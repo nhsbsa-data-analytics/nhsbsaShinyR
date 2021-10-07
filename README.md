@@ -4,7 +4,7 @@ This R package has been developed by NHS Business Services Authority Data Analyt
 
 ## Features
 
-We have used the `{golem}` framework to developed this taking inspiration from:
+We have used the `{golem}` framework to develop this taking inspiration from:
 
 * [Example `golem` apps](https://github.com/ThinkR-open/golem)
 * [Clinical Development Unit Data Science Team dashboards](https://github.com/CDU-data-science-team)
