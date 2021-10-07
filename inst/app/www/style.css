@@ -1,0 +1,66 @@
+/* Text */
+
+/* Define the frutiger font from NHS assets */
+@font-face {  
+  font-family: "Frutiger W01";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.ttf") 
+    format('truetype');
+}
+@font-face {  
+  font-family: "Frutiger W01 B";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.ttf")
+    format('truetype');
+}
+
+/* Make all standard font frutiger */
+p, li, a, em { 
+  font-family: Frutiger W01, Arial, Sans-Serif; 
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* Make all bold font bold frutiger */
+h1, h2, h3, h4, h5, h6 { 
+  font-family: Frutiger W01 B, Arial, Sans-Serif; 
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* Set the font sizes */
+h1 { font-size: 36pt; }
+h2 { font-size: 28pt; }
+h3 { font-size: 24pt; }
+h4 { font-size: 22pt; }
+h5 { font-size: 20pt; }
+h6 { font-size: 18pt; }
+p  { font-size: 16pt; }
+li { font-size: 16pt; }
+a  { font-size: 16pt; }
+em { font-size: 16pt; }
+
+
+/* Make hyperlinks blue and underlined */
+a { 
+  color: var(--nhs-blue); 
+  text-decoration: underline
+}
+
+/* General shiny stuff */
+
+/* Make the background colour NHS pale grey (full width of page) */
+body { background-color: var(--nhs-pale-grey); }
+
+/* Make the central container NHS pale grey (main body of dashboard content 
+should be no wider as per NHS guidelines) */
+.container-fluid {
+  background-color: var(--nhs-pale-grey);
+	max-width: 960px;
+}

@@ -1,0 +1,16 @@
+/* 
+Derived from the NHS identity:
+https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/
+*/
+:root {
+  --nhs-blue:        #005EB8;
+  --nhs-white:       #FFFFFF;
+  --nhs-dark-blue:   #003087;
+  --nhs-bright-blue: #0072CE;
+  --nhs-light-blue:  #41B6E6;
+  --nhs-aqua-blue:   #00A9CE;
+  --nhs-black:       #231F20;
+  --nhs-dark-grey:   #425563;
+  --nhs-mid-grey:    #768692;
+  --nhs-pale-grey:   #E8EDEE;
+}
