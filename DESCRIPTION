@@ -12,6 +12,7 @@ Imports:
     config (>= 0.3.1),
     golem (>= 0.3.1),
     shiny (>= 1.6.0),
+    markdown,
     highcharter
 Remotes:
     github::nhsbsa-data-analytics/nhsbsaR
