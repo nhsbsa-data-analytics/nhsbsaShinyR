@@ -13,7 +13,8 @@ Imports:
     golem (>= 0.3.1),
     shiny (>= 1.6.0),
     markdown,
-    highcharter
+    highcharter,
+    nhsbsaR
 Remotes:
     github::nhsbsa-data-analytics/nhsbsaR
 Encoding: UTF-8
