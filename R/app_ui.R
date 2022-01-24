@@ -9,14 +9,14 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    mod_00_header_ui("00_header_1"),
+    mod_00_header_ui("00_header_ui_1"),
     br(),
     fluidPage(
-      mod_markdown_example_ui("markdown_example_1"),
-      mod_chart_example_ui("chart_example_1")
+      mod_markdown_example_ui("markdown_example_ui_1"),
+      mod_chart_example_ui("chart_example_ui_1")
     ),
     br(),
-    mod_99_footer_ui("99_footer_1")
+    mod_99_footer_ui("99_footer_ui_1")
   )
 }
 
