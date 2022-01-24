@@ -14,15 +14,17 @@ mod_markdown_example_ui <- function(id) {
   )
 }
 
-#' markdown_example Server Function
+#' markdown_example Server Functions
 #'
 #' @noRd
-mod_markdown_example_server <- function(input, output, session) {
-  ns <- session$ns
+mod_markdown_example_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
+  })
 }
 
 ## To be copied in the UI
-# mod_markdown_example_ui("markdown_example_1")
+# mod_markdown_example_ui("markdown_example_ui_1")
 
 ## To be copied in the server
-# callModule(mod_markdown_example_server, "markdown_example_1")
+# mod_markdown_example_server("markdown_example_ui_1")

@@ -23,30 +23,32 @@ mod_chart_example_ui <- function(id) {
   )
 }
 
-#' chart_example Server Function
+#' chart_example Server Functions
 #'
 #' @noRd
-mod_chart_example_server <- function(input, output, session) {
-  ns <- session$ns
+mod_chart_example_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    ns <- session$ns
 
-  output$chart <- highcharter::renderHighchart({
+    output$chart <- highcharter::renderHighchart({
 
-    # Generate bins based on input$bins from ui.R
-    x <- nhsbsaShinyR::faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      # Generate bins based on input$bins from ui.R
+      x <- nhsbsaShinyR::faithful[, 2]
+      bins <- seq(min(x), max(x), length.out = input$bins + 1)
 
-    # Draw the histogram with the specified number of bins
-    chart <- hist(x, breaks = bins)
+      # Draw the histogram with the specified number of bins
+      chart <- hist(x, breaks = bins)
 
-    # Output interactive chart
-    chart %>%
-      highcharter::hchart() %>%
-      theme_nhsbsa()
+      # Output interactive chart
+      chart %>%
+        highcharter::hchart() %>%
+        theme_nhsbsa()
+    })
   })
 }
 
 ## To be copied in the UI
-# mod_chart_example_ui("chart_example_1")
+# mod_chart_example_ui("chart_example_ui_1")
 
 ## To be copied in the server
-# callModule(mod_chart_example_server, "chart_example_1")
+# mod_chart_example_server("chart_example_ui_1")
