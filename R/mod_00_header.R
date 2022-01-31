@@ -11,22 +11,22 @@ mod_00_header_ui <- function(id) {
   ns <- NS(id)
   tagList(
     tags$header(
-      class = "nhsuk-header", 
+      class = "nhsuk-header",
       role = "banner",
       shiny::tags$div(
         class = "nhsuk-width-container nhsuk-header__container",
         shiny::tags$div(
-          class = "nhsuk-header__logo nhsuk-header__logo--only",        
+          class = "nhsuk-header__logo nhsuk-header__logo--only",
           tags$a(
-            class="nhsuk-header__link",
+            class = "nhsuk-header__link",
             href = "https://www.nhs.uk/",
             `aria-label` = "NHS homepage",
             tags$svg(
               class = "nhsuk-logo",
-              xmlns="http://www.w3.org/2000/svg",
-              viewBox="0 0 40 16",
-              height="40",
-              width="100",
+              xmlns = "http://www.w3.org/2000/svg",
+              viewBox = "0 0 40 16",
+              height = "40",
+              width = "100",
               tags$path(
                 class = "nhsuk-logo__background",
                 fill = "#005eb8",
