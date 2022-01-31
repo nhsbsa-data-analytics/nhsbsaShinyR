@@ -12,6 +12,7 @@ app_ui <- function(request) {
     mod_00_header_ui("00_header_ui_1"),
     br(),
     fluidPage(
+      class = "nhsuk-width-container",
       mod_markdown_example_ui("markdown_example_ui_1"),
       mod_chart_example_ui("chart_example_ui_1")
     ),

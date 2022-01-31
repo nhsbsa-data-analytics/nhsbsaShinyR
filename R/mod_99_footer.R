@@ -10,39 +10,37 @@
 mod_99_footer_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    fluidRow(
-      style = "background-color: #005EB8; width: 100%; height: 3px"
-    ),
-    fluidRow(
-      style = "background-color: #D8DDE0; width: 100%",
-      align = "center",
-      fluidRow(
-        style = "background-color: #D8DDE0; max-width: 950px; padding: 15px",
-        column(
-          width = 9,
-          align = "left",
+    tags$footer(
+      role = "contentinfo",
+      tags$div(
+        class = "nhsuk-footer",
+        id = "nhsuk-footer",
+        tags$div(
+          class = "nhsuk-width-container app-width-container",
           p(
+            class = "nhsuk-footer__list",
             "Developed by the ",
             a(
-              style = "color: #768692;",
+              class = "nhsuk-footer__list-item-link",
+              style = "text-decoration: underline;",
               "NHS Business Services Authority",
               href = "https://www.nhsbsa.nhs.uk/",
               target = "_blank"
             ),
             " and available to view on ",
             a(
-              style = "color: #768692;",
+              class = "nhsuk-footer__list-item-link",
+              style = "text-decoration: underline;",
               "GitHub",
               href = "https://github.com/nhsbsa-data-analytics/nhsbsaShinyR",
               target = "_blank"
             ),
             "."
+          ),
+          p(
+            class = "nhsuk-footer__copyright",
+            "© APLv2"
           )
-        ),
-        column(
-          width = 3,
-          align = "right",
-          p("© APLv2")
         )
       )
     )
