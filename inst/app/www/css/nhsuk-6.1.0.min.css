@@ -13,24 +13,20 @@
      font-family:inherit 
 }
  a{
-     color:#005eb8 
+     color:#005eb8 ;
+     text-decoration:underline 
 }
  a:visited{
      color:#330072 
 }
  a:hover{
      color:#7c2855;
-     text-decoration:none 
 }
  a:focus{
      background-color:#ffeb3b;
      box-shadow:0 -2px #ffeb3b,0 4px #212b32;
      color:#212b32;
      outline:4px solid transparent;
-     text-decoration:none 
-}
- a:focus:hover{
-     text-decoration:none 
 }
  a:focus:visited{
      color:#212b32 
