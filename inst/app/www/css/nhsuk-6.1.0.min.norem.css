@@ -2063,6 +2063,7 @@ b,strong{
     position:relative;
     text-decoration:none
 }
+/*
 @media (min-width:40.0625em){
     .nhsuk-action-link__link{
         font-size:22px;
@@ -2070,6 +2071,7 @@ b,strong{
         line-height:1.45455
     }
 }
+*/
 @media print{
     .nhsuk-action-link__link{
         font-size:18pt;
