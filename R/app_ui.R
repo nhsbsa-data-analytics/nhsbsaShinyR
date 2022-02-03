@@ -8,16 +8,29 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    bootstrapLib(),
     # Your application UI logic
-    mod_00_header_ui("00_header_ui_1"),
+    nhs_header(),
     br(),
-    fluidPage(
+    tags$div(
       class = "nhsuk-width-container",
-      mod_markdown_example_ui("markdown_example_ui_1"),
-      mod_chart_example_ui("chart_example_ui_1")
+      tags$div(
+        class = "nhsuk-main-wrapper",
+        id = "maincontent",
+        role = "main",
+        nhs_navlistPanel(
+          well = FALSE,
+          widths = c(2, 10),
+          tabPanel(
+            title = "Article",
+            mod_markdown_example_ui("markdown_example_ui_1"),
+            mod_chart_example_ui("chart_example_ui_1")
+          )
+        )
+      )
     ),
     br(),
-    mod_99_footer_ui("99_footer_ui_1")
+    nhs_footer()
   )
 }
 

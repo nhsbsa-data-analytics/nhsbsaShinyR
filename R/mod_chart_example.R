@@ -10,12 +10,10 @@
 mod_chart_example_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    sliderInput(
+    nhs_selectInput(
       inputId = ns("bins"),
       label = "Number of bins:",
-      min = 1,
-      max = 50,
-      value = 30
+      choices = c(5, 10, 15, 20)
     ),
     highcharter::highchartOutput(
       outputId = ns("chart")
@@ -34,7 +32,7 @@ mod_chart_example_server <- function(id) {
 
       # Generate bins based on input$bins from ui.R
       x <- nhsbsaShinyR::faithful[, 2]
-      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      bins <- seq(min(x), max(x), length.out = as.numeric(input$bins) + 1)
 
       # Draw the histogram with the specified number of bins
       chart <- hist(x, breaks = bins)

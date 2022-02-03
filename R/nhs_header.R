@@ -1,14 +1,7 @@
-#' 00_header UI Function
+#' nhs_header Function
 #'
-#' @description A shiny Module.
-#'
-#' @param id,input,output,session Internal parameters for {shiny}.
-#'
-#' @noRd
-#'
-#' @importFrom shiny NS tagList
-mod_00_header_ui <- function(id) {
-  ns <- NS(id)
+#' @importFrom shiny tagList
+nhs_header <- function() {
   tagList(
     tags$header(
       class = "nhsuk-header",
@@ -44,18 +37,3 @@ mod_00_header_ui <- function(id) {
     )
   )
 }
-
-#' 00_header Server Functions
-#'
-#' @noRd
-mod_00_header_server <- function(id) {
-  moduleServer(id, function(input, output, session) {
-    ns <- session$ns
-  })
-}
-
-## To be copied in the UI
-# mod_00_header_ui("00_header_ui_1")
-
-## To be copied in the server
-# mod_00_header_server("00_header_ui_1")
