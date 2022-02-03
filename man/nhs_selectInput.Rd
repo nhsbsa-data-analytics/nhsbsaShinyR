@@ -4,7 +4,7 @@
 \alias{nhs_selectInput}
 \title{nhs_selectInput Function}
 \usage{
-nhs_selectInput(inputId, label, choices, selected = NULL, full_width)
+nhs_selectInput(inputId, label, choices, selected = NULL, full_width = FALSE)
 }
 \description{
 nhs_selectInput Function

@@ -6,7 +6,7 @@ nhs_selectInput <- function(
   label,
   choices,
   selected = NULL,
-  full_width
+  full_width = FALSE
 ) {
   
   # Create select input
