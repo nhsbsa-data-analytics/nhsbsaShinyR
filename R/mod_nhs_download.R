@@ -49,7 +49,7 @@ mod_nhs_download_ui <- function(id) {
 mod_nhs_download_server <- function(id, filename, export_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     output$download <- downloadHandler(
       filename = filename,
       content = function(file) {
