@@ -10,11 +10,11 @@
 mod_nhs_download_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    fluidRow(
-      style = "background-color: #FFFFFF; height: 36px;",
+    tags$div(
+      style = "position:relative; height:55px;",
       tags$div(
         class = "nhsuk-action-link",
-        style = "margin-bottom: 0;",
+        style = "position:absolute; bottom:0; right:0; margin-bottom:0;",
         shiny::downloadLink(
           outputId = ns("download"),
           class = "nhsuk-action-link__link",
@@ -53,12 +53,16 @@ mod_nhs_download_server <- function(id, filename, export_data) {
     output$download <- downloadHandler(
       filename = filename,
       content = function(file) {
-        write.csv(export_data, file, row.names = FALSE)
+        write.csv(
+          # Handle possibility of reactive input
+          x = if (is.data.frame(export_data)) export_data else export_data(),
+          file = file,
+          row.names = FALSE
+        )
       }
     )
   })
 }
-
 ## To be copied in the UI
 # mod_nhs_download_ui("nhs_download_ui_1")
 

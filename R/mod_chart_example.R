@@ -10,13 +10,25 @@
 mod_chart_example_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    nhs_selectInput(
-      inputId = ns("bins"),
-      label = "Number of bins:",
-      choices = c(5, 10, 15, 20)
-    ),
-    highcharter::highchartOutput(
-      outputId = ns("chart")
+    h2("Example chart"),
+    nhs_card(
+      heading = "example chart title",
+      nhs_selectInput(
+        inputId = ns("bins"),
+        label = "Number of bins:",
+        choices = c(5, 10, 15, 20),
+        selected = 20
+      ),
+      highcharter::highchartOutput(
+        outputId = ns("chart"),
+        height = "300px"
+      ),
+      # nhs_grid_2_col(
+
+      mod_nhs_download_ui(
+        id = ns("download_test")
+      )
+      # )
     )
   )
 }
@@ -42,6 +54,12 @@ mod_chart_example_server <- function(id) {
         highcharter::hchart() %>%
         theme_nhsbsa()
     })
+
+    mod_nhs_download_server(
+      id = "download_test",
+      filename = "test.csv",
+      export_data = faithful
+    )
   })
 }
 
