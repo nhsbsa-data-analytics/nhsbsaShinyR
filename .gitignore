@@ -6,3 +6,4 @@
 .DS_Store
 data/*
 rsconnect
+.Renviron
