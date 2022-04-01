@@ -38,7 +38,7 @@ regex = '''^\d{10}$'''
 [[rules]]
 id = "DB connect credential"
 description = "password or userID variable contains value"
-regex = '''(uid|UID|Uid|PWD|pwd|Pwd|PASSWORD|password|Password)[=^$]'''
+regex = '''(uid=").+"|(UID=").+"||(PASSWORD=").+"|(password=").+"|(Password=").+"|'''
 
 
 [[rules]]
