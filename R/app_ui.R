@@ -32,6 +32,7 @@ app_ui <- function(request) {
     br(),
     nhs_footer()
   )
+  # same digits as nhsnumber 1111111111, 9999999999 to see it is picked up by the gitleaks
 }
 
 #' Add external Resources to the Application

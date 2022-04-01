@@ -32,13 +32,13 @@ title = "gitleaks config"
 [[rules]]
 id = "nhsnumber"
 description = "ten digit NHS number check"
-regex = '''^\d{10}$'''
+regex = '''^\d{10}'''
 
 
 [[rules]]
-id = "OracleDB"
-description = "anything contains UID,PWD, USERNAME, PASSWORD "
-regex = '''uid|UID|Uid|PWD|pwd|Pwd|PASSWORD|password|Password'''
+id = "DB connect credential"
+description = "password or userID variable contains value"
+regex = '''uid = ".+"|UID = ".+"|PASSWORD = ".+"|password = ".+"|Password = ".+"'''
 
 
 [[rules]]
