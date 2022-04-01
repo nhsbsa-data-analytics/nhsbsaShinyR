@@ -36,9 +36,9 @@ regex = '''^\d{10}$'''
 
 
 [[rules]]
-id = "OracleDB"
-description = "anything contains UID,PWD, USERNAME, PASSWORD "
-regex = '''uid|UID|Uid|PWD|pwd|Pwd|PASSWORD|password|Password'''
+id = "DB connect credential"
+description = "password or userID variable contains value"
+regex = '''(uid|UID|Uid|PWD|pwd|Pwd|PASSWORD|password|Password)[=^$]'''
 
 
 [[rules]]
