@@ -32,7 +32,7 @@ title = "gitleaks config"
 [[rules]]
 id = "nhsnumber"
 description = "ten digit NHS number check"
-regex = '''^\d{10}$'''
+regex = '''^\d{10}'''
 
 
 [[rules]]
