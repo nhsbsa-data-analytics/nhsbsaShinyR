@@ -1,66 +1,49 @@
-/* Text */
+/* Scrolly stuff */
 
-/* Define the frutiger font from NHS assets */
-@font-face {  
-  font-family: "Frutiger W01";
-  font-display: swap;
-  font-style: normal;
-  font-weight: 400;
-  src: url("https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.ttf") 
-    format('truetype');
-}
-@font-face {  
-  font-family: "Frutiger W01 B";
-  font-display: swap;
-  font-style: normal;
-  font-weight: 600;
-  src: url("https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.ttf")
-    format('truetype');
+/* Force scrolly sections to be the full width of the container-fluid ^ */
+.scrolly-sections { width: 100% !important; }
+
+/* Fix accessibility issue with scrolly contrast (increase gap between sections 
+and prevent them fading in / out) */
+.scrolly-section {
+  margin-bottom: 0px;
+  margin-top: 75vh;
+  opacity: 1;
 }
 
-/* Make all standard font frutiger */
-p, li, a, em { 
-  font-family: Frutiger W01, Arial, Sans-Serif; 
-  line-height: 1.5;
-  margin-top: 0;
-  margin-bottom: 16px;
+/* Tippy stuff */
+
+.tippy {
+  text-decoration: underline;
 }
 
-/* Make all bold font bold frutiger */
-h1, h2, h3, h4, h5, h6 { 
-  font-family: Frutiger W01 B, Arial, Sans-Serif; 
-  line-height: 1.5;
-  margin-top: 0;
-  margin-bottom: 16px;
+.tippy-content{
+	background: #f0f4f5 none repeat scroll 0% 0%;
+	text-align: left;
+	font-size: 12pt;
 }
 
-/* Set the font sizes */
-h1 { font-size: 36pt; }
-h2 { font-size: 28pt; }
-h3 { font-size: 24pt; }
-h4 { font-size: 22pt; }
-h5 { font-size: 20pt; }
-h6 { font-size: 18pt; }
-p  { font-size: 16pt; }
-li { font-size: 16pt; }
-a  { font-size: 16pt; }
-em { font-size: 16pt; }
-
-
-/* Make hyperlinks blue and underlined */
-a { 
-  color: var(--nhs-blue); 
-  text-decoration: underline
+.tippy-tooltip{
+    color: #212b32;
+    background-color: #f0f4f5 !important;
+    border: 1px solid #425563;
+    border-radius: 0;
 }
 
-/* General shiny stuff */
-
-/* Make the background colour NHS pale grey (full width of page) */
-body { background-color: var(--nhs-pale-grey); }
-
-/* Make the central container NHS pale grey (main body of dashboard content 
-should be no wider as per NHS guidelines) */
-.container-fluid {
-  background-color: var(--nhs-pale-grey);
-	max-width: 960px;
+.tippy-backdrop {
+  background-color: #f0f4f5;
 }
+
+/* Tweak CSS for navpanel to make it sticky when scrolling page */
+.col-sm-2 {
+  position: -webkit-sticky; /* Safari */
+  position:sticky;
+  left:0;
+  top:0;
+}
+@media (max-width:800px){
+    .col-sm-2 {
+      position:inherit;
+}
+}
+

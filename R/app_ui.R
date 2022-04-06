@@ -8,15 +8,36 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    tags$html(lang = "en"),
+    bootstrapLib(),
     # Your application UI logic
-    mod_00_header_ui("00_header_1"),
+    nhs_header(),
     br(),
-    fluidPage(
-      mod_markdown_example_ui("markdown_example_1"),
-      mod_chart_example_ui("chart_example_1")
+    tags$div(
+      class = "nhsuk-width-container",
+      tags$div(
+        class = "nhsuk-main-wrapper",
+        id = "maincontent",
+        role = "main",
+        nhs_navlistPanel(
+          well = FALSE,
+          widths = c(2, 10),
+          tabPanel(
+            title = "Article",
+            mod_markdown_example_ui("markdown_example_ui_1"),
+            mod_chart_example_ui("chart_example_ui_1")
+          ),
+          # Whenever tab button is clicked, windows scroll to the top
+          tags$script(" $(document).ready(function () {
+            $('#maincontent a[data-toggle=\"tab\"]').on('click', function (e) {
+            window.scrollTo(0, 0)
+            });
+            });")
+        )
+      )
     ),
     br(),
-    mod_99_footer_ui("99_footer_1")
+    nhs_footer()
   )
 }
 
@@ -32,7 +53,7 @@ golem_add_external_resources <- function() {
   add_resource_path(
     "www", app_sys("app/www")
   )
-
+  
   tags$head(
     favicon(),
     bundle_resources(
