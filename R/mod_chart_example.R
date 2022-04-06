@@ -38,22 +38,22 @@ mod_chart_example_ui <- function(id) {
 mod_chart_example_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     output$chart <- highcharter::renderHighchart({
-      
+
       # Generate bins based on input$bins from ui.R
       x <- faithful[, 2]
       bins <- seq(min(x), max(x), length.out = as.numeric(input$bins) + 1)
-      
+
       # Draw the histogram with the specified number of bins
       chart <- hist(x, breaks = bins)
-      
+
       # Output interactive chart
       chart %>%
         highcharter::hchart() %>%
         theme_nhsbsa()
     })
-    
+
     mod_nhs_download_server(
       id = "download_test",
       filename = "test.csv",
