@@ -20,21 +20,10 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install styler and roxygen
-        run: install.packages(c("styler", "roxygen2"))
-        shell: Rscript {0}
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: lintr
 
       - name: Lint
-        run: |
-          style_df <- styler::style_pkg(dry = "on")
-          bad_style_df <- style_df[style_df$changed, ]
-          if (nrow(bad_style_df) > 0) {
-            error_message <- paste0(
-              nrow(bad_style_df),
-              "/",
-              nrow(style_df),
-              " files failed linting. Check with styler::style_pkg() and try again."
-            )
-            stop(error_message)
-          }
+        run: lintr::lint_package()
         shell: Rscript {0}
