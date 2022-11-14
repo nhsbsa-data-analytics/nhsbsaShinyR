@@ -15,8 +15,6 @@ Also included is a sample `data-raw/` script. Much of the data used in NHSBSA da
 
 There is also a github action to check that code conforms to lintr (https://lintr.r-lib.org/).
 
-## NOTE: once you copy this repository, please change `nhsbsaShinyR` to new package name you give. Especially in the config.yaml, app.R files.
-
 ## Structure
 
 The package is structured as follows:
@@ -58,3 +56,5 @@ nhsbsaShinyR
 ├── app.R                                   # Golem file
 ├── nhsbsaShinyR.Rproj                      # R Project file
 ```
+## Note 
+once you copy this repository, please change `nhsbsaShinyR` to new package name you give. Especially in the config.yaml, app.R files to avoid shiny deployment error.
