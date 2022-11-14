@@ -13,7 +13,9 @@ It includes two dummy modules demonstrating using either markdown or `{highchart
 
 Also included is a sample `data-raw/` script. Much of the data used in NHSBSA dashboards can be sensitive, so the `data/` directory is included in the `.gitignore` (you can change this if there is nothing sensitive) and this means you must run all the `data-raw/` scripts to produce the `data/` files after cloning.
 
-There is also a github action to check that code conforms to tidyverse linting.
+There is also a github action to check that code conforms to lintr (https://lintr.r-lib.org/).
+
+## NOTE: once you copy this repository, please change `nhsbsaShinyR` to new package name you give. Especially in the config.yaml, app.R files.
 
 ## Structure
 
