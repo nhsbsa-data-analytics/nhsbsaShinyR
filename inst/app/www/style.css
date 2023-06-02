@@ -1,14 +1,20 @@
 /* Scrolly stuff */
 
-/* Force scrolly sections to be the full width of the container-fluid ^ */
-.scrolly-sections { width: 100% !important; }
 
 /* Fix accessibility issue with scrolly contrast (increase gap between sections 
 and prevent them fading in / out) */
 .scrolly-section {
-  margin-bottom: 0px;
-  margin-top: 75vh;
+  margin-bottom: 20vh;
   opacity: 1;
+  margin-right: 30px;
+}
+
+.scrolly-sections .scrolly-section:last-child {
+    margin-bottom: 20vh;
+}
+
+.scrolly-graph {
+  margin-left: 0px;
 }
 
 /* Tippy stuff */
