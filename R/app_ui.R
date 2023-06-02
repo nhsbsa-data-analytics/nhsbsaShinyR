@@ -46,9 +46,15 @@ app_ui <- function(request) {
           well = FALSE,
           widths = c(3, 9),
           tabPanel(
-            title = "Article",
-            mod_markdown_example_ui("markdown_example_ui_1"),
-            mod_chart_example_ui("chart_example_ui_1"),
+            title = "Introduction",
+            mod_markdown_example_ui("markdown_example_ui_1")
+          ),
+          tabPanel(
+            title = "Charts",
+            mod_chart_example_ui("chart_example_ui_1")
+          ),
+          tabPanel(
+            title = "Scrolly example",
             mod_scrollytell_example_ui("scrollytell_example_1")
           ),
           # Whenever tab button is clicked, windows scroll to the top
