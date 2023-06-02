@@ -1,14 +1,19 @@
 /* Scrolly stuff */
 
-/* Force scrolly sections to be the full width of the container-fluid ^ */
-.scrolly-sections { width: 100% !important; }
-
 /* Fix accessibility issue with scrolly contrast (increase gap between sections 
 and prevent them fading in / out) */
 .scrolly-section {
-  margin-bottom: 0px;
-  margin-top: 75vh;
+  margin-bottom: 20vh;
   opacity: 1;
+  margin-right: 30px;
+}
+
+.scrolly-sections .scrolly-section:last-child {
+    margin-bottom: 20vh;
+}
+
+.scrolly-graph {
+  margin-left: 0px;
 }
 
 /* Tippy stuff */
@@ -18,31 +23,74 @@ and prevent them fading in / out) */
 }
 
 .tippy-content{
-	background: #f0f4f5 none repeat scroll 0% 0%;
-	text-align: left;
-	font-size: 12pt;
+background: #f0f4f5 none repeat scroll 0% 0%;
+text-align: left;
+font-size: 12pt;
 }
 
+
+
 .tippy-tooltip{
-    color: #212b32;
-    background-color: #f0f4f5 !important;
-    border: 1px solid #425563;
-    border-radius: 0;
+color: #212b32;
+background-color: #f0f4f5 !important;
+border: 1px solid #425563;
+border-radius: 0;
 }
 
 .tippy-backdrop {
   background-color: #f0f4f5;
 }
 
+/* Custom classes to help with accessibility */
+
+/* https://www.w3.org/WAI/tutorials/forms/labels/#note-on-hiding-elements */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Stop greying out when an input changes */
+.recalculating {
+  opacity: 1.0;
+}
+
 /* Tweak CSS for navpanel to make it sticky when scrolling page */
-.col-sm-2 {
+.col-sm-3 {
   position: -webkit-sticky; /* Safari */
   position:sticky;
   left:0;
   top:0;
 }
 @media (max-width:800px){
-    .col-sm-2 {
+    .col-sm-3 {
       position:inherit;
 }
+}
+  
+
+/* Tweak css for navbar styleing to prevent contrast issues*/
+.navbar-nav li a {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.navbar-default .navbar-nav li a {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.navbar-brand {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.navbar-default .navbar-brand {
+  font-weight: bold; 
+  color : #000000;
 }
