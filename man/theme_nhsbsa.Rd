@@ -11,9 +11,6 @@ theme_nhsbsa(hc, palette = NA, stack = "normal")
 
 \item{stack}{Stack option for highcharter.}
 }
-\value{
-
-}
 \description{
 Based on the nhsbsaR highcharter theme, since it returns a list we can edit
 it to the specific theme for this shiny app.
