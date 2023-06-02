@@ -21,7 +21,7 @@ app_ui <- function(request) {
         role = "main",
         nhs_navlistPanel(
           well = FALSE,
-          widths = c(2, 10),
+          widths = c(3, 9),
           tabPanel(
             title = "Article",
             mod_markdown_example_ui("markdown_example_ui_1"),
