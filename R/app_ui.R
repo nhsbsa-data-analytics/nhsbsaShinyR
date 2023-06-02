@@ -6,11 +6,33 @@
 #' @noRd
 app_ui <- function(request) {
   tagList(
+    shinyjs::useShinyjs(),
     # Leave this function for adding external resources
     golem_add_external_resources(),
     tags$html(lang = "en"),
     bootstrapLib(),
     # Your application UI logic
+    tags$a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
+    tags$style(HTML("
+      #skiplink {
+        position: absolute;
+        transform: translateY(-100%);
+      }
+      #skiplink:focus {
+      transform: translateY(0%);
+      background-color: lightyellow;
+      padding: 20px;
+      z-index: 9999;
+      }
+      /* Customize selectizeInput appearance 
+      Similar to NHS selectInput*/ 
+      .selectize-input {
+        color: #4c6272;
+        border-radius: 0;
+        border:2px solid;
+        line-height:1.2;
+      }
+      ")),
     nhs_header(),
     br(),
     tags$div(
@@ -20,6 +42,7 @@ app_ui <- function(request) {
         id = "maincontent",
         role = "main",
         nhs_navlistPanel(
+          id = "mainTabs",
           well = FALSE,
           widths = c(3, 9),
           tabPanel(
@@ -30,7 +53,7 @@ app_ui <- function(request) {
           ),
           # Whenever tab button is clicked, windows scroll to the top
           tags$script(" $(document).ready(function () {
-            $('#maincontent a[data-toggle=\"tab\"]').on('click', function (e) {
+            $('#mainTabs a[data-toggle=\"tab\"]').on('click', function (e) {
             window.scrollTo(0, 0)
             });
             });")

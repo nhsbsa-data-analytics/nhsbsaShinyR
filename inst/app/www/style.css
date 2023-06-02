@@ -4,7 +4,7 @@
 /* Fix accessibility issue with scrolly contrast (increase gap between sections 
 and prevent them fading in / out) */
 .scrolly-section {
-  margin-bottom: 20vh;
+  margin-bottom: 30vh;
   opacity: 1;
   margin-right: 30px;
 }
@@ -40,15 +40,60 @@ and prevent them fading in / out) */
   background-color: #f0f4f5;
 }
 
+/* Custom classes to help with accessibility */
+
+/* https://www.w3.org/WAI/tutorials/forms/labels/#note-on-hiding-elements */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Stop greying out when an input changes */
+.recalculating {
+  opacity: 1.0;
+}
+
 /* Tweak CSS for navpanel to make it sticky when scrolling page */
-.col-sm-2 {
+.col-sm-3 {
   position: -webkit-sticky; /* Safari */
   position:sticky;
   left:0;
   top:0;
 }
 @media (max-width:800px){
-    .col-sm-2 {
+    .col-sm-3 {
       position:inherit;
 }
+}
+
+/* Tweak css for navbar styleing to prevent contrast issues*/
+.navbar-nav li a {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.navbar-default .navbar-nav li a {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.navbar-brand {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.navbar-default .navbar-brand {
+  font-weight: bold; 
+  color : #000000;
+}
+
+.move-right {
+  float: right !important;
+  margin-left: auto !important;
 }
