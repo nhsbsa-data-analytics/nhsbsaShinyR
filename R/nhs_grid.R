@@ -44,3 +44,33 @@ nhs_grid_3_col <- function(col_1, col_2, col_3) {
     )
   )
 }
+
+
+#' nhs_grid_4_col Function
+#'
+#' @noRd
+#'
+#' @importFrom shiny tagList
+nhs_grid_4_col <- function(col_1, col_2, col_3, col_4) {
+  tagList(
+    div(
+      class = "nhsuk-grid-row",
+      div(
+        class = "nhsuk-grid-column-one-quarter",
+        col_1
+      ),
+      div(
+        class = "nhsuk-grid-column-one-quarter",
+        col_2
+      ),
+      div(
+        class = "nhsuk-grid-column-one-quarter",
+        col_3
+      ),
+      div(
+        class = "nhsuk-grid-column-one-quarter",
+        col_4
+      )
+    )
+  )
+}
