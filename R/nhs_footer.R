@@ -1,7 +1,20 @@
-#' nhs_footer Function
+#' nhs_footer
 #'
-#' @importFrom shiny tagList
-nhs_footer <- function() {
+#' NHS style footer element
+#'
+#' @param a11y_statement_url URL of accessibility statement
+#' @param email Contact email, by default 'nhsbsa.dall@nhs.net'
+#' @param github_url URL of app GitHub repo, by default 
+#'   https://github.com/nhsbsa-data-analytics
+#' 
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_footer()
+nhs_footer <- function(a11y_statement_url = "#",
+                       email = "nhsbsa.dall@nhs.net",
+                       github_url = "https://github.com/nhsbsa-data-analytics") {
   tagList(
     tags$footer(
       role = "contentinfo",
@@ -17,7 +30,7 @@ nhs_footer <- function() {
               a(
                 class = "nhsuk-footer__list-item-link",
                 style = "text-decoration: underline;",
-                href = "#",
+                href = a11y_statement_url,
                 target = "_blank",
                 "Accessibility statement"
               )
@@ -27,7 +40,7 @@ nhs_footer <- function() {
               a(
                 class = "nhsuk-footer__list-item-link",
                 style = "text-decoration: underline;",
-                href = "mailto:@nhs.net",
+                href = paste0("mailto:@", email),
                 target = "_blank",
                 "Contact us"
               )
@@ -37,7 +50,7 @@ nhs_footer <- function() {
               a(
                 class = "nhsuk-footer__list-item-link",
                 style = "text-decoration: underline;",
-                href = "https://github.com/nhsbsa-data-analytics/nhsbsaShinyR",
+                href = github_url,
                 target = "_blank",
                 "GitHub"
               )
@@ -45,7 +58,7 @@ nhs_footer <- function() {
           ),
           p(
             class = "nhsuk-footer__copyright",
-            "© APLv2"
+            "\u00A9 APLv2"
           )
         )
       )

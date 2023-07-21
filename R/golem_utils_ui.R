@@ -8,7 +8,6 @@
 #'
 #' @examples
 #' list_to_li(c("a", "b"))
-#' @importFrom shiny tags tagAppendAttributes tagList
 list_to_li <- function(list, class = NULL) {
   if (is.null(class)) {
     tagList(
@@ -44,8 +43,6 @@ list_to_li <- function(list, class = NULL) {
 #'
 #' @examples
 #' list_to_p(c("This is the first paragraph", "this is the second paragraph"))
-#' @importFrom shiny tags tagAppendAttributes tagList
-#'
 list_to_p <- function(list, class = NULL) {
   if (is.null(class)) {
     tagList(
@@ -72,7 +69,6 @@ list_to_p <- function(list, class = NULL) {
   }
 }
 
-#' @importFrom shiny tags tagAppendAttributes tagList
 named_to_li <- function(list, class = NULL) {
   if (is.null(class)) {
     res <- mapply(
@@ -146,7 +142,6 @@ tagRemoveAttributes <- function(tag, ...) {
 #' undisplay(a)
 #' b <- shiny::actionButton("go_filter", "go")
 #' undisplay(b)
-#' @importFrom shiny tagList
 undisplay <- function(tag) {
   # if not already hidden
   if (
@@ -163,7 +158,6 @@ undisplay <- function(tag) {
   tag
 }
 
-#' @importFrom shiny tagList
 display <- function(tag) {
   if (
     !is.null(tag$attribs$style) &&
@@ -183,8 +177,6 @@ display <- function(tag) {
 #' @param id the id of the element to hide
 #'
 #' @noRd
-#'
-#' @importFrom shiny tags
 jq_hide <- function(id) {
   tags$script(sprintf("$('#%s').hide()", id))
 }
@@ -201,7 +193,6 @@ jq_hide <- function(id) {
 #'
 #' @examples
 #' with_red_star("Enter your name here")
-#' @importFrom shiny tags HTML
 with_red_star <- function(text) {
   shiny::tags$span(
     HTML(
@@ -226,7 +217,6 @@ with_red_star <- function(text) {
 #'
 #' @examples
 #' rep_br(5)
-#' @importFrom shiny HTML
 rep_br <- function(times = 1) {
   HTML(rep("<br/>", times = times))
 }
@@ -241,7 +231,6 @@ rep_br <- function(times = 1) {
 #'
 #' @examples
 #' enurl("https://www.thinkr.fr", "ThinkR")
-#' @importFrom shiny tags
 enurl <- function(url, text) {
   tags$a(
     href = url,
@@ -257,61 +246,46 @@ enurl <- function(url, text) {
 #' `column(12, ...)`, `column(6, ...)`, `column(4, ...)`...
 #'
 #' @noRd
-#'
-#' @importFrom shiny column
 col_12 <- function(...) {
   column(12, ...)
 }
 
-#' @importFrom shiny column
 col_10 <- function(...) {
   column(10, ...)
 }
 
-#' @importFrom shiny column
 col_9 <- function(...) {
   column(8, ...)
 }
 
-#' @importFrom shiny column
 col_8 <- function(...) {
   column(8, ...)
 }
 
-#' @importFrom shiny column
 col_7 <- function(...) {
   column(7, ...)
 }
 
-#' @importFrom shiny column
 col_6 <- function(...) {
   column(6, ...)
 }
 
-#' @importFrom shiny column
 col_5 <- function(...) {
   column(5, ...)
 }
 
-#' @importFrom shiny column
 col_4 <- function(...) {
   column(4, ...)
 }
 
-
-#' @importFrom shiny column
 col_3 <- function(...) {
   column(3, ...)
 }
 
-
-#' @importFrom shiny column
 col_2 <- function(...) {
   column(2, ...)
 }
 
-
-#' @importFrom shiny column
 col_1 <- function(...) {
   column(1, ...)
 }
@@ -404,7 +378,6 @@ make_action_button <- function(tag, inputId = NULL) {
 #' #'
 #' #' @importFrom rmarkdown render
 #' #' @importFrom markdown markdownToHTML
-#' #' @importFrom shiny HTML
 #' includeRMarkdown <- function(path){
 #'
 #'   md <- tempfile(fileext = '.md')

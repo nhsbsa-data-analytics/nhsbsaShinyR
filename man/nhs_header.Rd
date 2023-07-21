@@ -2,10 +2,16 @@
 % Please edit documentation in R/nhs_header.R
 \name{nhs_header}
 \alias{nhs_header}
-\title{nhs_header Function}
+\title{nhs_header}
 \usage{
 nhs_header()
 }
+\value{
+HTML
+}
 \description{
-nhs_header Function
+NHS style header element
+}
+\examples{
+nhs_header()
 }

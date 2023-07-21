@@ -2,10 +2,42 @@
 % Please edit documentation in R/nhs_selectInput.R
 \name{nhs_selectInput}
 \alias{nhs_selectInput}
-\title{nhs_selectInput Function}
+\title{nhs_selectInput}
 \usage{
-nhs_selectInput(inputId, label, choices, selected = NULL, full_width = FALSE)
+nhs_selectInput(
+  inputId,
+  label,
+  choices,
+  selected = NULL,
+  full_width = FALSE,
+  ...
+)
+}
+\arguments{
+\item{inputId}{Element id}
+
+\item{label}{Element label}
+
+\item{choices}{Character vector (optionally named) giving available choices}
+
+\item{selected}{Initially selected choices}
+
+\item{full_width}{Boolean, controls if full width or not}
+
+\item{...}{Further named args passed to \code{shiny::selectInput}}
+}
+\value{
+HTML
 }
 \description{
-nhs_selectInput Function
+NHS styled selectInput
+}
+\examples{
+nhs_selectInput(
+  "fruit",
+  "Choose some fruit",
+  choices = c("Apple", "Banana", "Cherry"),
+  selected = "Banana",
+  full_width = TRUE
+)
 }

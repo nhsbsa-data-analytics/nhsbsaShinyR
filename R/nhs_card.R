@@ -1,8 +1,15 @@
-#' nhs_card Function
+#' nhs_card
 #'
-#' @noRd
+#' NHS style card element
 #'
-#' @importFrom shiny tagList
+#' @param heading Card title
+#' @param ... Card content
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_card("A card", shiny::p("Some content"))
 nhs_card <- function(heading, ...) {
   tagList(
     div(

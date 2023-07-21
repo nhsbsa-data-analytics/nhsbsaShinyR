@@ -5,8 +5,6 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd
-#'
-#' @importFrom shiny NS tagList
 mod_chart_example_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -42,22 +40,22 @@ mod_chart_example_server <- function(id) {
     output$chart <- highcharter::renderHighchart({
 
       # Generate bins based on input$bins from ui.R
-      x <- nhsbsaShinyR::faithful[, 2]
+      x <- datasets::faithful[, 2]
       bins <- seq(min(x), max(x), length.out = as.numeric(input$bins) + 1)
 
       # Draw the histogram with the specified number of bins
-      chart <- hist(x, breaks = bins)
+      chart <- graphics::hist(x, breaks = bins)
 
       # Output interactive chart
       chart %>%
         highcharter::hchart() %>%
-        theme_nhsbsa()
+        nhsbsaR::theme_nhsbsa_hc()
     })
 
     mod_nhs_download_server(
       id = "download_test",
       filename = "test.csv",
-      export_data = faithful
+      export_data = datasets::faithful
     )
   })
 }

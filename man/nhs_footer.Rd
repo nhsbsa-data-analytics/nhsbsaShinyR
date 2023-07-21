@@ -2,10 +2,28 @@
 % Please edit documentation in R/nhs_footer.R
 \name{nhs_footer}
 \alias{nhs_footer}
-\title{nhs_footer Function}
+\title{nhs_footer}
 \usage{
-nhs_footer()
+nhs_footer(
+  a11y_statement_url = "#",
+  email = "nhsbsa.dall@nhs.net",
+  github_url = "https://github.com/nhsbsa-data-analytics"
+)
+}
+\arguments{
+\item{a11y_statement_url}{URL of accessibility statement}
+
+\item{email}{Contact email, by default 'nhsbsa.dall@nhs.net'}
+
+\item{github_url}{URL of app GitHub repo, by default 
+https://github.com/nhsbsa-data-analytics}
+}
+\value{
+HTML
 }
 \description{
-nhs_footer Function
+NHS style footer element
+}
+\examples{
+nhs_footer()
 }

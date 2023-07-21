@@ -56,14 +56,16 @@ app_ui <- function(request) {
           tabPanel(
             title = "Scrolly example",
             mod_scrollytell_example_ui("scrollytell_example_1")
-          ),
-          # Whenever tab button is clicked, windows scroll to the top
-          tags$script(" $(document).ready(function () {
+          )
+        ),
+        # Whenever tab button is clicked, windows scroll to the top
+        tags$script("
+          $(document).ready(function () {
             $('#mainTabs a[data-toggle=\"tab\"]').on('click', function (e) {
-            window.scrollTo(0, 0)
+              window.scrollTo(0, 0)
             });
-            });")
-        )
+          });
+        ")
       )
     ),
     br(),

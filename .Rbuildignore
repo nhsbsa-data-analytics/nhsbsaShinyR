@@ -6,3 +6,7 @@ dev_history.R
 $run_dev.*
 ^app\.R$
 ^rsconnect$
+^.github$
+^LICENSE\.md$
+^example.Renviron$
+^gitleaks.toml$

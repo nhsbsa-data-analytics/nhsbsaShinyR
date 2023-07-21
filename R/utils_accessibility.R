@@ -1,7 +1,14 @@
-#' h1_tabstop Function
+#' h1_tabstop
 #'
-#' @noRd
+#' @param header Heading text
+#' @param tabindex Number for tabindex, default 0
+#' @inheritDotParams shiny::h1 
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' h1_tabstop("Heading")
 h1_tabstop <- function(header, tabindex = 0, ...) {
 
   # create header as typical header plus tabindex attribute
@@ -10,11 +17,17 @@ h1_tabstop <- function(header, tabindex = 0, ...) {
     htmltools::tagAppendAttributes(`tabindex` = tabindex)
 }
 
-
-#' h2_tabstop Function
+#' h2_tabstop
 #'
-#' @noRd
+#' @param header Heading text
+#' @param tabindex Number for tabindex, default 0
+#' @inheritDotParams shiny::h2 
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' h2_tabstop("Heading")
 h2_tabstop <- function(header, tabindex = 0, ...) {
 
   # create header as typical header plus tabindex attribute
@@ -23,11 +36,17 @@ h2_tabstop <- function(header, tabindex = 0, ...) {
     htmltools::tagAppendAttributes(`tabindex` = tabindex)
 }
 
-
-#' h3_tabstop Function
+#' h3_tabstop
 #'
-#' @noRd
+#' @param header Heading text
+#' @param tabindex Number for tabindex, default 0
+#' @inheritDotParams shiny::h3 
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' h3_tabstop("Heading")
 h3_tabstop <- function(header, tabindex = 0, ...) {
 
   # create header as typical header plus tabindex attribute
@@ -36,11 +55,17 @@ h3_tabstop <- function(header, tabindex = 0, ...) {
     htmltools::tagAppendAttributes(`tabindex` = tabindex)
 }
 
-
-#' h4_tabstop Function
+#' h4_tabstop
 #'
-#' @noRd
+#' @param header Heading text
+#' @param tabindex Number for tabindex, default 0
+#' @inheritDotParams shiny::h4 
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' h4_tabstop("Heading")
 h4_tabstop <- function(header, tabindex = 0, ...) {
 
   # create header as typical header plus tabindex attribute
@@ -49,11 +74,17 @@ h4_tabstop <- function(header, tabindex = 0, ...) {
     htmltools::tagAppendAttributes(`tabindex` = tabindex)
 }
 
-
-#' h5_tabstop Function
+#' h5_tabstop
 #'
-#' @noRd
+#' @param header Heading text
+#' @param tabindex Number for tabindex, default 0
+#' @inheritDotParams shiny::h5
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' h5_tabstop("Heading")
 h5_tabstop <- function(header, tabindex = 0, ...) {
 
   # create header as typical header plus tabindex attribute
@@ -62,11 +93,17 @@ h5_tabstop <- function(header, tabindex = 0, ...) {
     htmltools::tagAppendAttributes(`tabindex` = tabindex)
 }
 
-
-#' h6_tabstop Function
+#' h6_tabstop
 #'
-#' @noRd
+#' @param header Heading text
+#' @param tabindex Number for tabindex, default 0
+#' @inheritDotParams shiny::h6 
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' h6_tabstop("Heading")
 h6_tabstop <- function(header, tabindex = 0, ...) {
 
   # create header as typical header plus tabindex attribute
@@ -76,10 +113,17 @@ h6_tabstop <- function(header, tabindex = 0, ...) {
 }
 
 
-#' nhs_card_tabstop Function
+#' nhs_card_tabstop
 #'
-#' @noRd
+#' @param header Card title
+#' @param tabindex Number for tabindex, default 0
+#' @param ... Card content  
 #'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_card_tabstop("A card", shiny::p("Some content"))
 nhs_card_tabstop <- function(header, tabindex = 0, ...) {
 
   # create nhs_card as typical nhs_card plus tabindex attribute

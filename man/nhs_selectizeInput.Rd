@@ -2,10 +2,29 @@
 % Please edit documentation in R/nhs_selectizeInput.R
 \name{nhs_selectizeInput}
 \alias{nhs_selectizeInput}
-\title{nhs_selectizeInput Function}
+\title{nhs_selectizeInput}
 \usage{
-nhs_selectizeInput(inputId, label, full_width = FALSE)
+nhs_selectizeInput(inputId, label, full_width = FALSE, ...)
+}
+\arguments{
+\item{inputId}{Element id}
+
+\item{label}{Element label}
+
+\item{full_width}{Boolean, controls if full width or not}
+
+\item{...}{Further named args passed to \code{shiny::selectInput}}
+}
+\value{
+HTML
 }
 \description{
-nhs_selectizeInput Function
+NHS styled selectizeInput
+}
+\examples{
+nhs_selectizeInput(
+  "fruit",
+  "Choose some fruit",
+  full_width = TRUE
+)
 }
