@@ -5,16 +5,18 @@
 \title{nhs_navlistPanel}
 \usage{
 nhs_navlistPanel(
+  ...,
   id = NULL,
   selected = NULL,
   header = NULL,
   footer = NULL,
   fluid = TRUE,
-  widths = c(4, 8),
-  ...
+  widths = c(4, 8)
 )
 }
 \arguments{
+\item{...}{\code{\link[shiny:tabPanel]{tabPanel()}} elements to include in the navlist}
+
 \item{id}{If provided, you can use \verb{input$}\emph{\code{id}} in your
 server logic to determine which of the current navlist items is active. The
 value will correspond to the \code{value} argument that is passed to
@@ -35,8 +37,6 @@ layout.}
 
 \item{widths}{Column widths of the navigation list and tabset content areas
 respectively.}
-
-\item{...}{\code{\link[shiny:tabPanel]{tabPanel()}} elements to include in the navlist}
 }
 \value{
 HTML

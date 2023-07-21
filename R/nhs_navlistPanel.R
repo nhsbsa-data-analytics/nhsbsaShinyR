@@ -13,28 +13,27 @@
 #'   shiny::tabPanel(title = "Introduction", shiny::p("This is an intro")),
 #'   shiny::tabPanel(title = "Article", shiny::p("This is an article"))
 #' )
-nhs_navlistPanel <- function(id = NULL,
+nhs_navlistPanel <- function(...,
+                             id = NULL,
                              selected = NULL,
                              header = NULL,
                              footer = NULL,
                              fluid = TRUE,
-                             widths = c(4, 8),
-                             ...) {
-  #browser()
+                             widths = c(4, 8)) {
   # Create navlist panel
   nvp <- navlistPanel(
+    ...,
     id = id,
     selected = selected,
     header = header,
     footer = footer,
     fluid = fluid,
-    widths = widths,
-    ...
+    widths = widths
   )
 
   # Hack the CSS to look like an NHS list
   nvp$children[[1]]$
     children[[1]]$attribs$class <- "nhsuk-list app-side-nav__list"
 
-  tagList(nvp)
+  nvp
 }

@@ -10,7 +10,7 @@ mod_chart_example_ui <- function(id) {
   tagList(
     h1_tabstop("First level"),
     h2_tabstop("Second level"),
-    nhs_card(
+    nhs_card_tabstop(
       heading = "example chart title",
       nhs_selectInput(
         inputId = ns("bins"),
@@ -38,18 +38,18 @@ mod_chart_example_server <- function(id) {
     ns <- session$ns
 
     output$chart <- highcharter::renderHighchart({
-
+      
       # Generate bins based on input$bins from ui.R
       x <- datasets::faithful[, 2]
       bins <- seq(min(x), max(x), length.out = as.numeric(input$bins) + 1)
 
       # Draw the histogram with the specified number of bins
-      chart <- graphics::hist(x, breaks = bins)
+      chart <- graphics::hist(x, breaks = bins, plot = FALSE)
 
       # Output interactive chart
       chart %>%
         highcharter::hchart() %>%
-        nhsbsaR::theme_nhsbsa_hc()
+        nhsbsaR::theme_nhsbsa_highchart()
     })
 
     mod_nhs_download_server(

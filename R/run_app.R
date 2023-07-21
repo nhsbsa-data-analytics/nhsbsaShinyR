@@ -13,7 +13,7 @@ run_app <- function(onStart = NULL,
                     ...) {
   with_golem_options(
     app = shinyApp(
-      ui = fluidPage(nhs_navlistPanel(tabPanel("one"), tabPanel("two"))),# app_ui,
+      ui = app_ui,
       server = app_server,
       onStart = onStart,
       options = options,

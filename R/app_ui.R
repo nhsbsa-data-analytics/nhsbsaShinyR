@@ -9,11 +9,12 @@ app_ui <- function(request) {
     shinyjs::useShinyjs(),
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    tags$html(lang = "en"),
-    bootstrapLib(),
-    # Your application UI logic
-    tags$a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
-    tags$style(HTML("
+    withTags(
+      html(lang = "en"),
+      bootstrapLib(),
+      # Your application UI logic
+      a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
+      style(HTML("
       #skiplink {
         position: absolute;
         transform: translateY(-100%);
@@ -33,39 +34,40 @@ app_ui <- function(request) {
         line-height:1.2;
       }
       ")),
-    nhs_header(),
-    br(),
-    tags$div(
-      class = "nhsuk-width-container",
-      tags$div(
-        class = "nhsuk-main-wrapper",
-        id = "maincontent",
-        role = "main",
-        nhs_navlistPanel(
-          id = "mainTabs",
-          well = FALSE,
-          widths = c(3, 9),
-          tabPanel(
-            title = "Introduction",
-            mod_markdown_example_ui("markdown_example_ui_1")
+      nhs_header(),
+      br(),
+      div(
+        class = "nhsuk-width-container",
+        div(
+          class = "nhsuk-main-wrapper",
+          id = "maincontent",
+          role = "main",
+          nhs_navlistPanel(
+            id = "mainTabs",
+            well = FALSE,
+            widths = c(3, 9),
+            tabPanel(
+              title = "Introduction",
+              mod_markdown_example_ui("markdown_example_ui_1")
+            ),
+            tabPanel(
+              title = "Charts",
+              mod_chart_example_ui("chart_example_ui_1")
+            ),
+            tabPanel(
+              title = "Scrolly example",
+              mod_scrollytell_example_ui("scrollytell_example_1")
+            )
           ),
-          tabPanel(
-            title = "Charts",
-            mod_chart_example_ui("chart_example_ui_1")
-          ),
-          tabPanel(
-            title = "Scrolly example",
-            mod_scrollytell_example_ui("scrollytell_example_1")
-          )
-        ),
-        # Whenever tab button is clicked, windows scroll to the top
-        tags$script("
+          # Whenever tab button is clicked, windows scroll to the top
+          script("
           $(document).ready(function () {
             $('#mainTabs a[data-toggle=\"tab\"]').on('click', function (e) {
               window.scrollTo(0, 0)
             });
           });
         ")
+        )
       )
     ),
     br(),

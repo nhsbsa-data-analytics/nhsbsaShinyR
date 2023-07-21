@@ -8,7 +8,7 @@
 mod_scrollytell_example_ui <- function(id){
   ns <- NS(id)
   tagList(
-    h2("Demo of scrollytelling using iris dataset"),
+    h2_tabstop("Demo of scrollytelling using iris dataset"),
     p(
       "This section shows an example of a scrolly chart in action using the 'iris'
        dataset. The scatter chart will remain in place and react to changes as the 
@@ -25,11 +25,11 @@ mod_scrollytell_example_ui <- function(id){
       scrollytell::scrolly_graph(
         # place the sticky part in the center of the page
         # for aesthetics stops the chart hitting top of page
-        tags$div(
+        div(
           style = "margin-top: 10vh" # change based on size of sticky graph
         ),
         # use a nhs_card element to hold the chart
-        nhs_card(
+        nhs_card_tabstop(
           # this could be made dynamic if required by using a textOutput() object
           heading = "Iris Dataset: Sepal Length v Width",
           highcharter::highchartOutput(outputId = ns("example_scroll_chart"))
@@ -42,11 +42,11 @@ mod_scrollytell_example_ui <- function(id){
           # each section needs a unique ID to reference, use meaningful names
           id = "section_1_all",
           # bump the start of each section to avoid top of screen
-          tags$div(
+          div(
             style = "height: 20vh"
           ),
           # text output, including header if required
-          h3("Length v Width"),
+          h3_tabstop("Length v Width"),
           p(
             "Looking purely at the Sepal length and width does not suggest a 
              strong relationship."
@@ -55,11 +55,11 @@ mod_scrollytell_example_ui <- function(id){
         scrollytell::scrolly_section(
           id = "section_2_group", # each section needs a unique ID to reference
           # bump the start of each section to avoid top of screen
-          tags$div(
+          div(
             style = "height: 20vh"
           ),
           # text output, including header if required
-          h3("Split by species"),
+          h3_tabstop("Split by species"),
           p(
             "When highlighting by species type we start to see that there is
              correlation within each species."
@@ -68,11 +68,11 @@ mod_scrollytell_example_ui <- function(id){
         scrollytell::scrolly_section(
           id = "section_3_setosa", # each section needs a unique ID to reference
           # bump the start of each section to avoid top of screen
-          tags$div(
+          div(
             style = "height: 20vh"
           ),
           # text output, including header if required
-          h3("Setosa"),
+          h3_tabstop("Setosa"),
           p(
             "This species has the largest sepal width but some of the smallest
              sepal lengths."
@@ -82,26 +82,26 @@ mod_scrollytell_example_ui <- function(id){
           # each section needs a unique ID to reference
           id = "section_4_versicolor",
           # bump the start of each section to avoid top of screen
-          tags$div(
+          div(
             style = "height: 20vh"
           ),
           # text output, including header if required
-          h3("Versicolor"),
+          h3_tabstop("Versicolor"),
           p("This species has the some of the smallest sepal widths.")
         ),
         scrollytell::scrolly_section(
           # each section needs a unique ID to reference
           id = "section_5_virginica",
           # bump the start of each section to avoid top of screen
-          tags$div(
+          div(
             style = "height: 20vh"
           ),
           # text output, including header if required
-          h3("Setosa"),
+          h3_tabstop("Setosa"),
           p("This species has the largest sepal lengths."),
           # Bump the height of the last section so that the top of it aligns
           # with the top of the sticky image when you scroll
-          tags$div(
+          div(
             style = "height: 30vh" # change based on size of section
           )
         )
