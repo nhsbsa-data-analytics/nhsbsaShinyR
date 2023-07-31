@@ -8,7 +8,7 @@
 mod_markdown_example_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    includeMarkdown("inst/app/www/mod_markdown_example.md")
+    includeMarkdown("inst/app/www/assets/markdown/mod_markdown_example.md")
   )
 }
 

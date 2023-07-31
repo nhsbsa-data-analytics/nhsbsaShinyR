@@ -9,31 +9,10 @@ app_ui <- function(request) {
     shinyjs::useShinyjs(),
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    withTags(
-      html(lang = "en"),
+    tagList(
+      tags$html(lang = "en"),
       bootstrapLib(),
-      # Your application UI logic
       a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
-      style(HTML("
-      #skiplink {
-        position: absolute;
-        transform: translateY(-100%);
-      }
-      #skiplink:focus {
-      transform: translateY(0%);
-      background-color: lightyellow;
-      padding: 20px;
-      z-index: 9999;
-      }
-      /* Customize selectizeInput appearance 
-      Similar to NHS selectInput*/ 
-      .selectize-input {
-        color: #4c6272;
-        border-radius: 0;
-        border:2px solid;
-        line-height:1.2;
-      }
-      ")),
       nhs_header(),
       br(),
       div(
@@ -58,15 +37,7 @@ app_ui <- function(request) {
               title = "Scrolly example",
               mod_scrollytell_example_ui("scrollytell_example_1")
             )
-          ),
-          # Whenever tab button is clicked, windows scroll to the top
-          script("
-          $(document).ready(function () {
-            $('#mainTabs a[data-toggle=\"tab\"]').on('click', function (e) {
-              window.scrollTo(0, 0)
-            });
-          });
-        ")
+          )
         )
       )
     ),
@@ -84,17 +55,38 @@ app_ui <- function(request) {
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
 golem_add_external_resources <- function() {
-  add_resource_path(
-    "www", app_sys("app/www")
-  )
+  # add_resource_path(
+  #   "www", app_sys("app/www")
+  # )
+  
+  resources <- app_sys("app/www")
+  addResourcePath("www", resources)
 
   tags$head(
-    favicon(),
-    bundle_resources(
-      path = app_sys("app/www"),
-      app_title = "nhsbsaShinyR"
-    )
+    favicon("assets/favicons/favicon"),
+    tags$title("nhsbsaShinyR"),
+    # bundle_resources(
+    #   path = "www",
+    #   app_title = "nhsbsaShinyR"
+    # ),
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
+    
+    # Javascript resources
+    htmltools::htmlDependency(
+      name = "resources",
+      version = "0.0.1",
+      src = resources,
+      script = list.files(resources, pattern = "\\.js$", recursive = TRUE),
+      package = NULL,
+      all_files = TRUE
+    ),
+    
+    # CSS resources
+    lapply(
+      list.files(resources, pattern = "\\.css$", recursive = TRUE),
+      function(x) tags$link(href = file.path("www", x), rel = "stylesheet")
+    )
+    
   )
 }

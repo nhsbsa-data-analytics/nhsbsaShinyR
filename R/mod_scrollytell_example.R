@@ -8,7 +8,7 @@
 mod_scrollytell_example_ui <- function(id){
   ns <- NS(id)
   tagList(
-    h2_tabstop("Demo of scrollytelling using iris dataset"),
+    h1_tabstop("Demo of scrollytelling using iris dataset"),
     p(
       "This section shows an example of a scrolly chart in action using the 'iris'
        dataset. The scatter chart will remain in place and react to changes as the 
@@ -20,7 +20,7 @@ mod_scrollytell_example_ui <- function(id){
       # the outputID will hold the reference for the input showing the current
       # scroll section
       outputId = ns("scroll_level"),
-      
+      h2_tabstop("The iris dataset"),
       # define the container for the static part of the scrolly
       scrollytell::scrolly_graph(
         # place the sticky part in the center of the page
