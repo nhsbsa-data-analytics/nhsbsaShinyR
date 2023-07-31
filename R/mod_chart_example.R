@@ -40,7 +40,7 @@ mod_chart_example_server <- function(id) {
     output$chart <- highcharter::renderHighchart({
       
       # Generate bins based on input$bins from ui.R
-      x <- datasets::faithful[, 2]
+      x <- nhsbsaShinyR::faithful[, 2]
       bins <- seq(min(x), max(x), length.out = as.numeric(input$bins) + 1)
 
       # Draw the histogram with the specified number of bins
@@ -55,7 +55,7 @@ mod_chart_example_server <- function(id) {
     mod_nhs_download_server(
       id = "download_test",
       filename = "test.csv",
-      export_data = datasets::faithful
+      export_data = nhsbsaShinyR::faithful
     )
   })
 }

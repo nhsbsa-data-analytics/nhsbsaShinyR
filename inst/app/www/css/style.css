@@ -1,3 +1,8 @@
+/* NHS front-end toolkit assumes a default font-size of 16px: https://github.com/nhsuk/nhsuk-frontend/issues/879  */
+html {
+    font-size: 16px!important
+}
+
 #skiplink {
   position: absolute;
   transform: translateY(-100%);

@@ -112,8 +112,6 @@ mod_scrollytell_example_ui <- function(id){
     
 #' scrollytell_example Server Functions
 #'
-#' @importFrom rlang .data
-#'
 #' @noRd 
 mod_scrollytell_example_server <- function(id){
   moduleServer( id, function(input, output, session){

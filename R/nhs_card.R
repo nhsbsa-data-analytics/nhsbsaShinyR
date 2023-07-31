@@ -16,7 +16,7 @@ nhs_card <- function(heading, ...) {
       class = "nhsuk-card",
       div(
         class = "nhsuk-card__content",
-        h3(
+        h3_tabstop(
           class = "nhsuk-card__heading",
           heading
         ),
