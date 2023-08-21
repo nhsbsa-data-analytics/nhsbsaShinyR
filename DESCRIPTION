@@ -34,14 +34,14 @@ Imports:
     highcharter,
     htmltools,
     magrittr,
-    markdown,
     nhsbsaR,
-    pkgload,
     rlang,
     scrollytell,
     shiny (>= 1.6.0),
     shinyjs
 Suggests:
+    lintr,
+    pkgload,
     usethis
 Remotes:
     nhsbsa-data-analytics/nhsbsaR
