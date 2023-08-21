@@ -20,13 +20,12 @@
 #'   selected = "Banana",
 #'   full_width = TRUE
 #' )
-nhs_selectInput <- function(inputId,
+nhs_selectInput <- function(inputId, # Exclude Linting
                             label,
                             choices,
                             selected = NULL,
                             full_width = FALSE,
                             ...) {
-
   # Create select input
   nsi <- selectInput(
     inputId = inputId,

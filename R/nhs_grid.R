@@ -4,7 +4,7 @@
 #'
 #' @param col_1 First column content
 #' @param col_2 Second column content
-#' 
+#'
 #' @return HTML
 #' @export
 #'
@@ -33,7 +33,7 @@ nhs_grid_2_col <- function(col_1, col_2) {
 #' @param col_1 First column content
 #' @param col_2 Second column content
 #' @param col_3 Third column content
-#' 
+#'
 #' @return HTML
 #' @export
 #'
@@ -71,7 +71,7 @@ nhs_grid_3_col <- function(col_1, col_2, col_3) {
 #' @param col_2 Second column content
 #' @param col_3 Third column content
 #' @param col_4 Fourth column content
-#' 
+#'
 #' @return HTML
 #' @export
 #'

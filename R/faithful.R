@@ -12,12 +12,12 @@
 #'     \item waiting. Waiting time to next eruption (in mins)
 #' }
 #'
-#' @source {W. Härdle.}
+#' @source {W. H<U+00E4>rdle.}
 #'
 #' @docType data
 #' @keywords datasets
 #' @name faithful
 #' @usage faithful
 #' @format A data frame with 272 observations on 2 variables.
-#' 
+#'
 "faithful"

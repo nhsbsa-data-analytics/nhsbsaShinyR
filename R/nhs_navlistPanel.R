@@ -2,8 +2,8 @@
 #'
 #' NHS style navlist element
 #'
-#' @inheritParams shiny::navlistPanel 
-#' 
+#' @inheritParams shiny::navlistPanel
+#'
 #' @return HTML
 #' @export
 #'
@@ -13,7 +13,7 @@
 #'   shiny::tabPanel(title = "Introduction", shiny::p("This is an intro")),
 #'   shiny::tabPanel(title = "Article", shiny::p("This is an article"))
 #' )
-nhs_navlistPanel <- function(...,
+nhs_navlistPanel <- function(..., # Exclude Linting
                              id = NULL,
                              selected = NULL,
                              header = NULL,

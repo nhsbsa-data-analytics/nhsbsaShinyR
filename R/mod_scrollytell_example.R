@@ -5,13 +5,13 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd
-mod_scrollytell_example_ui <- function(id){
+mod_scrollytell_example_ui <- function(id) {
   ns <- NS(id)
   tagList(
     h1_tabstop("Demo of scrollytelling using iris dataset"),
     p(
       "This section shows an example of a scrolly chart in action using the 'iris'
-       dataset. The scatter chart will remain in place and react to changes as the 
+       dataset. The scatter chart will remain in place and react to changes as the
        user scrolls."
     ),
     # start with the overall container object that will hold the different
@@ -35,7 +35,7 @@ mod_scrollytell_example_ui <- function(id){
           highcharter::highchartOutput(outputId = ns("example_scroll_chart"))
         )
       ),
-      
+
       # create the container for the scrolling sections of the scrolly
       scrollytell::scrolly_sections(
         scrollytell::scrolly_section(
@@ -48,7 +48,7 @@ mod_scrollytell_example_ui <- function(id){
           # text output, including header if required
           h3_tabstop("Length v Width"),
           p(
-            "Looking purely at the Sepal length and width does not suggest a 
+            "Looking purely at the Sepal length and width does not suggest a
              strong relationship."
           ),
         ),
@@ -109,39 +109,40 @@ mod_scrollytell_example_ui <- function(id){
     )
   )
 }
-    
+
 #' scrollytell_example Server Functions
 #'
-#' @noRd 
-mod_scrollytell_example_server <- function(id){
-  moduleServer( id, function(input, output, session){
+#' @noRd
+mod_scrollytell_example_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     # create the chart object
     output$example_scroll_chart <- highcharter::renderHighchart({
-      
       # require the scroll input to prevent errors on initialisation
       req(input$scroll_level)
-      
-      # create a custom chart dataset based on the scrolly section inputs
-      # the input$scroll_level will allow you to define the chart input
-      # this input is based on section of the report that is currently active during the scroll
+
+      # create a custom chart dataset based on the scrolly section inputs the
+      # input$scroll_level will allow you to define the chart input this input
+      # is based on section of the report that is currently active during the
+      # scroll
       chart_data <- datasets::iris |>
-        dplyr::filter(.data$Species %in% switch(input$scroll_level,
-                                          "section_3_setosa" = c("setosa"),
-                                          "section_4_versicolor" = c("versicolor"),
-                                          "section_5_virginica" = c("virginica"),
-                                          c("setosa", "versicolor", "virginica")
-        )
+        dplyr::filter(
+          .data$Species %in% switch(input$scroll_level,
+            "section_3_setosa" = c("setosa"),
+            "section_4_versicolor" = c("versicolor"),
+            "section_5_virginica" = c("virginica"),
+            c("setosa", "versicolor", "virginica")
+          )
         )
 
-      if(input$scroll_level == "section_1_all") {
+      if (input$scroll_level == "section_1_all") {
         chart_data <- chart_data |>
-          dplyr::mutate(group_lvl = "Species") |> 
+          dplyr::mutate(group_lvl = "Species") |>
           dplyr::mutate(point_col = "#0000FF")
       } else {
         chart_data <- chart_data |>
-          dplyr::mutate(group_lvl = .data$Species) |> 
+          dplyr::mutate(group_lvl = .data$Species) |>
           dplyr::mutate(
             point_col = dplyr::case_when(
               .data$Species == "setosa" ~ "#fdb863",
@@ -151,11 +152,11 @@ mod_scrollytell_example_server <- function(id){
             )
           )
       }
-      
+
       # produce the chart object
       chart_data |>
         highcharter::hchart(
-          type ="scatter",
+          type = "scatter",
           highcharter::hcaes(
             x = Sepal.Length,
             y = Sepal.Width,
@@ -163,23 +164,23 @@ mod_scrollytell_example_server <- function(id){
             color = point_col
           )
         ) |>
-        highcharter::hc_xAxis(min = 4,
-                              max = 8
+        highcharter::hc_xAxis(
+          min = 4,
+          max = 8
         ) |>
-        highcharter::hc_yAxis(min = 1,
-                              max = 5
+        highcharter::hc_yAxis(
+          min = 1,
+          max = 5
         ) |>
         # remove plot animations
         highcharter::hc_plotOptions(series = list(animation = FALSE)) |>
         # disable the legend
         highcharter::hc_legend(enabled = FALSE)
-      
     })
-    
+
     # output the scrolly object - MUST BE INCLUDED FOR SCROLLY OBJECT TO BE RENDERED
     output$scroll_level <- scrollytell::renderScrollytell({
       scrollytell::scrollytell()
     })
- 
   })
 }

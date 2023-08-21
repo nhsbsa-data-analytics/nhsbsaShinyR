@@ -121,7 +121,7 @@ named_to_li <- function(list, class = NULL) {
 #' @examples
 #' a <- shiny::tags$p(src = "plop", "pouet")
 #' tagRemoveAttributes(a, "src")
-tagRemoveAttributes <- function(tag, ...) {
+tagRemoveAttributes <- function(tag, ...) { # Exclude Linting
   attrs <- as.character(list(...))
   for (i in seq_along(attrs)) {
     tag$attribs[[attrs[i]]] <- NULL
@@ -321,7 +321,7 @@ col_1 <- function(...) {
 #'
 #'   shinyApp(ui, server)
 #' }
-make_action_button <- function(tag, inputId = NULL) {
+make_action_button <- function(tag, inputId = NULL) { # Exclude Linting
   # some obvious checks
   if (!inherits(tag, "shiny.tag")) stop("Must provide a shiny tag.")
   if (!is.null(tag$attribs$class)) {
@@ -360,40 +360,29 @@ make_action_button <- function(tag, inputId = NULL) {
 }
 
 
+#' Include Content From a File
+#'
+#' Load rendered RMarkdown from a file and turn into HTML.
+#'
+#' @rdname includeRMarkdown
+#' @export
+#'
+includeRMarkdown <- function(path) { # Exclude Linting
+  md <- tempfile(fileext = ".md")
 
+  on.exit(unlink(md), add = TRUE)
 
-# UNCOMMENT AND USE
-#
-# usethis::use_package("markdown")
-# usethis::use_package("rmarkdown")
-#
-# To use this part of the UI
-#
-#' #' Include Content From a File
-#' #'
-#' #' Load rendered RMarkdown from a file and turn into HTML.
-#' #'
-#' #' @rdname includeRMarkdown
-#' #' @export
-#' #'
-#' #' @importFrom rmarkdown render
-#' #' @importFrom markdown markdownToHTML
-#' includeRMarkdown <- function(path){
-#'
-#'   md <- tempfile(fileext = '.md')
-#'
-#'   on.exit(unlink(md),add = TRUE)
-#'
-#'   rmarkdown::render(
-#'     path,
-#'     output_format = 'md_document',
-#'     output_dir = tempdir(),
-#'     output_file = md,quiet = TRUE
-#'     )
-#'
-#'   html <- markdown::markdownToHTML(md, fragment.only = TRUE)
-#'
-#'   Encoding(html) <- "UTF-8"
-#'
-#'   return(HTML(html))
-#' }
+  rmarkdown::render(
+    path,
+    output_format = "md_document",
+    output_dir = tempdir(),
+    output_file = md,
+    quiet = TRUE
+  )
+
+  html <- markdown::markdownToHTML(md, fragment.only = TRUE)
+
+  Encoding(html) <- "UTF-8"
+
+  return(HTML(html))
+}

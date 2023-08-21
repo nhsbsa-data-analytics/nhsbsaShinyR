@@ -38,7 +38,6 @@ mod_chart_example_server <- function(id) {
     ns <- session$ns
 
     output$chart <- highcharter::renderHighchart({
-      
       # Generate bins based on input$bins from ui.R
       x <- nhsbsaShinyR::faithful[, 2]
       bins <- seq(min(x), max(x), length.out = as.numeric(input$bins) + 1)
@@ -59,9 +58,3 @@ mod_chart_example_server <- function(id) {
     )
   })
 }
-
-## To be copied in the UI
-# mod_chart_example_ui("chart_example_ui_1")
-
-## To be copied in the server
-# mod_chart_example_server("chart_example_ui_1")

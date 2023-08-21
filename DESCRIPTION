@@ -34,8 +34,10 @@ Imports:
     highcharter,
     htmltools,
     magrittr,
+    markdown,
     nhsbsaR,
     rlang,
+    rmarkdown,
     scrollytell,
     shiny,
     shinyjs

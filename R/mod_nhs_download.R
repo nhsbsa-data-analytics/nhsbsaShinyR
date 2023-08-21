@@ -28,8 +28,8 @@ mod_nhs_download_ui <- function(id) {
               fill = "none"
             ),
             tags$path(
-              d = "M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 
-                   1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 
+              d = "M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1
+                   1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0
                    1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"
             )
           ),
@@ -63,8 +63,3 @@ mod_nhs_download_server <- function(id, filename, export_data) {
     )
   })
 }
-## To be copied in the UI
-# mod_nhs_download_ui("nhs_download_ui_1")
-
-## To be copied in the server
-# mod_nhs_download_server("nhs_download_ui_1")

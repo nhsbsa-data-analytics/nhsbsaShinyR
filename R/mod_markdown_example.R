@@ -20,9 +20,3 @@ mod_markdown_example_server <- function(id) {
     ns <- session$ns
   })
 }
-
-## To be copied in the UI
-# mod_markdown_example_ui("markdown_example_ui_1")
-
-## To be copied in the server
-# mod_markdown_example_server("markdown_example_ui_1")

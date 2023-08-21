@@ -6,15 +6,17 @@
 #' @name nhsbsaShinyR
 #'
 #' @importFrom rlang := .data
-#' 
+#'
 NULL
 
-if(getRversion() >= "2.15.1") utils::globalVariables(
-  c(
-    # data column names
-    "Sepal.Length",
-    "Sepal.Width",
-    "group_lvl",
-    "point_col"
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(
+    c(
+      # data column names
+      "Sepal.Length",
+      "Sepal.Width",
+      "group_lvl",
+      "point_col"
+    )
   )
-)
+}
