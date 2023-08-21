@@ -15,7 +15,7 @@ nhs_footer(
 
 \item{email}{Contact email, by default 'nhsbsa.dall@nhs.net'}
 
-\item{github_url}{URL of app GitHub repo, by default 
+\item{github_url}{URL of app GitHub repo, by default
 https://github.com/nhsbsa-data-analytics}
 }
 \value{

@@ -8,7 +8,7 @@
 A data frame with 272 observations on 2 variables.
 }
 \source{
-{W. Härdle.}
+{W. H<U+00E4>rdle.}
 }
 \usage{
 faithful
