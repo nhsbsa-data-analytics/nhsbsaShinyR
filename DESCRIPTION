@@ -43,7 +43,7 @@ Suggests:
     pkgload,
     usethis
 Remotes:
-    nhsbsa-data-analytics/nhsbsaR
+    nhsbsa-data-analytics/nhsbsaR,
     statistiekcbs/scrollytell
 Encoding: UTF-8
 LazyData: true
