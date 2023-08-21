@@ -55,20 +55,13 @@ app_ui <- function(request) {
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
 golem_add_external_resources <- function() {
-  # add_resource_path(
-  #   "www", app_sys("app/www")
-  # )
-  
   resources <- app_sys("app/www")
   addResourcePath("www", resources)
 
   tags$head(
     favicon("assets/favicons/favicon"),
     tags$title("nhsbsaShinyR"),
-    # bundle_resources(
-    #   path = "www",
-    #   app_title = "nhsbsaShinyR"
-    # ),
+    
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
     
@@ -81,12 +74,10 @@ golem_add_external_resources <- function() {
       package = NULL,
       all_files = TRUE
     ),
-    
     # CSS resources
     lapply(
       list.files(resources, pattern = "\\.css$", recursive = TRUE),
       function(x) tags$link(href = file.path("www", x), rel = "stylesheet")
     )
-    
   )
 }

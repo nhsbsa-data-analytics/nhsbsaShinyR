@@ -28,7 +28,7 @@ nhs_selectInput <- function(inputId,
                             ...) {
 
   # Create select input
-  nhs_selectInput <- selectInput(
+  nsi <- selectInput(
     inputId = inputId,
     label = label,
     choices = choices,
@@ -38,20 +38,20 @@ nhs_selectInput <- function(inputId,
   )
 
   # Hack the CSS to look like an NHS select input
-  nhs_selectInput$attribs$class <- "nhsuk-form-group"
-  nhs_selectInput$children[[1]]$attribs$class <- "nhsuk-label"
+  nsi$attribs$class <- "nhsuk-form-group"
+  nsi$children[[1]]$attribs$class <- "nhsuk-label"
 
   if (full_width) {
     # need form-control to fit max width if required
-    nhs_selectInput$children[[2]]$
+    nsi$children[[2]]$
       children[[1]]$attribs$class <- "nhsuk-select form-control"
     # form-control rounds the edges so we need this
-    nhs_selectInput$children[[2]]$
+    nsi$children[[2]]$
       children[[1]]$attribs$style <- "border-radius: 0;"
   } else {
-    nhs_selectInput$children[[2]]$
+    nsi$children[[2]]$
       children[[1]]$attribs$class <- "nhsuk-select"
   }
 
-  nhs_selectInput
+  nsi
 }
