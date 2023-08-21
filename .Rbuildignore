@@ -10,3 +10,4 @@ $run_dev.*
 ^LICENSE\.md$
 ^example.Renviron$
 ^gitleaks.toml$
+^\.github$
