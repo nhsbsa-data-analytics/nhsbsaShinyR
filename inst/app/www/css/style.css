@@ -19,8 +19,8 @@ html {
 .selectize-input {
   color: #4c6272;
   border-radius: 0;
-  border:2px solid;
-  line-height:1.2;
+  border: 2px solid;
+  line-height: 1.2;
 }
 
 /* Scrolly stuff */
@@ -87,38 +87,31 @@ and prevent them fading in / out) */
 /* Tweak CSS for navpanel to make it sticky when scrolling page */
 .col-sm-3 {
   position: -webkit-sticky; /* Safari */
-  position:sticky;
-  left:0;
-  top:0;
+  position: sticky;
+  left: 0;
+  top: 0;
 }
 @media (max-width:800px){
-    .col-sm-3 {
-      position:inherit;
-}
-}
-
-/* Tweak css for navbar styleing to prevent contrast issues*/
-.navbar-nav li a {
-  font-weight: bold; 
-  color : #000000;
+  .col-sm-3 {
+    position:inherit;
+  }
 }
 
-.navbar-default .navbar-nav li a {
-  font-weight: bold; 
-  color : #000000;
-}
-
-.navbar-brand {
-  font-weight: bold; 
-  color : #000000;
-}
-
+/* Tweak colours to get contrast dead on 4.5:1 */
 .navbar-default .navbar-brand {
-  font-weight: bold; 
-  color : #000000;
+    color: #717465;
+    background-color: #f8f8f8;
 }
 
-.move-right {
-  float: right !important;
-  margin-left: auto !important;
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #717465;
+    background-color: #f8f8f8;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: black;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #717465;
 }

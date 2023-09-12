@@ -32,8 +32,9 @@ nhs_navlistPanel <- function(..., # Exclude Linting
   )
 
   # Hack the CSS to look like an NHS list
-  nvp$children[[1]]$
-    children[[1]]$attribs$class <- "nhsuk-list app-side-nav__list"
+  nvp$children$children[[1]]$children[[1]]$attribs$class <- "nhsuk-list nav-pills nav-stacked"
+  nvp$children$children[[1]]$attribs$role <- "navigation"
+  nvp$children$children[[1]]$attribs$`aria-label` <- "Navigation menu"
 
   nvp
 }
