@@ -15,11 +15,11 @@ app_ui <- function(request) {
       a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
       nhs_header(),
       br(),
+      div(id = "maincontent"),
       div(
         class = "nhsuk-width-container",
         div(
           class = "nhsuk-main-wrapper",
-          id = "maincontent",
           role = "main",
           nhs_navlistPanel(
             id = "mainTabs",
