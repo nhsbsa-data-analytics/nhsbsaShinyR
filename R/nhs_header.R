@@ -24,7 +24,7 @@ nhs_header <- function() {
               class = "nhsuk-logo",
               src = "www/assets/logos/logo-nhsbsa.svg",
               name = "NHSBSA logo",
-              alt = "’NHS Business Services Authority"
+              alt = "NHS Business Services Authority"
             )
           )
         )
