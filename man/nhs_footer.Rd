@@ -6,14 +6,14 @@
 \usage{
 nhs_footer(
   a11y_statement_url = "#",
-  email = "nhsbsa.dall@nhs.net",
+  email = "dall@nhsbsa.nhs.uk",
   github_url = "https://github.com/nhsbsa-data-analytics"
 )
 }
 \arguments{
 \item{a11y_statement_url}{URL of accessibility statement}
 
-\item{email}{Contact email, by default 'nhsbsa.dall@nhs.net'}
+\item{email}{Contact email, by default 'dall@nhsbsa.nhs.uk'}
 
 \item{github_url}{URL of app GitHub repo, by default
 https://github.com/nhsbsa-data-analytics}

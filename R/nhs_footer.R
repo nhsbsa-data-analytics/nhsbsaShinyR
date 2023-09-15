@@ -3,7 +3,7 @@
 #' NHS style footer element
 #'
 #' @param a11y_statement_url URL of accessibility statement
-#' @param email Contact email, by default 'nhsbsa.dall@nhs.net'
+#' @param email Contact email, by default 'dall@nhsbsa.nhs.uk'
 #' @param github_url URL of app GitHub repo, by default
 #'   https://github.com/nhsbsa-data-analytics
 #'
