@@ -13,7 +13,7 @@
 #' @examples
 #' nhs_footer()
 nhs_footer <- function(a11y_statement_url = "#",
-                       email = "nhsbsa.dall@nhs.net",
+                       email = "dall@nhsbsa.nhs.uk",
                        github_url = "https://github.com/nhsbsa-data-analytics") {
   tagList(
     tags$footer(
