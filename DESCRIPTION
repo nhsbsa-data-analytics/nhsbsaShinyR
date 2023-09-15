@@ -21,7 +21,7 @@ Authors@R:
       person(given = "Mark",
              family = "McPherson",
              role = "ctb",
-             email = "mark.mcphersoni@nhsbsa.nhs.uk"))
+             email = "mark.mcpherson@nhsbsa.nhs.uk"))
 Description: Template used for NHSBSA Data Science and Advanced Analytics
   {shiny} apps.
 License: Apache License (>= 2)

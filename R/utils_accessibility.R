@@ -121,6 +121,6 @@ h6_tabstop <- function(header, tabindex = 0, ...) {
 nhs_card_tabstop <- function(header, tabindex = 0, ...) {
   # create nhs_card as typical nhs_card plus tabindex attribute
   # ensures nhs_card will be stopped at when pressing keyboard tab
-  nhs_card_tabstop <- nhs_card(header, ...) %>%
+  nhs_card_tabstop <- div(nhs_card(header, ...)) %>%
     htmltools::tagAppendAttributes(`tabindex` = tabindex)
 }

@@ -11,7 +11,7 @@ We have used the `{golem}` framework to develop this taking inspiration from:
 
 It includes several dummy modules demonstrating using markdown, scrollytell and `{highcharter}` with an NHSBSA theme applied. 
 
-Also included is a sample `data-raw/` script. Much of the data used in NHSBSA dashboards can be sensitive, so the `data/` directory should be included in the `.gitignore` in the initial commit of your new repo.
+Also included is a sample `data-raw/` script. Much of the data used in NHSBSA dashboards can be sensitive, so the `data/` directory in most cases should be included in the `.gitignore` in the initial commit of your new repo (`usethis::use_git_ignore("data")`).
 
 There are also github actions to check that code conforms to `lintr` (https://lintr.r-lib.org/), passes `R CMD check` and to run a `gitleaks` check.
 

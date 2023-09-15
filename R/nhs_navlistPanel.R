@@ -30,14 +30,11 @@ nhs_navlistPanel <- function(..., # Exclude Linting
     fluid = fluid,
     widths = widths
   )
-
+  
   # Hack the CSS to look like an NHS list
-  nvp$children$children[[1]]$
-    children[[1]]$
-    attribs$
-    class <- "nhsuk-list nav-pills nav-stacked"
-  nvp$children$children[[1]]$attribs$role <- "navigation"
-  nvp$children$children[[1]]$attribs$`aria-label` <- "Navigation menu"
+  nvp$children[[1]]$children[[1]]$attribs$class <- "nhsuk-list nav-pills nav-stacked"
+  nvp$children[[1]]$attribs$role <- "navigation"
+  nvp$children[[1]]$attribs$`aria-label` <- "Navigation menu"
 
   nvp
 }
