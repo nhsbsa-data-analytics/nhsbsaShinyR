@@ -121,7 +121,7 @@ mod_scrollytell_example_server <- function(id) {
     output$example_scroll_chart <- highcharter::renderHighchart({
       # require the scroll input to prevent errors on initialisation
       req(input$scroll_level)
-      
+
       # create a custom chart dataset based on the scrolly section inputs the
       # input$scroll_level will allow you to define the chart input this input
       # is based on section of the report that is currently active during the
