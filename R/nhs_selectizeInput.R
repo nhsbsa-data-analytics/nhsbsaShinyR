@@ -13,13 +13,13 @@
 #' @export
 #'
 #' @examples
-#' # In module UI function 
+#' # In module UI function
 #' nhs_selectizeInput(
 #'   "fruit",
 #'   "Choose some fruit",
 #'   full_width = TRUE
 #' )
-#' 
+#'
 #' \dontrun{
 #' # In module server function
 #' shiny::updateSelectizeInput(
