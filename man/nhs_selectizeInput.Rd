@@ -13,18 +13,31 @@ nhs_selectizeInput(inputId, label, full_width = FALSE, ...)
 
 \item{full_width}{Boolean, controls if full width or not}
 
-\item{...}{Further named args passed to \code{shiny::selectInput}}
+\item{...}{Further named args passed to \code{shiny::selectizeInput}}
 }
 \value{
 HTML
 }
 \description{
-NHS styled selectizeInput
+NHS styled selectizeInput. This is meant to be used with options passed in
+from the server. For example, long lists of organisations or drugs. It allows
+to search for options by typing as well as dropdown.
 }
 \examples{
+# In module UI function 
 nhs_selectizeInput(
   "fruit",
   "Choose some fruit",
   full_width = TRUE
 )
+
+\dontrun{
+# In module server function
+shiny::updateSelectizeInput(
+  session,
+  "fruit",
+  choices = sort(fruit_list),
+  server = TRUE
+)
+}
 }
