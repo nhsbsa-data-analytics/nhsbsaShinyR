@@ -1,26 +1,50 @@
 Package: nhsbsaShinyR
-Title: An Amazing Shiny App
-Version: 0.0.0.9000
+Title: Template for NHSBSA {shiny} apps
+Version: 0.0.0.9001
 Authors@R: 
-    person(given = "firstname",
-           family = "lastname",
-           role = c("aut", "cre"),
-           email = "your@email.com")
-Description: What the package does (one paragraph).
+    c(person(given = "DALL",
+             family = "",
+             role = c("aut", "cre"),
+             email = "dall@nhsbsa.nhs.uk"),
+      person(given = "Adam",
+             family = "Ivison",
+             role = "ctb",
+             email = ""),
+      person(given = "Kayoung",
+             family = "Goffe",
+             role = "ctb",
+             email = "kayoung.goffe@nhsbsa.nhs.uk"),
+      person(given = "Steven",
+             family = "Buckley",
+             role = "ctb",
+             email = "steven.buckley@nhsbsa.nhs.uk"),
+      person(given = "Mark",
+             family = "McPherson",
+             role = "ctb",
+             email = "mark.mcpherson@nhsbsa.nhs.uk"))
+Description: Template used for NHSBSA Data Science and Advanced Analytics
+  {shiny} apps.
 License: Apache License (>= 2)
+Depends: 
+    R (>= 4.0)
 Imports: 
-    config (>= 0.3.1),
-    golem (>= 0.3.1),
-    shiny (>= 1.6.0),
-    markdown,
+    config,
+    dplyr,
+    golem,
     highcharter,
-    nhsbsaR,
+    htmltools,
     magrittr,
-    pkgload
+    nhsbsaR,
+    rlang,
+    scrollytell,
+    shiny,
+    shinyjs
+Suggests:
+    pkgload,
+    usethis
 Remotes:
-    nhsbsa-data-analytics/nhsbsaR
+    nhsbsa-data-analytics/nhsbsaR,
+    statistiekcbs/scrollytell
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
-Depends: 
-    R (>= 2.10)

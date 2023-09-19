@@ -1,36 +1,67 @@
-#' nhs_selectizeInput Function
+#' nhs_selectizeInput
 #'
-#' @importFrom shiny tagList
-nhs_selectizeInput <- function(inputId,
+#' NHS styled selectizeInput. This is meant to be used with options passed in
+#' from the server. For example, long lists of organisations or drugs. It allows
+#' to search for options by typing as well as dropdown.
+#'
+#' @param inputId Element id
+#' @param label Element label
+#' @param full_width Boolean, controls if full width or not
+#' @param ... Further named args passed to \code{shiny::selectizeInput}
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' # In module UI function
+#' nhs_selectizeInput(
+#'   "fruit",
+#'   "Choose some fruit",
+#'   full_width = TRUE
+#' )
+#'
+#' \dontrun{
+#' # In module server function
+#' shiny::updateSelectizeInput(
+#'   session,
+#'   "fruit",
+#'   choices = sort(fruit_list),
+#'   server = TRUE
+#' )
+#' }
+nhs_selectizeInput <- function(inputId, # Exclude Linting
                                label,
-                               full_width = FALSE) {
+                               full_width = FALSE,
+                               ...) {
   # Create selectize input
-  nhs_selectizeInput <- shiny::selectizeInput(
+  nsi <- selectizeInput( # Exclude Linting
     inputId = inputId,
     label = label,
     choices = NULL,
     multiple = FALSE,
     options = list(
-      placeholder = 'Please select an option below',
+      placeholder = "Please select an option below",
       onInitialize = I('function() { this.setValue(""); }'),
       options = list(maxItems = 5, closeAfterSelect = TRUE)
-    )
+    ),
+    ...
   )
 
-  
   # Hack the CSS to look like an NHS select input
-  nhs_selectizeInput$attribs$class <- "nhsuk-form-group"
-  nhs_selectizeInput$children[[1]]$attribs$class <- "nhsuk-label"
-  
-  if (full_width) {
-    nhs_selectizeInput$children[[2]]$children[[1]]$attribs$class <- "nhsuk-select form-control" # need form-control to fit max width if required
-    nhs_selectizeInput$children[[2]]$children[[1]]$attribs$style <- "border-radius: 0;" # form-control rounds the edges so we need this
-  } else {
-    nhs_selectizeInput$children[[2]]$children[[1]]$attribs$class <- "nhsuk-select"
-  }
-  
+  nsi$attribs$class <- "nhsuk-form-group" # Exclude Linting
+  nsi$children[[1]]$attribs$class <- "nhsuk-label" # Exclude Linting
 
-  tagList(
-    nhs_selectizeInput
-  )
+  if (full_width) {
+    # need form-control to fit max width if required
+    nsi$children[[2]]$ # Exclude Linting
+      children[[1]]$attribs$class <- "nhsuk-select form-control"
+    # form-control rounds the edges so we need this
+    nsi$children[[2]]$ # Exclude Linting
+      children[[1]]$attribs$style <- "border-radius: 0;"
+  } else {
+    nsi$children[[2]]$ # Exclude Linting
+      children[[1]]$attribs$class <- "nhsuk-select"
+  }
+
+  nsi
 }

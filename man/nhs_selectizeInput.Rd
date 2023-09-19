@@ -2,10 +2,42 @@
 % Please edit documentation in R/nhs_selectizeInput.R
 \name{nhs_selectizeInput}
 \alias{nhs_selectizeInput}
-\title{nhs_selectizeInput Function}
+\title{nhs_selectizeInput}
 \usage{
-nhs_selectizeInput(inputId, label, full_width = FALSE)
+nhs_selectizeInput(inputId, label, full_width = FALSE, ...)
+}
+\arguments{
+\item{inputId}{Element id}
+
+\item{label}{Element label}
+
+\item{full_width}{Boolean, controls if full width or not}
+
+\item{...}{Further named args passed to \code{shiny::selectizeInput}}
+}
+\value{
+HTML
 }
 \description{
-nhs_selectizeInput Function
+NHS styled selectizeInput. This is meant to be used with options passed in
+from the server. For example, long lists of organisations or drugs. It allows
+to search for options by typing as well as dropdown.
+}
+\examples{
+# In module UI function 
+nhs_selectizeInput(
+  "fruit",
+  "Choose some fruit",
+  full_width = TRUE
+)
+
+\dontrun{
+# In module server function
+shiny::updateSelectizeInput(
+  session,
+  "fruit",
+  choices = sort(fruit_list),
+  server = TRUE
+)
+}
 }

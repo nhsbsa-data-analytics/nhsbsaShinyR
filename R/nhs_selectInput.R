@@ -1,33 +1,56 @@
-#' nhs_selectInput Function
+#' nhs_selectInput
 #'
-#' @importFrom shiny tagList
-nhs_selectInput <- function(inputId,
+#' NHS styled selectInput
+#'
+#' @param inputId Element id
+#' @param label Element label
+#' @param choices Character vector (optionally named) giving available choices
+#' @param selected Initially selected choices
+#' @param full_width Boolean, controls if full width or not
+#' @param ... Further named args passed to \code{shiny::selectInput}
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_selectInput(
+#'   "fruit",
+#'   "Choose some fruit",
+#'   choices = c("Apple", "Banana", "Cherry"),
+#'   selected = "Banana",
+#'   full_width = TRUE
+#' )
+nhs_selectInput <- function(inputId, # Exclude Linting
                             label,
                             choices,
                             selected = NULL,
-                            full_width = FALSE) {
-
+                            full_width = FALSE,
+                            ...) {
   # Create select input
-  nhs_selectInput <- shiny::selectInput(
+  nsi <- selectInput(
     inputId = inputId,
     label = label,
     choices = choices,
     selected = selected,
-    selectize = FALSE
+    selectize = FALSE,
+    ...
   )
 
   # Hack the CSS to look like an NHS select input
-  nhs_selectInput$attribs$class <- "nhsuk-form-group"
-  nhs_selectInput$children[[1]]$attribs$class <- "nhsuk-label"
+  nsi$attribs$class <- "nhsuk-form-group"
+  nsi$children[[1]]$attribs$class <- "nhsuk-label"
 
   if (full_width) {
-    nhs_selectInput$children[[2]]$children[[1]]$attribs$class <- "nhsuk-select form-control" # need form-control to fit max width if required
-    nhs_selectInput$children[[2]]$children[[1]]$attribs$style <- "border-radius: 0;" # form-control rounds the edges so we need this
+    # need form-control to fit max width if required
+    nsi$children[[2]]$
+      children[[1]]$attribs$class <- "nhsuk-select form-control"
+    # form-control rounds the edges so we need this
+    nsi$children[[2]]$
+      children[[1]]$attribs$style <- "border-radius: 0;"
   } else {
-    nhs_selectInput$children[[2]]$children[[1]]$attribs$class <- "nhsuk-select"
+    nsi$children[[2]]$
+      children[[1]]$attribs$class <- "nhsuk-select"
   }
 
-  tagList(
-    nhs_selectInput
-  )
+  nsi
 }

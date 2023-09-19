@@ -1,3 +1,28 @@
+/* NHS front-end toolkit assumes a default font-size of 16px: https://github.com/nhsuk/nhsuk-frontend/issues/879  */
+html {
+    font-size: 16px!important
+}
+
+#skiplink {
+  position: absolute;
+  transform: translateY(-100%);
+}
+
+#skiplink:focus {
+  transform: translateY(0%);
+  background-color: lightyellow;
+  padding: 20px;
+  z-index: 9999;
+}
+
+/* Customize selectizeInput appearance to be similar to NHS selectInput */
+.selectize-input {
+  color: #4c6272;
+  border-radius: 0;
+  border: 2px solid;
+  line-height: 1.2;
+}
+
 /* Scrolly stuff */
 
 
@@ -62,38 +87,31 @@ and prevent them fading in / out) */
 /* Tweak CSS for navpanel to make it sticky when scrolling page */
 .col-sm-3 {
   position: -webkit-sticky; /* Safari */
-  position:sticky;
-  left:0;
-  top:0;
+  position: sticky;
+  left: 0;
+  top: 0;
 }
 @media (max-width:800px){
-    .col-sm-3 {
-      position:inherit;
-}
-}
-
-/* Tweak css for navbar styleing to prevent contrast issues*/
-.navbar-nav li a {
-  font-weight: bold; 
-  color : #000000;
+  .col-sm-3 {
+    position:inherit;
+  }
 }
 
-.navbar-default .navbar-nav li a {
-  font-weight: bold; 
-  color : #000000;
-}
-
-.navbar-brand {
-  font-weight: bold; 
-  color : #000000;
-}
-
+/* Tweak colours to get contrast dead on 4.5:1 */
 .navbar-default .navbar-brand {
-  font-weight: bold; 
-  color : #000000;
+    color: #717465;
+    background-color: #f8f8f8;
 }
 
-.move-right {
-  float: right !important;
-  margin-left: auto !important;
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #717465;
+    background-color: #f8f8f8;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: black;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #717465;
 }

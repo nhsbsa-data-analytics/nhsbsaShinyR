@@ -1,8 +1,15 @@
-#' nhs_grid_2_col Function
+#' nhs_grid_2_col
 #'
-#' @noRd
+#' NHS style 2 column grid element
 #'
-#' @importFrom shiny tagList
+#' @param col_1 First column content
+#' @param col_2 Second column content
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_grid_2_col(shiny::p("Column one"), shiny::p("Column two"))
 nhs_grid_2_col <- function(col_1, col_2) {
   tagList(
     div(
@@ -19,12 +26,23 @@ nhs_grid_2_col <- function(col_1, col_2) {
   )
 }
 
-
-#' nhs_grid_3_col Function
+#' nhs_grid_3_col
 #'
-#' @noRd
+#' NHS style 3 column grid element
 #'
-#' @importFrom shiny tagList
+#' @param col_1 First column content
+#' @param col_2 Second column content
+#' @param col_3 Third column content
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_grid_3_col(
+#'   shiny::p("Column one"),
+#'   shiny::p("Column two"),
+#'   shiny::p("Column three")
+#' )
 nhs_grid_3_col <- function(col_1, col_2, col_3) {
   tagList(
     div(
@@ -45,12 +63,25 @@ nhs_grid_3_col <- function(col_1, col_2, col_3) {
   )
 }
 
-
-#' nhs_grid_4_col Function
+#' nhs_grid_4_col
 #'
-#' @noRd
+#' NHS style 4 column grid element
 #'
-#' @importFrom shiny tagList
+#' @param col_1 First column content
+#' @param col_2 Second column content
+#' @param col_3 Third column content
+#' @param col_4 Fourth column content
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_grid_4_col(
+#'   shiny::p("Column one"),
+#'   shiny::p("Column two"),
+#'   shiny::p("Column three"),
+#'   shiny::p("Column four")
+#' )
 nhs_grid_4_col <- function(col_1, col_2, col_3, col_4) {
   tagList(
     div(

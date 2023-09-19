@@ -9,60 +9,35 @@ app_ui <- function(request) {
     shinyjs::useShinyjs(),
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    tags$html(lang = "en"),
-    bootstrapLib(),
-    # Your application UI logic
-    tags$a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
-    tags$style(HTML("
-      #skiplink {
-        position: absolute;
-        transform: translateY(-100%);
-      }
-      #skiplink:focus {
-      transform: translateY(0%);
-      background-color: lightyellow;
-      padding: 20px;
-      z-index: 9999;
-      }
-      /* Customize selectizeInput appearance 
-      Similar to NHS selectInput*/ 
-      .selectize-input {
-        color: #4c6272;
-        border-radius: 0;
-        border:2px solid;
-        line-height:1.2;
-      }
-      ")),
-    nhs_header(),
-    br(),
-    tags$div(
-      class = "nhsuk-width-container",
-      tags$div(
-        class = "nhsuk-main-wrapper",
-        id = "maincontent",
-        role = "main",
-        nhs_navlistPanel(
-          id = "mainTabs",
-          well = FALSE,
-          widths = c(3, 9),
-          tabPanel(
-            title = "Introduction",
-            mod_markdown_example_ui("markdown_example_ui_1")
-          ),
-          tabPanel(
-            title = "Charts",
-            mod_chart_example_ui("chart_example_ui_1")
-          ),
-          tabPanel(
-            title = "Scrolly example",
-            mod_scrollytell_example_ui("scrollytell_example_1")
-          ),
-          # Whenever tab button is clicked, windows scroll to the top
-          tags$script(" $(document).ready(function () {
-            $('#mainTabs a[data-toggle=\"tab\"]').on('click', function (e) {
-            window.scrollTo(0, 0)
-            });
-            });")
+    tagList(
+      tags$html(lang = "en"),
+      bootstrapLib(),
+      a(id = "skiplink", "Skip to Main Content", href = "#maincontent"),
+      nhs_header(),
+      br(),
+      div(id = "maincontent"),
+      div(
+        class = "nhsuk-width-container",
+        div(
+          class = "nhsuk-main-wrapper",
+          role = "main",
+          nhs_navlistPanel(
+            id = "mainTabs",
+            well = FALSE,
+            widths = c(3, 9),
+            tabPanel(
+              title = "Introduction",
+              mod_markdown_example_ui("markdown_example_ui_1")
+            ),
+            tabPanel(
+              title = "Charts",
+              mod_chart_example_ui("chart_example_ui_1")
+            ),
+            tabPanel(
+              title = "Scrolly example",
+              mod_scrollytell_example_ui("scrollytell_example_1")
+            )
+          )
         )
       )
     ),
@@ -80,17 +55,29 @@ app_ui <- function(request) {
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
 golem_add_external_resources <- function() {
-  add_resource_path(
-    "www", app_sys("app/www")
-  )
+  resources <- app_sys("app/www")
+  addResourcePath("www", resources)
 
   tags$head(
-    favicon(),
-    bundle_resources(
-      path = app_sys("app/www"),
-      app_title = "nhsbsaShinyR"
-    )
+    favicon("assets/favicons/favicon"),
+    tags$title("nhsbsaShinyR"),
+
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
+
+    # Javascript resources
+    htmltools::htmlDependency(
+      name = "resources",
+      version = "0.0.1",
+      src = resources,
+      script = list.files(resources, pattern = "\\.js$", recursive = TRUE),
+      package = NULL,
+      all_files = TRUE
+    ),
+    # CSS resources
+    lapply(
+      list.files(resources, pattern = "\\.css$", recursive = TRUE),
+      function(x) tags$link(href = file.path("www", x), rel = "stylesheet")
+    )
   )
 }

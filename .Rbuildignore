@@ -1,8 +1,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
-dev_history.R
+^dev_history.R$
 ^dev$
-$run_dev.*
+^run_dev.R$
 ^app\.R$
 ^rsconnect$
+^LICENSE\.md$
+^example.Renviron$
+^gitleaks.toml$
+^\.github$
+^\.lintr$

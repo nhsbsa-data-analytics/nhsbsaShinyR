@@ -5,12 +5,11 @@
 #' @inheritParams shiny::shinyApp
 #'
 #' @export
-#' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
-run_app <- function(onStart = NULL,
+run_app <- function(onStart = NULL, # Exclude Linting
                     options = list(),
-                    enableBookmarking = NULL,
-                    uiPattern = "/",
+                    enableBookmarking = NULL, # Exclude Linting
+                    uiPattern = "/", # Exclude Linting
                     ...) {
   with_golem_options(
     app = shinyApp(

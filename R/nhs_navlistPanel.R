@@ -1,18 +1,27 @@
-#' nhs_navlistPanel Function
+#' nhs_navlistPanel
 #'
-#' @noRd
+#' NHS style navlist element
 #'
-#' @importFrom shiny tagList
-nhs_navlistPanel <- function(...,
+#' @inheritParams shiny::navlistPanel
+#'
+#' @return HTML
+#' @export
+#'
+#' @examples
+#' nhs_navlistPanel(
+#'   "nav_panel",
+#'   shiny::tabPanel(title = "Introduction", shiny::p("This is an intro")),
+#'   shiny::tabPanel(title = "Article", shiny::p("This is an article"))
+#' )
+nhs_navlistPanel <- function(..., # Exclude Linting
                              id = NULL,
                              selected = NULL,
                              header = NULL,
                              footer = NULL,
                              fluid = TRUE,
                              widths = c(4, 8)) {
-
   # Create navlist panel
-  nhs_navlistPanel <- shiny::navlistPanel(
+  nvp <- navlistPanel(
     ...,
     id = id,
     selected = selected,
@@ -23,10 +32,9 @@ nhs_navlistPanel <- function(...,
   )
 
   # Hack the CSS to look like an NHS list
-  nhs_navlistPanel$children[[1]]$children[[1]]$attribs$class <-
-    "nhsuk-list app-side-nav__list"
+  nvp$children[[1]]$children[[1]]$attribs$class <- "nhsuk-list nav-pills nav-stacked"
+  nvp$children[[1]]$attribs$role <- "navigation"
+  nvp$children[[1]]$attribs$`aria-label` <- "Navigation menu"
 
-  tagList(
-    nhs_navlistPanel
-  )
+  nvp
 }
