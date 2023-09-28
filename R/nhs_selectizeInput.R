@@ -51,6 +51,15 @@ nhs_selectizeInput <- function(inputId, # Exclude Linting
   nsi$attribs$class <- "nhsuk-form-group" # Exclude Linting
   nsi$children[[1]]$attribs$class <- "nhsuk-label" # Exclude Linting
 
+  # Accessibility
+  # Associate the label with the select input for accessibility
+  label_id <- paste0(inputId, "-label")
+  # for attribute in label
+  # (https://www.w3schools.com/accessibility/accessibility_labels.php)
+  nsi$children[[1]]$attribs$`for` <- inputId
+  nsi$children[[1]]$attribs$id <- label_id # id for the label
+  nsi$children[[2]]$children[[1]]$attribs$`aria-labelledby` <- label_id # label
+
   if (full_width) {
     # need form-control to fit max width if required
     nsi$children[[2]]$ # Exclude Linting
