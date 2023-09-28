@@ -50,7 +50,7 @@ nhs_selectizeInput <- function(inputId, # Exclude Linting
   # Hack the CSS to look like an NHS select input
   nsi$attribs$class <- "nhsuk-form-group" # Exclude Linting
   nsi$children[[1]]$attribs$class <- "nhsuk-label" # Exclude Linting
-  
+
   # Accessibility
   # Associate the label with the select input for accessibility
   label_id <- paste0(inputId, "-label")
