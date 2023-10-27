@@ -40,8 +40,17 @@ Imports:
     shiny,
     shinyjs
 Suggests:
+    officedown,
+    officer,
     pkgload,
-    usethis
+    purrr,
+    rmarkdown,
+    rprojroot,
+    testthat,
+    tidyr,
+    usethis,
+    withr,
+    xml2
 Remotes:
     nhsbsa-data-analytics/nhsbsaR,
     statistiekcbs/scrollytell
