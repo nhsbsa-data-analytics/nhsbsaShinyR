@@ -24,7 +24,7 @@ from the server. For example, long lists of organisations or drugs. It allows
 to search for options by typing as well as dropdown.
 }
 \examples{
-# In module UI function 
+# In module UI function
 nhs_selectizeInput(
   "fruit",
   "Choose some fruit",
