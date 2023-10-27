@@ -26,16 +26,20 @@ app_ui <- function(request) {
             well = FALSE,
             widths = c(3, 9),
             tabPanel(
-              title = "Introduction",
-              mod_markdown_example_ui("markdown_example_ui_1")
+              title = "Markdown cheat sheet",
+              mod_markdown_example_ui("markdown_cheat_sheet_example")
+            ),
+            tabPanel(
+              title = "Another markdown page",
+              mod_markdown_internal_link_example_ui("markdown_internal_link_example")
             ),
             tabPanel(
               title = "Charts",
-              mod_chart_example_ui("chart_example_ui_1")
+              mod_chart_example_ui("chart_example")
             ),
             tabPanel(
               title = "Scrolly example",
-              mod_scrollytell_example_ui("scrollytell_example_1")
+              mod_scrollytell_example_ui("scrollytell_example")
             )
           )
         )
