@@ -1,117 +1,125 @@
 ## Markdown cheat sheet
 
-### Basic syntax
+The markdown syntax compatible with the review automation scripts is shown below. There exists further markdown syntax that could be incorporated if required.
 
-These are the elements outlined in John Gruber's original design document. All Markdown applications support these elements.
+---
 
-#### Heading
+### Heading
+
+```
+# H1
+## H2
+### H3
+#### H4
+```
 
 # H1
 ## H2
 ### H3
+#### H4
 
-#### Bold
+---
 
-Original markdown used the * character, but underscore can be used, and is what is used for the review scripts to work.
+### Bold
+
+Original markdown used double * characters, but underscore can be used, and is what is used for the review scripts to work.
+
+```
+__bold text__
+```
 
 __bold text__
 
-#### Italic
+---
+
+### Italic
 
 Original markdown used the * character, but underscore can be used, and is what is used for the review scripts to work.
 
+```
+_italicized text_
+```
+
 _italicized text_
 
-#### Blockquote
+---
 
-> blockquote
+### Ordered list
 
-#### Ordered list
+```
+1. First item
+2. Second item
+3. Third item
+```
 
 1. First item
 2. Second item
 3. Third item
 
-#### Unordered list
+---
+
+### Unordered list
+
+```
+- First item
+- Second item
+- Third item
+```
 
 - First item
 - Second item
 - Third item
 
-#### Code
+---
 
-A single pair of backticks is generally used. But the review scripts require 4 pairs!
+### Inline code
 
-````code````
+```
+Here is some inline ````code````. Note it uses four pairs of backticks, not a single pair as usual for markdown!
+```
 
-#### Horizontal rule
+Here is some inline `code`.
 
 ---
 
-#### External link
+### External link
+
+```
+[Markdown Guide](https://www.markdownguide.org)
+```
 
 [Markdown Guide](https://www.markdownguide.org)
 
-#### Internal link
+---
 
-You can link to [another page](http://127.0.0.1/Another_markdown_page), and even a [specific heading](http://127.0.0.1/Another_markdown_page?linked-heading) on another page. The browser back button will also be enabled on doing this, to allow you to get back to where you were.
+### Internal link
 
-#### Image
+You can link to another page using the `localhost` IP address and pointing to a page by using the `title` of its `tabpanel`, as defined in `app_ui.R`, with any spaces replaced by underscores.
 
-Always specify the alt text. You can include images from web sources...
+```
+[Link to page "Another markdown page"](http://127.0.0.1/Another_markdown_page)
+```
 
-![alt text](https://cdn.ons.gov.uk/assets/images/ons-logo/v2/ons-logo.svg)
+[Link to page "Another markdown page"](http://127.0.0.1/Another_markdown_page)
 
-...and images served locally.
+You can even link to a specific heading on another page. Just add a `?` followed by a string formed from the lower case heading text, with non-alphanumeric characters removed and spaces replaced with dashes.
 
-![alt text](www/assets/logos/nhs-logo.png)
+```
+[Link to heading "Linked heading"on page "Another markdown page"](http://127.0.0.1/Another_markdown_page?linked-heading)
+```
 
-### Extended syntax
+[Link to heading "Linked heading" on page "Another markdown page"](http://127.0.0.1/Another_markdown_page?linked-heading)
 
-These elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements. Only the ones supported when using ````shiny::includeMarkdown```` are shown.
+The browser back button will also be enabled after using an internal link, to allow you to get back to where you were.
 
-#### Table
+### Inline code with link
 
-| Syntax    | Description |
-| ----------| ----------- |
-| Header    | Title       |
-| Paragraph | Text        |
+Links can be created on inline code using
 
-#### Fenced code block
+```
+[````{nhsbsaShinyR}````](https://github.com/nhsbsa-data-analytics/nhsbsaShinyR)
+```
 
-````
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
-````
+[````{nhsbsaShinyR}````](https://github.com/nhsbsa-data-analytics/nhsbsaShinyR)
 
-#### Footnote
-
-Here's a sentence with a footnote. [^1]
-
-[^1]: This is the footnote.
-
-#### Definition list
-
-term
-: definition
-
-#### Strikethrough
-
-~~The world is flat.~~
-
-#### Task list
-
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
-
-#### Subscript
-
-H~2~O
-
-#### Superscript
-
-X^2^
+Note the braces (`{}`) are not necessary, but are a convention when writing an R package name.

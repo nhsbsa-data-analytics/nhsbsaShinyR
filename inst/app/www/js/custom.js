@@ -91,7 +91,7 @@ var internalLink = function(tabName, id) {
       tab.click();
       
       // exit early if no id was specified
-      if ($id.length === 0) {
+      if (id.length === 0) {
           return;
       }
       
