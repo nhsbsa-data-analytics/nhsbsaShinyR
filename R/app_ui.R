@@ -31,7 +31,7 @@ app_ui <- function(request) {
             ),
             tabPanel(
               title = "Another markdown page",
-              mod_markdown_internal_link_example_ui("markdown_internal_link_example")
+              mod_internal_link_example_ui("internal_link_example")
             ),
             tabPanel(
               title = "Charts",

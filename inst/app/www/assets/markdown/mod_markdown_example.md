@@ -74,8 +74,10 @@ _italicized text_
 
 ### Inline code
 
+Inline code is usually made with a single pair of backticks. We need to use four pairs of backticks to allow it to work in the review code.
+
 ```
-Here is some inline ````code````. Note it uses four pairs of backticks, not a single pair as usual for markdown!
+Here is some inline ````code````.
 ```
 
 Here is some inline `code`.
