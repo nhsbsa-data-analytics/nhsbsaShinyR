@@ -11,3 +11,4 @@
 ^gitleaks.toml$
 ^\.github$
 ^\.lintr$
+^review$

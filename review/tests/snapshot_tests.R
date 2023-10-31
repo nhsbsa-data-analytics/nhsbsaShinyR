@@ -15,9 +15,9 @@ local_edition(3)
 # 6. Review the changes in each file one by one.
 #    If ALL changes in a file are as intended, then choose the 'Accept' option.
 #    If there are some changes that were not intended, you should fix these in 
-#    the source files. You can leave the diff viewer open and revert the changes
-#    directly by a simple copy and paste of the original content. Click 'Skip' 
-#    once the reversions are complete.
+#    the temporary markdown files (review/temp). You can leave the diff viewer
+#    open and revert the changes directly by a simple copy and paste of the
+#    original content. Click 'Skip' once the reversions are complete.
 # 7. Close the diff viewer once only skipped files remain.
 # 8. If you had some changes to revert, FIRST MAKE SURE TO COMMENT OUT the line
 #        source("review/scripts/word_to_md.R")  
@@ -35,23 +35,10 @@ local_edition(3)
 # future".
 test_that("generate snapshots", {
   with_dir(find_package_root_file(), {
-    expect_snapshot_file("inst/markdown/01_headline_figures.md")
-    expect_snapshot_file("inst/markdown/02_patients_age_gender.md")
-    expect_snapshot_file("inst/markdown/03_patients_imd.md")
-    expect_snapshot_file("inst/markdown/04_metrics_ch_type.md")
-    expect_snapshot_file("inst/markdown/05_metrics_age_gender.md")
-    expect_snapshot_file("inst/markdown/06_geo_ch_flag.md")
-    expect_snapshot_file("inst/markdown/07_ch_flag_drug.md")
-    expect_snapshot_file("inst/markdown/08_geo_ch_flag_drug.md")
-    expect_snapshot_file("inst/markdown/09_metrics_1.md")
-    expect_snapshot_file("inst/markdown/09_metrics_2.md")
-    expect_snapshot_file("inst/markdown/09_metrics_3.md")
-    expect_snapshot_file("inst/markdown/09_metrics_4.md")
-    expect_snapshot_file("inst/markdown/10_datasets.md")
-    expect_snapshot_file("inst/markdown/11_address_matching.md")
-    expect_snapshot_file("inst/markdown/12_feedback.md")
-    expect_snapshot_file("inst/markdown/13_annex.md")
-    expect_snapshot_file("inst/markdown/final_thoughts.md")
+    source("review/scripts/md_to_word.R")
+    
+    expect_snapshot_file("inst/app/www/assets/markdown/01_mod_the_first.md")
+    expect_snapshot_file("inst/app/www/assets/markdown/02_mod_the_second.md")
   })
 })
 
@@ -64,38 +51,24 @@ test_that("generate snapshots", {
 #   with_dir(find_package_root_file(), {
 #     source("review/scripts/word_to_md.R")
 # 
-#     expect_snapshot_file("review/temp/01_headline_figures.md")
-#     expect_snapshot_file("review/temp/02_patients_age_gender.md")
-#     expect_snapshot_file("review/temp/03_patients_imd.md")
-#     expect_snapshot_file("review/temp/04_metrics_ch_type.md")
-#     expect_snapshot_file("review/temp/05_metrics_age_gender.md")
-#     expect_snapshot_file("review/temp/06_geo_ch_flag.md")
-#     expect_snapshot_file("review/temp/07_ch_flag_drug.md")
-#     expect_snapshot_file("review/temp/08_geo_ch_flag_drug.md")
-#     expect_snapshot_file("review/temp/09_metrics_1.md")
-#     expect_snapshot_file("review/temp/09_metrics_2.md")
-#     expect_snapshot_file("review/temp/09_metrics_3.md")
-#     expect_snapshot_file("review/temp/09_metrics_4.md")
-#     expect_snapshot_file("review/temp/10_datasets.md")
-#     expect_snapshot_file("review/temp/11_address_matching.md")
-#     expect_snapshot_file("review/temp/12_feedback.md")
-#     expect_snapshot_file("review/temp/13_annex.md")
-#     expect_snapshot_file("review/temp/final_thoughts.md")
+#     expect_snapshot_file("review/temp/01_mod_the_first.md")
+#     expect_snapshot_file("review/temp/02_mod_the_second.md")
 #   })
 # })
 
-# 5. If any differences are present (there should be if you changed the
-# files...) a shiny app can be started showing the differences by running the
-# code below in the console (you can open it in browser using the 'Show in new
-# window' button in the Viewer pane)
+# 5. If any differences are present (there should be if you changed the files...)
+# a diff viewer can be opened by running the code below in the console (you can 
+# open it in browser using the 'Show in new window' button in the Viewer pane)
 #     testthat::snapshot_review('snapshot_tests/', "review/tests")
 
 # 6. Review the changes in each file one by one.
 #    If ALL changes in a file are as intended, then choose the 'Accept' option.
+#
 #    If there are some changes that were not intended, you should fix these in 
 #    the source files. You can leave the diff viewer open and revert the changes
-#    directly by a simple copy and paste of the original content. Click 'Skip' 
-#    once the reversions are complete.
+#    directly by a simple copy and paste of the original content.
+#
+#    Click 'Skip' once the reversions are complete.
 
 # 7. Close the diff viewer once only skipped files remain.
 
@@ -105,7 +78,10 @@ test_that("generate snapshots", {
 #    differences to be found now, but if there are then repeat step 6 to 8 until
 #    none are found.
 
-# 9. If you had to comment out the line
+# 9. It is now safe to copy the revised markdown files from the review/temp folder
+#    over the app markdown files in inst/app/www/assets/markdown.
+#
+#    If you had to comment out the line
 #        source("review/scripts/word_to_md.R")
-#    due to reversions, uncomment it now so it is ready for the next set of 
-#    changes.
+#    due to reversions, MAKE SURE to uncomment it now so it is ready for the next
+#    set of changes.

@@ -15,7 +15,7 @@ mod_internal_link_example_ui <- function(id) {
 #' internal_link_example Server Function
 #'
 #' @noRd
-mod_internal_link_example_server <- function(id) {
+mod_internal_link_example_server <- function(id) { # Exclude Linting
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
   })
