@@ -2,7 +2,7 @@
 title: "Writing and reviewing text"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{writing-and-reviewing-text}
+  %\VignetteIndexEntry{Writing and reviewing text}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

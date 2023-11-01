@@ -12,3 +12,5 @@
 ^\.github$
 ^\.lintr$
 ^review$
+^doc$
+^Meta$

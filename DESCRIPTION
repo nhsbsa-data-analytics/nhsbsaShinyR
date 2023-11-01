@@ -45,6 +45,7 @@ Suggests:
     officer,
     pkgload,
     purrr,
+    markdown,
     rmarkdown,
     rprojroot,
     testthat,
