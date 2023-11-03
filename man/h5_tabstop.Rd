@@ -4,10 +4,10 @@
 \alias{h5_tabstop}
 \title{h5_tabstop}
 \usage{
-h5_tabstop(header, tabindex = 0, ...)
+h5_tabstop(heading, tabindex = 0, ...)
 }
 \arguments{
-\item{header}{Heading text}
+\item{heading}{Heading text}
 
 \item{tabindex}{Number for tabindex, default 0}
 
