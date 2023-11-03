@@ -4,14 +4,14 @@
 \alias{nhs_card_tabstop}
 \title{nhs_card_tabstop}
 \usage{
-nhs_card_tabstop(heading, tabindex = 0, ...)
+nhs_card_tabstop(heading, ..., tabindex = 0)
 }
 \arguments{
 \item{heading}{Card title}
 
-\item{tabindex}{Number for tabindex, default 0}
-
 \item{...}{Card content}
+
+\item{tabindex}{Number for tabindex, default 0}
 }
 \value{
 HTML

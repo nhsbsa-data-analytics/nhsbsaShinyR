@@ -1,15 +1,15 @@
 #' h1_tabstop
 #'
 #' @param heading Heading text
-#' @param tabindex Number for tabindex, default 0
 #' @inheritDotParams shiny::h1
+#' @param tabindex Number for tabindex, default 0
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' h1_tabstop("Heading")
-h1_tabstop <- function(heading, tabindex = 0, ...) {
+h1_tabstop <- function(heading, ..., tabindex = 0) {
   # create heading as typical heading plus tabindex attribute
   # ensures heading will be stopped at when pressing keyboard tab
   h1_tabstop <- h1(heading, ...) %>%
@@ -19,15 +19,15 @@ h1_tabstop <- function(heading, tabindex = 0, ...) {
 #' h2_tabstop
 #'
 #' @param heading Heading text
+#' @inheritDotParams shiny::h1
 #' @param tabindex Number for tabindex, default 0
-#' @inheritDotParams shiny::h2
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' h2_tabstop("Heading")
-h2_tabstop <- function(heading, tabindex = 0, ...) {
+h2_tabstop <- function(heading, ..., tabindex = 0) {
   # create heading as typical heading plus tabindex attribute
   # ensures heading will be stopped at when pressing keyboard tab
   h2_tabstop <- h2(heading, ...) %>%
@@ -37,15 +37,15 @@ h2_tabstop <- function(heading, tabindex = 0, ...) {
 #' h3_tabstop
 #'
 #' @param heading Heading text
+#' @inheritDotParams shiny::h1
 #' @param tabindex Number for tabindex, default 0
-#' @inheritDotParams shiny::h3
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' h3_tabstop("Heading")
-h3_tabstop <- function(heading, tabindex = 0, ...) {
+h3_tabstop <- function(heading, ..., tabindex = 0) {
   # create heading as typical heading plus tabindex attribute
   # ensures heading will be stopped at when pressing keyboard tab
   h3_tabstop <- h3(heading, ...) %>%
@@ -55,15 +55,15 @@ h3_tabstop <- function(heading, tabindex = 0, ...) {
 #' h4_tabstop
 #'
 #' @param heading Heading text
+#' @inheritDotParams shiny::h1
 #' @param tabindex Number for tabindex, default 0
-#' @inheritDotParams shiny::h4
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' h4_tabstop("Heading")
-h4_tabstop <- function(heading, tabindex = 0, ...) {
+h4_tabstop <- function(heading, ..., tabindex = 0) {
   # create heading as typical heading plus tabindex attribute
   # ensures heading will be stopped at when pressing keyboard tab
   h4_tabstop <- h4(heading, ...) %>%
@@ -73,15 +73,15 @@ h4_tabstop <- function(heading, tabindex = 0, ...) {
 #' h5_tabstop
 #'
 #' @param heading Heading text
+#' @inheritDotParams shiny::h1
 #' @param tabindex Number for tabindex, default 0
-#' @inheritDotParams shiny::h5
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' h5_tabstop("Heading")
-h5_tabstop <- function(heading, tabindex = 0, ...) {
+h5_tabstop <- function(heading, ..., tabindex = 0) {
   # create heading as typical heading plus tabindex attribute
   # ensures heading will be stopped at when pressing keyboard tab
   h5_tabstop <- h5(heading, ...) %>%
@@ -91,15 +91,15 @@ h5_tabstop <- function(heading, tabindex = 0, ...) {
 #' h6_tabstop
 #'
 #' @param heading Heading text
+#' @inheritDotParams shiny::h1
 #' @param tabindex Number for tabindex, default 0
-#' @inheritDotParams shiny::h6
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' h6_tabstop("Heading")
-h6_tabstop <- function(heading, tabindex = 0, ...) {
+h6_tabstop <- function(heading, ..., tabindex = 0) {
   # create heading as typical heading plus tabindex attribute
   # ensures heading will be stopped at when pressing keyboard tab
   h6_tabstop <- h6(heading, ...) %>%
@@ -110,15 +110,15 @@ h6_tabstop <- function(heading, tabindex = 0, ...) {
 #' nhs_card_tabstop
 #'
 #' @param heading Card title
-#' @param tabindex Number for tabindex, default 0
 #' @param ... Card content
+#' @param tabindex Number for tabindex, default 0
 #'
 #' @return HTML
 #' @export
 #'
 #' @examples
 #' nhs_card_tabstop("A card", shiny::p("Some content"))
-nhs_card_tabstop <- function(heading, tabindex = 0, ...) {
+nhs_card_tabstop <- function(heading, ..., tabindex = 0) {
   # create nhs_card as typical nhs_card plus tabindex attribute
   # ensures nhs_card will be stopped at when pressing keyboard tab
   htmltools::tagQuery(nhs_card(heading, ...))$

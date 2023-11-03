@@ -12,7 +12,6 @@ mod_chart_example_ui <- function(id) {
     h2_tabstop("Second level"),
     nhs_card_tabstop(
       heading = "example chart title",
-      tabindex = 0,
       nhs_selectInput(
         inputId = ns("bins"),
         label = "Number of bins:",
