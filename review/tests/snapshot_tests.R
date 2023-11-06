@@ -4,7 +4,8 @@ library(rprojroot)
 
 local_edition(3)
 
-# INSTRUCTIONS
+
+# Instructions ------------------------------------------------------------
 # 1. Get initial snapshots
 # 2. Comment out the first code block
 # 3. Uncomment the rest of the code
@@ -29,6 +30,8 @@ local_edition(3)
 #    due to reversions, uncomment it now so it is ready for the next set of 
 #    changes.
 
+
+# Generate snapshots ------------------------------------------------------
 # 1. To get the initial snapshot, run the below block, with an expectation for
 # each reference file. Use 'Run Tests' button above right.
 # You are basically saying "all these files should look as they are now in
@@ -46,8 +49,10 @@ test_that("generate snapshots", {
 
 # 3. Uncomment the below block, ready for future changes
 
+
+# Compare markdown --------------------------------------------------------
 # 4. When you make changes to the files, use 'Run Tests' button above right
-# test_that("markdown text is as expected", {
+# test_that("compare markdown", {
 #   with_dir(find_package_root_file(), {
 #     source("review/scripts/word_to_md.R")
 # 
@@ -56,11 +61,15 @@ test_that("generate snapshots", {
 #   })
 # })
 
+
+# Run diff viewer ---------------------------------------------------------
 # 5. If any differences are present (there should be if you changed the files...)
 # a diff viewer can be opened by running the code below in the console (you can 
 # open it in browser using the 'Show in new window' button in the Viewer pane)
 #     testthat::snapshot_review('snapshot_tests/', "review/tests")
 
+
+# Review - accept or fix --------------------------------------------------
 # 6. Review the changes in each file one by one.
 #    If ALL changes in a file are as intended, then choose the 'Accept' option.
 #
@@ -78,6 +87,8 @@ test_that("generate snapshots", {
 #    differences to be found now, but if there are then repeat step 6 to 8 until
 #    none are found.
 
+
+# Replace markdown --------------------------------------------------------
 # 9. It is now safe to copy the revised markdown files from the review/temp folder
 #    over the app markdown files in inst/app/www/assets/markdown.
 #

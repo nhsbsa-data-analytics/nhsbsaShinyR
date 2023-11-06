@@ -410,6 +410,8 @@ pwalk(
         ),
         text = case_match(
           style_name,
+          "Heading 1" ~ paste0("# ", text),
+          "heading 1" ~ paste0("# ", text),
           "Heading 2" ~ paste0("## ", text),
           "heading 2" ~ paste0("## ", text),
           "Heading 3" ~ paste0("### ", text),
@@ -438,6 +440,7 @@ pwalk(
     walk(needs_blank_after, \(x) doc_df <<- add_row(doc_df, text = "", .after = x))
 
     # Write the markdown file
+    dir.create(md_out_dir, showWarnings = FALSE)
     writeLines(doc_df$text, file.path(md_out_dir, basename(md_file)))
   }
 )

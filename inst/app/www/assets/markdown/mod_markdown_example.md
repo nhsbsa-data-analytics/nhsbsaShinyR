@@ -6,14 +6,16 @@ The markdown syntax compatible with the review automation scripts is shown below
 
 ### Heading
 
-Headings from level two to four can be used. First level heading is reserved for the main title, so should never appear in markdown files.
+Headings from level one to four can be used.
 
 ```
+# H1
 ## H2
 ### H3
 #### H4
 ```
 
+# H1
 ## H2
 ### H3
 #### H4

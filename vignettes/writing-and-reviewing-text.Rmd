@@ -93,7 +93,7 @@ You will need to use a template Word doc in order to use the automation script. 
 
 In addition to using the template document when writing the first draft, there are some conventions that need to be followed on which the script depends. All of the (currently) usable syntax is shown on the _Markdown cheat sheet_ page in the example app.
 
-1. Use headings starting from 2nd level (Heading 2 in Word); the 1st level heading will be for the app title, which is not set in the markdown
+1. Use headings starting from 1st to 4th level (Heading n, in Word)
 2. Use __bold__ and _italics_ as required
 3. Use __single level__ lists, both ordered and bullets
 4. Use the `Consolas` font for mono-spaced text such as code
@@ -133,17 +133,17 @@ This list is then written as an Rmarkdown document, and finally rendered as a Wo
 Once the text is first added to the app, as markdown files, there is probably going to be a time when something needs to change, based on feedback or a rethink of what is written. This review process can be made easy with the following steps
 
 1. Make sure to base changes on the current state of the app text, by running the `review/md_to_word.R` script first
-2. (First review only) To get the initial snapshots, run the first code block ("generate snapshots") in `review/tests/snapshot_tests.R`; each markdown file should have an expectation
+2. (First review only) To get the initial snapshots, run the first code block (`Generate snapshots`) in `review/tests/snapshot_tests.R`; each markdown file should have an expectation
 3. Finalise the changes in Word, making sure to accept or reject every change
-4. Run the second code block ("markdown text is as expected") in `review/tests/snapshot_tests.R`
-5. Run the diff tool with `testthat::snapshot_review('snapshot_tests/', "review/tests")`
-6. For each file with changes
+4. Run the second code block (`Compare markdown`) in `review/tests/snapshot_tests.R`
+5. Run the diff tool `Run diff viewer`
+6. For each file with changes (`Review - accept or fix`)
     a. If __all__ changes in a file are as intended, then choose the 'Accept' option
     b. If there are unintended changes, fix these in the associated markdown file in `review/temp` (simple copy and paste from the diff viewer works)
     c. If you could not 'Accept' a file because some changes were unintended, instead click 'Skip'
-7. Once you have finished with the checking and fixing, close the diff viewer
+7. Once you have finished with the checking and fixing, close the diff viewer.
 8. Re-run the snapshot tests __BUT MAKE SURE__ to comment out `source("review/scripts/word_to_md.R")` or you will overwrite your amendments and have to redo them! (for extra safety, you could rename the Word doc after step 4, which will make the test error out). You should expect no differences to be found now, but if there are then repeat step 6 to 8 until none are found.
-9. Once all is as it should be, you can safely copy the revised markdown files in the `review/temp` folder over the source markdown files for the app in `/inst/app/www/assets/markdown`. __MAKE SURE__ to uncomment `source("review/scripts/word_to_md.R")` in the "markdown text is as expected" code block, if you had to make any fixes, so it is ready for next review cycle.
+9. Once all is as it should be, you can safely copy the revised markdown files in the `review/temp` folder over the source markdown files for the app in `/inst/app/www/assets/markdown`. __MAKE SURE__ to uncomment `source("review/scripts/word_to_md.R")` in the "markdown text is as expected" code block, if you had to make any fixes, so it is ready for next review cycle (`Replace markdown`).
 
 The snapshot tests file has extensive comments to follow.
 
