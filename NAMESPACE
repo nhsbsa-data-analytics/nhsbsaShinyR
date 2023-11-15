@@ -2,7 +2,7 @@
 
 export("%>%")
 export(accessible_action_link)
-export(accessible_radio_button)
+export(accessible_radio_buttons)
 export(h1_tabstop)
 export(h2_tabstop)
 export(h3_tabstop)
