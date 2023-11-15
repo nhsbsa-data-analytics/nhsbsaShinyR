@@ -48,9 +48,10 @@ Suggests:
     markdown,
     rmarkdown,
     rprojroot,
-    testthat,
+    testthat (>= 3.0.0),
     tidyr,
     usethis,
+    waldo,
     withr,
     xml2
 Remotes:
@@ -60,3 +61,4 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
+Config/testthat/edition: 3
