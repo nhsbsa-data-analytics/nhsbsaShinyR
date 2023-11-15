@@ -134,7 +134,7 @@ nhs_card_tabstop <- function(header, tabindex = 0, ...) {
 #' @export
 #'
 #' @examples
-#' accessible_radio_button("rb", "Choose one:",
+#' accessible_radio_buttons("rb", "Choose one:",
 #'                         choiceNames = list(
 #'                           "apple",
 #'                           "banana",
@@ -144,7 +144,7 @@ nhs_card_tabstop <- function(header, tabindex = 0, ...) {
 #'                           "A", "B", "C"
 #'                         ))
 # Begin Exclude Linting
-accessible_radio_button <- function(inputId, label, choices = NULL, selected = NULL,
+accessible_radio_buttons <- function(inputId, label, choices = NULL, selected = NULL,
                                     inline = FALSE, width = NULL, choiceNames = NULL,
                                     choiceValues = NULL) {
   # End Exclude Linting
