@@ -126,53 +126,65 @@ nhs_card_tabstop <- function(header, tabindex = 0, ...) {
 }
 
 
-
-
-
-
-
 #' accessible_radio_button
 #'
-#' @param ... radio content
+#' @inheritParams shiny::radioButtons
 #'
-#' @noRd
+#' @return HTML
+#' @export
 #'
+#' @examples
+#' accessible_radio_button("rb", "Choose one:",
+#'                         choiceNames = list(
+#'                           "apple",
+#'                           "banana",
+#'                           "cherry"
+#'                         ),
+#'                         choiceValues = list(
+#'                           "A", "B", "C"
+#'                         ))
+# Begin Exclude Linting
 accessible_radio_button <- function(inputId, label, choices = NULL, selected = NULL,
                                     inline = FALSE, width = NULL, choiceNames = NULL,
                                     choiceValues = NULL) {
+  # End Exclude Linting
   args <- shiny:::normalizeChoicesArgs(choices, choiceNames, choiceValues)
-  
-  selected <- shiny::restoreInput(id = inputId, default = selected)
-  
+
+  selected <- restoreInput(id = inputId, default = selected)
+
   selected <- if (is.null(selected)) args$choiceValues[[1]] else as.character(selected)
   if (length(selected) > 1) stop("The 'selected' argument must be of length 1")
-  
+
   options <- shiny:::generateOptions(
     inputId, selected, inline, "radio", args$choiceNames, args$choiceValues
   )
-  
-  divClass <- "form-group shiny-input-radiogroup shiny-input-container"
-  if (inline) divClass <- paste(divClass, "shiny-input-container-inline")
-  
+
+  div_class <- "form-group shiny-input-radiogroup shiny-input-container"
+  if (inline) div_class <- paste(div_class, "shiny-input-container-inline")
+
   tags$fieldset(
     tags$legend(label),
     tags$div(
       id = inputId,
       style = htmltools::css(width = validateCssUnit(width)),
-      class = divClass,
+      class = div_class,
       role = "radiogroup",
       options
     )
   )
 }
 
+
 #' accessible_action_link
 #'
-#' @param ... action link text
+#' @inheritParams shiny::actionLink
 #'
-#' @noRd
+#' @return HTML
+#' @export
 #'
-accessible_action_link <- function(inputId, label, icon = NULL, ...) {
+#' @examples
+#' accessible_action_link("infoLink", "Information Link", class = "btn-info")
+accessible_action_link <- function(inputId, label, icon = NULL, ...) { # Exclude Linting
   value <- restoreInput(id = inputId, default = NULL)
   tags$a(id = inputId, href = "#", class = "action-button",
          `data-val` = value, style = "color: #004280; text-decoration: underline;",
