@@ -46,3 +46,6 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+          
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3

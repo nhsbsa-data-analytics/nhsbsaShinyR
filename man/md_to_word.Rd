@@ -24,7 +24,7 @@ md_to_word(
 Path of generated Word doc
 }
 \description{
-All markdown files in a folder can be used to generate a Word document. The 
+All markdown files in a folder can be used to generate a Word document. The
 main use case is for use in reviewing often changing text when writing final
 output of initiatives. It can be used standalone for adhoc purposes.
 }

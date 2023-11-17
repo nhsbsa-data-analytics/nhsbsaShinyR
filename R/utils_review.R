@@ -1,6 +1,6 @@
 #' Generate Word doc from markdown files
-#' 
-#' All markdown files in a folder can be used to generate a Word document. The 
+#'
+#' All markdown files in a folder can be used to generate a Word document. The
 #' main use case is for use in reviewing often changing text when writing final
 #' output of initiatives. It can be used standalone for adhoc purposes.
 #'
@@ -25,9 +25,9 @@
 #'   "adhoc.docx",
 #'   system.file("review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR")
 #' )}
-md_to_word <- function(md_dir = "inst/app/www/assets/markdown", 
+md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
                        rv_dir = "inst/review",
-                       docx_file = "review.docx", 
+                       docx_file = "review.docx",
                        styles_rmd = "inst/review/styles/draft-styles.rmd") {
   styles_doc <- rmarkdown::render(
     styles_rmd,
@@ -35,23 +35,23 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
     output_file = tempfile(),
     quiet = TRUE
   )
-  
+
   # Get paths of md files
   md_files <- Sys.glob(file.path(md_dir, "*.md"))
-  
+
   # Combine them into one rmarkdown file
   all_md <- purrr::map(md_files, readLines) # List of md content
-  
+
   # Keep only parent folder and file name
   md_files <- file.path(
     rev(strsplit(dirname(md_files), "/")[[1]])[[1]],
     basename(md_files)
   )
-  
+
   all_md <- purrr::map2(all_md, md_files, \(x, y) c(y, "", x, "")) # Add file marker
   all_md <- purrr::reduce(all_md, c)                     # All content in one vector
   writeLines(all_md, file.path(tempdir(), "all_md.rmd"))
-  
+
   # Create Word document
   rmarkdown::render(
     file.path(tempdir(), "all_md.rmd"),
@@ -64,7 +64,7 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
     output_file = docx_file,
     quiet = TRUE
   )
-  
+
   # Return path of generated Word doc
   file.path(rv_dir, docx_file)
 }
@@ -102,19 +102,21 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
 #' style_map(doc, "r", "rPr", "rStyle", "VerbatimChar") # monospace code
 #' style_map(
 #'   doc, "hyperlink", "r", "rPr", NULL, "rStyle", "VerbatimChar"
-#' ) # monospace code hyperlinks 
-style_map <- function(doc, t1, t2 = NULL, 
+#' ) # monospace code hyperlinks
+# Begin Exclude Linting
+style_map <- function(doc, t1, t2 = NULL,
                       t3 = NULL, val3 = NULL,
                       t4 = NULL, val4 = NULL) {
+  # End Exclude Linting
   smap         <- list()
   num_blank    <- 0
-  
-  for (i in 1:length(doc)) {
+
+  for (i in seq_along(doc)) {
     doc$officer_cursor$which <- i
     num_chars <- 0
     parent <- officer::docx_current_block_xml(doc)
     first_children <- xml2::xml_children(parent)
-    if(xml2::xml_text(parent) == "") num_blank <- num_blank + 1
+    if (xml2::xml_text(parent) == "") num_blank <- num_blank + 1
     for (first_child in first_children) {
       match_found <- FALSE
       num_chars <- num_chars + nchar(xml2::xml_text(first_child))
@@ -137,29 +139,35 @@ style_map <- function(doc, t1, t2 = NULL,
                   if (xml2::xml_attr(fourth_child, "val") != val4) next
                   match_found <- TRUE
                 }
-              } else match_found <- TRUE
+              } else {
+                match_found <- TRUE
+              }
             }
-          } else match_found <- TRUE
+          } else {
+            match_found <- TRUE
+          }
         }
-      } else match_found <- TRUE
-      
+      } else {
+        match_found <- TRUE
+      }
+
       if (match_found) {
         style_data <- list(
           num_chars - nchar(xml2::xml_text(first_child)) + 1,
           num_chars
         )
         xml_attr_names <- xml2::xml_attrs(first_child) %>% names()
-        if (length(xml_attr_names) & "id" %in% xml_attr_names) {
+        if (length(xml_attr_names) && "id" %in% xml_attr_names) {
           style_data <- c(style_data, list(xml2::xml_attrs(first_child)[["id"]]))
         }
-        if (length(xml_attr_names) & "anchor" %in% xml_attr_names) {
+        if (length(xml_attr_names) && "anchor" %in% xml_attr_names) {
           style_data <- c(style_data, list(xml2::xml_attrs(first_child)[["anchor"]]))
         }
         if (as.character(i - num_blank) %in% names(smap)) {
           prev_index <- length(smap[[as.character(i - num_blank)]])
           new_index <- prev_index + 1
-          if (style_data[[1]] == 
-              smap[[as.character(i - num_blank)]][[prev_index]][[2]] + 1) {
+          if (style_data[[1]] ==
+                smap[[as.character(i - num_blank)]][[prev_index]][[2]] + 1) {
             smap[[as.character(i - num_blank)]][[prev_index]][[2]] <- style_data[[2]]
           } else {
             smap[[as.character(i - num_blank)]][[new_index]] <- style_data
@@ -172,7 +180,7 @@ style_map <- function(doc, t1, t2 = NULL,
       }
     }
   }
-  
+
   smap %>% purrr::map(unique)
 }
 
@@ -206,10 +214,12 @@ style_map <- function(doc, t1, t2 = NULL,
 #'   "adhoc.docx",
 #'   "C:/Users/CYPHER/Downloads"
 #' )}
-word_to_md <- function(md_flag = "markdown/", 
+# Begin Exclude Linting
+word_to_md <- function(md_flag = "markdown/",
                        rv_dir = "inst/review",
                        docx_file = "review.docx",
                        md_out_dir = "inst/review/temp") {
+  # End Exclude Linting
   doc <- officer::read_docx(file.path(rv_dir, docx_file))
   doc_df <- officer::docx_summary(doc)
   maps <- list(
@@ -219,7 +229,7 @@ word_to_md <- function(md_flag = "markdown/",
     code_map = style_map(doc, "r", "rPr", "rStyle", "VerbatimChar"),
     chyp_map = style_map(doc, "hyperlink", "r", "rPr", NULL, "rStyle", "VerbatimChar")
   )
-  
+
   # This will find the rows to use for each md file
   breaks <- doc_df %>%
     dplyr::filter(startsWith(.data$text, md_flag)) %>%
@@ -230,7 +240,7 @@ word_to_md <- function(md_flag = "markdown/",
       .keep   = "none"
     ) %>%
     tidyr::replace_na(list(end = nrow(doc_df)))
-  
+
   # Iterate over the markdown filenames. The content for each file is transformed
   # to apply styling and hyperlinks and then written to md_out_dir
   purrr::pwalk(
@@ -239,7 +249,7 @@ word_to_md <- function(md_flag = "markdown/",
       # Each file has content from row number start to end
       doc_df <- doc_df %>%
         dplyr::filter(dplyr::between(.data$doc_index, begin, end))
-      
+
       # Apply any bold styling
       for (row in dplyr::intersect(names(maps$bold_map), begin:end)) {
         offset <- 0
@@ -248,9 +258,9 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          
-          bold_applied <- doc_df %>% 
-            dplyr::filter(.data$doc_index == rownum) %>% 
+
+          bold_applied <- doc_df %>%
+            dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
               text = paste0(
                 substr(.data$text, 0, start - 1),
@@ -259,22 +269,22 @@ word_to_md <- function(md_flag = "markdown/",
                 "__",
                 substr(.data$text, stop + 1, nchar(.data$text))
               )
-            ) %>% 
+            ) %>%
             dplyr::pull(.data$text)
-          
-          doc_df <- doc_df %>% 
+
+          doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
-                .data$text, 
-                .data$doc_index == rownum, 
+                .data$text,
+                .data$doc_index == rownum,
                 bold_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 2:5) {
             if (row %in% names(maps[[m]])) {
-              for (i in seq(length(maps[[m]][[row]]))) {
+              for (i in seq_along(maps[[m]][[row]])) {
                 if ((stop + offset) <= maps[[i]][[row]][[i]][[1]]) {
                   maps[[m]][[row]][[i]][[1]] <<- maps[[m]][[row]][[i]][[1]] + increment
                   maps[[m]][[row]][[i]][[2]] <<- maps[[m]][[row]][[i]][[2]] + increment
@@ -282,11 +292,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment
         }
       }
-      
+
       # Apply any italics styling
       for (row in dplyr::intersect(names(maps$ital_map), begin:end)) {
         offset <- 0
@@ -295,9 +305,9 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          
-          ital_applied <- doc_df %>% 
-            dplyr::filter(.data$doc_index == rownum) %>% 
+
+          ital_applied <- doc_df %>%
+            dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
               text = paste0(
                 substr(.data$text, 0, start - 1),
@@ -306,22 +316,22 @@ word_to_md <- function(md_flag = "markdown/",
                 "_",
                 substr(.data$text, stop + 1, nchar(.data$text))
               )
-            ) %>% 
+            ) %>%
             dplyr::pull(.data$text)
-          
-          doc_df <- doc_df %>% 
+
+          doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
-                .data$text, 
-                .data$doc_index == rownum, 
+                .data$text,
+                .data$doc_index == rownum,
                 ital_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 3:5) {
             if (row %in% names(maps[[m]])) {
-              for (i in seq(length(maps[[m]][[row]]))) {
+              for (i in seq_along(maps[[m]][[row]])) {
                 if ((stop + offset) <= maps[[m]][[row]][[i]][[1]]) {
                   maps[[m]][[row]][[i]][[1]] <<- maps[[m]][[row]][[i]][[1]] + increment
                   maps[[m]][[row]][[i]][[2]] <<- maps[[m]][[row]][[i]][[2]] + increment
@@ -329,11 +339,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment
         }
       }
-      
+
       # Add any hyperlinks
       for (row in dplyr::intersect(names(maps$hypl_map), begin:end)) {
         offset <- 0
@@ -342,21 +352,23 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          invisible(utils::capture.output(
-            url <- doc$
-              doc_obj$
-              relationship()$
-              show() %>%
-              dplyr::as_tibble() %>%
-              dplyr::filter(.data$id == style_data[[3]]) %>%
-              dplyr::pull(.data$target)
-          ))
+          invisible(
+            utils::capture.output(
+              url <- doc$
+                doc_obj$
+                relationship()$ # Exclude Linting
+                show() %>%
+                dplyr::as_tibble() %>%
+                dplyr::filter(.data$id == style_data[[3]]) %>%
+                dplyr::pull(.data$target)
+            )
+          )
           url <- if (length(style_data) == 4) {
             paste0(url, "#", style_data[[4]])
           } else {
             url
           }
-          
+
           hypl_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -371,7 +383,7 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
+
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -380,11 +392,11 @@ word_to_md <- function(md_flag = "markdown/",
                 hypl_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 4:5) {
             if (row %in% names(maps[[m]])) {
-              for (i in seq(length(maps[[m]][[row]]))) {
+              for (i in seq_along(maps[[m]][[row]])) {
                 if ((stop + offset) <= maps[[m]][[row]][[i]][[1]]) {
                   maps[[m]][[row]][[i]][[1]] <<- maps[[m]][[row]][[i]][[1]] +
                     increment + nchar(url)
@@ -394,11 +406,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment + nchar(url)
         }
       }
-      
+
       # Apply any code (monospace font) styling
       for (row in dplyr::intersect(names(maps$code_map), begin:end)) {
         offset <- 0
@@ -407,9 +419,9 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          
-          code_applied <- doc_df %>% 
-            dplyr::filter(.data$doc_index == rownum) %>% 
+
+          code_applied <- doc_df %>%
+            dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
               text = paste0(
                 substr(.data$text, 0, start - 1),
@@ -418,22 +430,22 @@ word_to_md <- function(md_flag = "markdown/",
                 "````",
                 substr(.data$text, stop + 1, nchar(.data$text))
               )
-            ) %>% 
+            ) %>%
             dplyr::pull(.data$text)
-          
-          doc_df <- doc_df %>% 
+
+          doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
-                .data$text, 
-                .data$doc_index == rownum, 
+                .data$text,
+                .data$doc_index == rownum,
                 code_applied
               )
             )
-          
+
           # Add offsets to remaining maps
           for (m in 5:5) {
             if (row %in% names(maps[[m]])) {
-              for (i in seq(length(maps[[m]][[row]]))) {
+              for (i in seq_along(maps[[m]][[row]])) {
                 if ((stop + offset) <= maps[[m]][[row]][[i]][[1]]) {
                   maps[[m]][[row]][[i]][[1]] <<- maps[[m]][[row]][[i]][[1]] + increment
                   maps[[m]][[row]][[i]][[2]] <<- maps[[m]][[row]][[i]][[2]] + increment
@@ -441,11 +453,11 @@ word_to_md <- function(md_flag = "markdown/",
               }
             }
           }
-          
+
           offset <- offset + increment
         }
       }
-      
+
       # Add any code (monospace font) hyperlinks
       for (row in dplyr::intersect(names(maps$chyp_map), begin:end)) {
         offset <- 0
@@ -454,16 +466,18 @@ word_to_md <- function(md_flag = "markdown/",
           rownum <- as.integer(row)
           start  <- style_data[[1]] + offset
           stop   <- style_data[[2]] + offset
-          invisible(utils::capture.output(
-            url <- doc$
-              doc_obj$
-              relationship()$
-              show() %>%
-              dplyr::as_tibble() %>%
-              dplyr::filter(.data$id == style_data[[3]]) %>%
-              dplyr::pull(.data$target)
-          ))
-          
+          invisible(
+            utils::capture.output(
+              url <- doc$
+                doc_obj$
+                relationship()$ # Exclude Linting
+                show() %>%
+                dplyr::as_tibble() %>%
+                dplyr::filter(.data$id == style_data[[3]]) %>%
+                dplyr::pull(.data$target)
+            )
+          )
+
           chyp_applied <- doc_df %>%
             dplyr::filter(.data$doc_index == rownum) %>%
             dplyr::mutate(
@@ -478,7 +492,7 @@ word_to_md <- function(md_flag = "markdown/",
               )
             ) %>%
             dplyr::pull(.data$text)
-          
+
           doc_df <- doc_df %>%
             dplyr::mutate(
               text = replace(
@@ -487,38 +501,37 @@ word_to_md <- function(md_flag = "markdown/",
                 chyp_applied
               )
             )
-          
+
           offset <- offset + increment + nchar(url)
         }
       }
-      
+
       # Numbered lists need special treatment, the XML is very convoluted...
       numbering_xml <- file.path(
         doc$package_dir,
         "word",
         "numbering.xml"
       ) %>% xml2::read_xml()
-      
-      num_ids_alt_1 <- numbering_xml %>% 
+
+      num_ids_alt_1 <- numbering_xml %>%
         xml2::xml_find_all("//w:num[w:abstractNumId/@w:val='99411']") %>%
-        xml2::xml_attr("numId") %>% 
+        xml2::xml_attr("numId") %>%
         as.numeric()
-      num_ids_alt_2 <- numbering_xml %>% 
+      num_ids_alt_2 <- numbering_xml %>%
         xml2::xml_find_all("//w:num[w:abstractNumId/@w:val='2']") %>%
-        xml2::xml_attr("numId") %>% 
+        xml2::xml_attr("numId") %>%
         as.numeric()
       num_ids <- c(num_ids_alt_1, num_ids_alt_2)
-      
+
       # Add heading, bullet and list markup and find where to add blank lines
       doc_df <- doc_df %>%
         dplyr::mutate(
           next_style = dplyr::lead(.data$style_name),
           blank_after = (
             (.data$style_name != "Compact") |
-            (.data$style_name == "Compact" &
-               dplyr::lead(.data$style_name) != "Compact")
-          ) &
-            (!is.na(dplyr::lead(.data$style_name))),
+              (.data$style_name == "Compact" &
+                 dplyr::lead(.data$style_name) != "Compact")
+          ) & (!is.na(dplyr::lead(.data$style_name))),
           style_name = dplyr::case_when(
             .data$num_id %in% num_ids ~ "Numbering",
             TRUE ~ .data$style_name
@@ -533,133 +546,33 @@ word_to_md <- function(md_flag = "markdown/",
             "heading 3" ~ paste0("### ", .data$text),
             "Heading 4" ~ paste0("#### ", .data$text),
             "heading 4" ~ paste0("#### ", .data$text),
-            "Compact"   ~ paste0("- ", .data$text),
-            .default    = .data$text
+            "Compact" ~ paste0("- ", .data$text),
+            .default = .data$text
           )
         ) %>%
         dplyr::group_by(.data$num_id) %>%
         dplyr::mutate(
           text = dplyr::case_match(
             .data$style_name,
-            "Numbering" ~ paste0(seq(dplyr::n()), ". ", .data$text),
-            .default    = .data$text
+            "Numbering" ~ paste0(seq_len(dplyr::n()), ". ", .data$text),
+            .default = .data$text
           )
-        ) %>% 
+        ) %>%
         dplyr::ungroup()
-      
+
       # Get the element indices which need a blank line afterward
       needs_blank_after <- which(doc_df$blank_after) +
         seq_len(length(which(doc_df$blank_after))) - 1
-      
+
       # Iterate over the indices and add a new blank row after each
       purrr::walk(
         needs_blank_after,
         \(x) doc_df <<- dplyr::add_row(doc_df, text = "", .after = x)
       )
-      
+
       # Write the markdown file
       dir.create(md_out_dir, showWarnings = FALSE)
       writeLines(doc_df$text, file.path(md_out_dir, basename(md_file)))
     }
   )
 }
-
-# Instructions ------------------------------------------------------------
-# 1. Get initial snapshots
-# 2. Comment out the first code block
-# 3. Uncomment the rest of the code
-# 4. Whenever you make changes to these files, 'Run Tests' again
-# 5. Any differences will be caught; run the below code in the console to review
-#    them in a shiny app (working dir is project root):
-#        testthat::snapshot_review('snapshot_tests/', "review/tests")
-# 6. Review the changes in each file one by one.
-#    If ALL changes in a file are as intended, then choose the 'Accept' option.
-#    If there are some changes that were not intended, you should fix these in 
-#    the temporary markdown files (review/temp). You can leave the diff viewer
-#    open and revert the changes directly by a simple copy and paste of the
-#    original content. Click 'Skip' once the reversions are complete.
-# 7. Close the diff viewer once only skipped files remain.
-# 8. If you had some changes to revert, FIRST MAKE SURE TO COMMENT OUT the line
-#        source("review/scripts/word_to_md.R")  
-#    then run this test file again with 'Run Tests'. You should expect no
-#    differences to be found now, but if there are then repeat step 6 to 8 until
-#    none are found.
-# 9. If you had to comment out the line
-#        source("review/scripts/word_to_md.R")
-#    due to reversions, uncomment it now so it is ready for the next set of 
-#    changes.
-
-# gen_snaps <- function() {
-#   withr::with_dir(rprojroot::find_package_root_file(), {
-#     source("review/scripts/md_to_word.R")
-#     
-#     expect_snapshot_file("inst/app/www/assets/markdown/01_mod_the_first.md")
-#     expect_snapshot_file("inst/app/www/assets/markdown/02_mod_the_second.md")
-#   })
-# }
-
-# Generate snapshots ------------------------------------------------------
-# 1. To get the initial snapshot, run the below block, with an expectation for
-# each reference file. Use 'Run Tests' button above right.
-# You are basically saying "all these files should look as they are now in
-# future".
-# test_that("generate snapshots", {
-#   with_dir(find_package_root_file(), {
-#     source("review/scripts/md_to_word.R")
-#     
-#     expect_snapshot_file("inst/app/www/assets/markdown/01_mod_the_first.md")
-#     expect_snapshot_file("inst/app/www/assets/markdown/02_mod_the_second.md")
-#   })
-# })
-
-# 2. Comment the above block out now
-
-# 3. Uncomment the below block, ready for future changes
-
-
-# Compare markdown --------------------------------------------------------
-# 4. When you make changes to the files, use 'Run Tests' button above right
-# test_that("compare markdown", {
-#   with_dir(find_package_root_file(), {
-#     source("review/scripts/word_to_md.R")
-# 
-#     expect_snapshot_file("review/temp/01_mod_the_first.md")
-#     expect_snapshot_file("review/temp/02_mod_the_second.md")
-#   })
-# })
-
-
-# Run diff viewer ---------------------------------------------------------
-# 5. If any differences are present (there should be if you changed the files...)
-# a diff viewer can be opened by running the code below in the console (you can 
-# open it in browser using the 'Show in new window' button in the Viewer pane)
-#     testthat::snapshot_review('snapshot_tests/', "review/tests")
-
-
-# Review - accept or fix --------------------------------------------------
-# 6. Review the changes in each file one by one.
-#    If ALL changes in a file are as intended, then choose the 'Accept' option.
-#
-#    If there are some changes that were not intended, you should fix these in 
-#    the source files. You can leave the diff viewer open and revert the changes
-#    directly by a simple copy and paste of the original content.
-#
-#    Click 'Skip' once the reversions are complete.
-
-# 7. Close the diff viewer once only skipped files remain.
-
-# 8. If you had some changes to revert, FIRST MAKE SURE TO COMMENT OUT the line
-#        source("review/scripts/word_to_md.R")  
-#    then run this test file again with 'Run Tests'. You should expect no
-#    differences to be found now, but if there are then repeat step 6 to 8 until
-#    none are found.
-
-
-# Replace markdown --------------------------------------------------------
-# 9. It is now safe to copy the revised markdown files from the review/temp folder
-#    over the app markdown files in inst/app/www/assets/markdown.
-#
-#    If you had to comment out the line
-#        source("review/scripts/word_to_md.R")
-#    due to reversions, MAKE SURE to uncomment it now so it is ready for the next
-#    set of changes.
