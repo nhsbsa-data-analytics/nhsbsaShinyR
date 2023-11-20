@@ -130,7 +130,15 @@ This list is then written as an Rmarkdown document, and finally rendered as a Wo
 
 ## Assisted review
 
-Once the text is first added to the app, as markdown files, there is probably going to be a time when something needs to change, based on feedback or a rethink of what is written. This review process can be made easy with the following steps
+Once the text is first added to the app, as markdown files, there is probably going to be a time when something needs to change, based on feedback or a rethink of what is written. Using the automation provided by the review functions makes keeping the draft text and the app text synced quicker, easier and less error-prone.
+
+The end-to-end process follows.
+
+1. Generate the initial Word document as in ['Word-first' approach](127.0.0.1/#word-first-approach).
+2. Write the initial draft of text in Word, using the built-in review functionality to track changes and comments. It is important to use the conventions laid out in ['Word-first' approach](127.0.0.1/#word-first-approach), as without these the functions may give unexpected results. Keep it in Word for as long as possible!
+3. When you get to a point when you _have_ to deploy the app with the text, run `word_to_md`. From this point on, the app text and the Word text need to be synced as changes are agreed. With the default arguments, `word_to_md` will place the generated markdown files in `inst/review/temp`.
+4. Run `review_md` to get an interactive diff between the generated markdown and the existing markdown, if it exists. If no existing markdown is present in `inst/app/www/assets/markdown`, this will create file snapshots instead.
+5. 
 
 1. Make sure to base changes on the current state of the app text, by running the `review/md_to_word.R` script first
 2. (First review only) To get the initial snapshots, run the first code block (`Generate snapshots`) in `review/tests/snapshot_tests.R`; each markdown file should have an expectation
