@@ -7,6 +7,9 @@ test_that("md_to_word generates expected Word doc", {
     rv_dir = rv_dir,
     docx_file = docx_file
   )
+  
+  dir.create("tmp")
+  file.copy(basename(docx_path), "tmp")
 
   # When run for first time, just save the generated Word doc for future use
   # Note the test will essentially be comparing this doc to itself on that first
