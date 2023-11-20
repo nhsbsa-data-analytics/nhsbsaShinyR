@@ -1,5 +1,8 @@
 test_that("md_to_word generates expected Word doc", {
-  docx_file <- "review.docx"
+  is_ci <- testthat:::on_ci()
+  
+  docx_file <- ifelse(testthat:::on_ci(), "review_ci.docx", "review.docx")
+  cat( "\n\n", docx_file, "\n\n")
   md_dir <- local_create_md()
   rv_dir <- gsub("markdown", "review", md_dir)
   docx_path <- local_create_word_doc(
@@ -7,9 +10,6 @@ test_that("md_to_word generates expected Word doc", {
     rv_dir = rv_dir,
     docx_file = docx_file
   )
-  
-  dir.create("tmp")
-  file.copy(basename(docx_path), "tmp")
 
   # When run for first time, just save the generated Word doc for future use
   # Note the test will essentially be comparing this doc to itself on that first
