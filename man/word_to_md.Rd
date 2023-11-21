@@ -8,7 +8,8 @@ word_to_md(
   md_flag = "markdown/",
   rv_dir = "inst/review",
   docx_file = "review.docx",
-  md_out_dir = "inst/review/temp"
+  md_out_dir = "inst/review/temp",
+  first_run_snaps = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ with name as everything after this}
 \item{docx_file}{Output Word document file name}
 
 \item{md_out_dir}{Output folder for markdown files}
+
+\item{first_run_snaps}{Should snapshot files be generated if there are none?}
 }
 \value{
 Nothing, used for side effects only

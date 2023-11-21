@@ -1,3 +1,15 @@
+gen_review_doc <- function(rv_dir = "inst/review",
+                           docx_file = "review.docx",
+                           styles_rmd = "inst/review/styles/draft-styles.rmd") {
+  styles_doc <- rmarkdown::render(
+    styles_rmd,
+    output_dir = rv_dir,
+    output_file = docx_file,
+    quiet = TRUE
+  )
+}
+
+
 #' Generate Word doc from markdown files
 #'
 #' All markdown files in a folder can be used to generate a Word document. The
@@ -166,16 +178,16 @@ style_map <- function(doc, t1, t2 = NULL,
         if (as.character(i - num_blank) %in% names(smap)) {
           prev_index <- length(smap[[as.character(i - num_blank)]])
           new_index <- prev_index + 1
-          if (style_data[[1]] ==
+          if (
+              style_data[[1]] ==
                 smap[[as.character(i - num_blank)]][[prev_index]][[2]] + 1) {
-            smap[[as.character(i - num_blank)]][[prev_index]][[2]] <- style_data[[2]]
+            smap[[as.character(i - num_blank)]][[prev_index]][[2]] <-
+              style_data[[2]]
           } else {
             smap[[as.character(i - num_blank)]][[new_index]] <- style_data
           }
         } else {
-          smap[[as.character(i - num_blank)]] <- list(
-            `1` = style_data
-          )
+          smap[[as.character(i - num_blank)]] <- list(`1` = style_data)
         }
       }
     }
@@ -197,6 +209,7 @@ style_map <- function(doc, t1, t2 = NULL,
 #' @param rv_dir Review directory
 #' @param docx_file Output Word document file name
 #' @param md_out_dir Output folder for markdown files
+#' @param first_run_snaps Should snapshot files be generated if there are none?
 #'
 #' @return Nothing, used for side effects only
 #' @export
@@ -218,7 +231,8 @@ style_map <- function(doc, t1, t2 = NULL,
 word_to_md <- function(md_flag = "markdown/",
                        rv_dir = "inst/review",
                        docx_file = "review.docx",
-                       md_out_dir = "inst/review/temp") {
+                       md_out_dir = "inst/review/temp",
+                       first_run_snaps = TRUE) {
   # End Exclude Linting
   doc <- officer::read_docx(file.path(rv_dir, docx_file))
   doc_df <- officer::docx_summary(doc)
@@ -575,4 +589,187 @@ word_to_md <- function(md_flag = "markdown/",
       writeLines(doc_df$text, file.path(md_out_dir, basename(md_file)))
     }
   )
+
+  # Unless disabled, create initial snapshot files if there is no or an empty
+  # _snaps dir
+  if (first_run_snaps) {
+    if (file.exists(file.path(rv_dir, "_snaps"))) {
+      if (!length(Sys.glob(file.path(rv_dir, "tests/_snaps/review_md", "*.md")))) {
+        review_md_dir()
+      }
+
+      return(invisible())
+    }
+
+    review_md_dir()
+  }
+
+  invisible()
+}
+
+
+review_md <- function(path, name = basename(path), snaps_dir = "inst/review/tests") {
+  withr::local_options(list(warn = 1))
+
+  snap_dir <- file.path(snaps_dir, "_snaps")
+  snapshotter <- testthat::local_snapshotter(snap_dir = snap_dir)
+  snapshotter$start_file("review_md", "test")
+
+  lab <- rlang::quo_label(rlang::enquo(path))
+  msg <- utils::capture.output({
+    equal <- snapshotter$take_file_snapshot(
+      name,
+      path,
+      file_equal = testthat::compare_file_text,
+      variant = NULL,
+      trace_env = rlang::caller_env()
+    )
+  },
+  type = "message")
+  if (!identical(msg, character(0))) {
+    message(gsub("tests/testthat", snaps_dir, msg))
+  }
+
+  tryCatch({
+    testthat::expect(
+      equal,
+      sprintf(
+        "Snapshot of %s to \"%s\" has changed\n%s",
+        lab,
+        paste0(snap_dir, "/", name),
+        "Run nhsbsaShinyR::review_md_diff() to review changes"
+      )
+    )
+  },
+  error = \(e) message(gsub("Error", "Warning", e)))
+
+  snapshotter$end_file()
+}
+
+
+review_md_dir <- function(md_dir = "inst/review/temp", snaps_dir = "inst/review/tests") {
+  md_files <- Sys.glob(file.path(md_dir, "*.md"))
+
+  purrr::walk(
+    md_files,
+    \(x) {
+      testthat::announce_snapshot_file(x)
+    }
+  )
+  purrr::walk(
+    md_files,
+    \(x) {
+      review_md(x, snaps_dir = snaps_dir)
+    }
+  )
+}
+
+
+review_md_diff <- function(files = "review_md/", path = "inst/review/tests") {
+  rlang::check_installed(c("shiny", "diffviewer"), "to use review_md_diff()")
+
+  changed <- testthat:::snapshot_meta(files, path)
+  if (nrow(changed) == 0) {
+    rlang::inform("No snapshots to update")
+    return(invisible())
+  }
+
+  name <- changed$name
+  old_path <- changed$cur
+  new_path <- changed$new
+
+  stopifnot(
+    length(name) == length(old_path),
+    length(old_path) == length(new_path)
+  )
+
+  n <- length(name)
+  case_index <- stats::setNames(seq_along(name), name)
+  handled <- rep(FALSE, n)
+
+  ui <- shiny::fluidPage(
+    style = "margin: 0.5em",
+    shiny::fluidRow(
+      style = "display: flex",
+      shiny::div(
+        style = "flex: 1 1",
+        shiny::selectInput("cases", NULL, case_index, width = "100%")
+      ),
+      shiny::div(
+        class = "btn-group", style = "margin-left: 1em; flex: 0 0 auto",
+        shiny::actionButton("reject", "Reject", class = "btn-danger"),
+        shiny::actionButton("skip", "Skip", class = "btn-warning"),
+        shiny::actionButton("accept", "Accept", class = "btn-success")
+      ),
+      shiny::div(
+        class = "btn-group", style = "margin-left: 1em; flex: 0 0 auto",
+        shiny::actionButton("close", "Close", class = "btn-primary")
+      )
+    ),
+    shiny::fluidRow(
+      diffviewer::visual_diff_output("diff")
+    )
+  )
+  server <- function(input, output, session) {
+    i <- shiny::reactive(as.numeric(input$cases))
+    output$diff <- diffviewer::visual_diff_render({
+      diffviewer::visual_diff(old_path[[i()]], new_path[[i()]])
+    })
+
+    # Handle buttons - after clicking update move input$cases to next case,
+    # and remove current case (for accept/reject). If no cases left, close app
+    shiny::observeEvent(input$reject, {
+      rlang::inform(paste0("Rejecting snapshot: '", new_path[[i()]], "'"))
+      unlink(new_path[[i()]])
+      update_cases()
+    })
+    shiny::observeEvent(input$accept, {
+      rlang::inform(paste0("Accepting snapshot: '", old_path[[i()]], "'"))
+      file.rename(new_path[[i()]], old_path[[i()]])
+      update_cases()
+    })
+    shiny::observeEvent(input$skip, {
+      i <- next_case()
+      shiny::updateSelectInput(session, "cases", selected = i)
+    })
+    shiny::observeEvent(input$close, {
+      rlang::inform("Review ended with changes still present")
+      shiny::stopApp()
+      return()
+    })
+
+    update_cases <- function() {
+      handled[[i()]] <<- TRUE
+      i <- next_case()
+
+      shiny::updateSelectInput(
+        session,
+        "cases",
+        choices = case_index[!handled],
+        selected = i
+      )
+    }
+    next_case <- function() {
+      if (all(handled)) {
+        rlang::inform("Review complete")
+        shiny::stopApp()
+        return()
+      }
+
+      # Find next case;
+      remaining <- case_index[!handled]
+      next_cases <- which(remaining > i())
+      if (length(next_cases) == 0) remaining[[1]] else remaining[[next_cases[[1]]]]
+    }
+  }
+
+  rlang::inform(c(
+    "Starting Shiny app for snapshot review",
+    i = "Use Ctrl + C to quit"
+  ))
+  shiny::runApp(
+    shiny::shinyApp(ui, server),
+    quiet = TRUE
+  )
+  invisible()
 }

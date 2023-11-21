@@ -29,6 +29,7 @@ Depends:
     R (>= 4.0)
 Imports: 
     config,
+    diffviewer,
     dplyr,
     golem,
     highcharter,
@@ -43,6 +44,7 @@ Imports:
     scrollytell,
     shiny,
     shinyjs,
+    testthat (>= 3.0.0),
     tidyr,
     utils,
     withr,
@@ -51,7 +53,6 @@ Suggests:
     knitr,
     pkgload,
     markdown,
-    testthat (>= 3.0.0),
     usethis,
     waldo
 Remotes:

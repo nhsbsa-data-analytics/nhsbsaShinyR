@@ -1,8 +1,7 @@
 test_that("md_to_word generates expected Word doc", {
   is_ci <- testthat:::on_ci()
-  
+
   docx_file <- ifelse(testthat:::on_ci(), "review_ci.docx", "review.docx")
-  cat( "\n\n", docx_file, "\n\n")
   md_dir <- local_create_md()
   rv_dir <- gsub("markdown", "review", md_dir)
   docx_path <- local_create_word_doc(
