@@ -24,6 +24,15 @@ test_that("md_to_word generates expected Word doc", {
   # Also, when run on github CI, there are small differences in some of the
   # colours used in the Word doc styles.
   expected_differences <- ifelse(testthat:::on_ci(), 6, 2)
+  
+  # TEMP: print for verification of testthat:::on_ci
+  cat(
+    "\n**********testthat:::on_ci()**********\n",
+    testthat:::on_ci(),
+    "\n*********expected_differences*********\n",
+    expected_differences,
+    "\n**************************************\n"
+  )
 
   # If unexpected number of diffs, print out the comparison for ease of seeing
   # where the fail is.
