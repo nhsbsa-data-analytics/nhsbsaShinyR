@@ -1,7 +1,34 @@
+#' Generate a initial Word doc to write draft text in
+#'
+#' The `{officer}` package works best with a Word document generated from
+#' Rmarkdown. This is just a wrapper around `rmarkdown::render` to do that, with
+#' default arguments matching our package conventions.
+#'
+#' @param rv_dir Review directory
+#' @param docx_file Output Word document file name
+#' @param styles_rmd Path to Rmarkdown that creates Word template
+#'
+#' @return Path to the generated Word document
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # For standard use case, default args are fine
+#' gen_review_doc()
+#'
+#' # May be times when you want to use outside of the usual use case, e.g.
+#' # generate Word doc for adhoc purposes
+#' gen_review_doc(
+#'   "C:/Users/CYPHER/Downloads",
+#'   "adhoc.docx",
+#'   system.file(
+#'     "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
+#'   )
+#' )}
 gen_review_doc <- function(rv_dir = "inst/review",
                            docx_file = "review.docx",
                            styles_rmd = "inst/review/styles/draft-styles.rmd") {
-  styles_doc <- rmarkdown::render(
+  rmarkdown::render(
     styles_rmd,
     output_dir = rv_dir,
     output_file = docx_file,
@@ -35,17 +62,18 @@ gen_review_doc <- function(rv_dir = "inst/review",
 #'   "my/adhoc/markdown",
 #'   "C:/Users/CYPHER/Downloads",
 #'   "adhoc.docx",
-#'   system.file("review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR")
+#'   system.file(
+#'     "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
+#'   )
 #' )}
 md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
                        rv_dir = "inst/review",
                        docx_file = "review.docx",
                        styles_rmd = "inst/review/styles/draft-styles.rmd") {
-  styles_doc <- rmarkdown::render(
-    styles_rmd,
-    output_dir = tempdir(),
-    output_file = tempfile(),
-    quiet = TRUE
+  styles_doc <- gen_review_doc(
+    rv_dir = tempdir(),
+    docx_file = tempfile(),
+    styles_rmd = styles_rmd
   )
 
   # Get paths of md files
@@ -64,6 +92,12 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
   all_md <- purrr::reduce(all_md, c)                     # All content in one vector
   writeLines(all_md, file.path(tempdir(), "all_md.rmd"))
 
+  # Check and rename if existing review.docx is present
+  docx_path <- file.path(rv_dir, docx_file)
+  if (file.exists(docx_path)) {
+    file.rename(docx_path, file.path(rv_dir, paste0("prev-", docx_file)))
+  }
+
   # Create Word document
   rmarkdown::render(
     file.path(tempdir(), "all_md.rmd"),
@@ -78,7 +112,7 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
   )
 
   # Return path of generated Word doc
-  file.path(rv_dir, docx_file)
+  docx_path
 }
 
 
@@ -608,13 +642,33 @@ word_to_md <- function(md_flag = "markdown/",
 }
 
 
-review_md <- function(path, name = basename(path), snaps_dir = "inst/review/tests") {
+#' Compare and create snapshot for a single markdown file
+#'
+#' Will announce intention to compare/create snapshots for each markdown file,
+#' then do so.
+#'
+#' @param path The path of the markdown file
+#' @param snaps_dir The path of the directory containing (or to create in) the
+#'   _snaps directory
+#'
+#' @return Nothing, used for side-effects only
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' review_md(
+#'   path = "my/adhoc/markdown/md_file.md",
+#'   snaps_dir = "C:/Users/CYPHER/Downloads"
+#' )
+#' )}
+review_md <- function(path, snaps_dir = "inst/review/tests") {
   withr::local_options(list(warn = 1))
 
   snap_dir <- file.path(snaps_dir, "_snaps")
   snapshotter <- testthat::local_snapshotter(snap_dir = snap_dir)
   snapshotter$start_file("review_md", "test")
 
+  name <- basename(path)
   lab <- rlang::quo_label(rlang::enquo(path))
   msg <- utils::capture.output({
     equal <- snapshotter$take_file_snapshot(
@@ -644,9 +698,36 @@ review_md <- function(path, name = basename(path), snaps_dir = "inst/review/test
   error = \(e) message(gsub("Error", "Warning", e)))
 
   snapshotter$end_file()
+
+  invisible()
 }
 
 
+#' Compare and create snapshots for all markdown files in a directory
+#'
+#' Will announce intention to compare/create snapshots for each markdown file,
+#' then do so.
+#'
+#' @param md_dir The path to the directory of markdown files
+#' @param snaps_dir The path of the directory containing (or to create in) the
+#'   _snaps directory
+#'
+#' @return Nothing, used for side-effects only
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # For standard use case, default args are fine
+#' review_md_dir()
+#'
+#' # Can be paired with review_md_diff() for reviewing custom markdown
+#' review_md_dir(
+#'   md_dir = "my/adhoc/markdown",
+#'   snaps_dir = "C:/Users/CYPHER/Downloads"
+#' )
+#'
+#' review_md_diff(snaps_dir = "C:/Users/CYPHER/Downloads")
+#' )}
 review_md_dir <- function(md_dir = "inst/review/temp", snaps_dir = "inst/review/tests") {
   md_files <- Sys.glob(file.path(md_dir, "*.md"))
 
@@ -662,13 +743,42 @@ review_md_dir <- function(md_dir = "inst/review/temp", snaps_dir = "inst/review/
       review_md(x, snaps_dir = snaps_dir)
     }
   )
+  invisible()
 }
 
 
-review_md_diff <- function(files = "review_md/", path = "inst/review/tests") {
+#' Review changes to markdown files
+#'
+#' This is a customised combination of `testthat::snapshot_review` and the
+#' unexported function `testthat:::review_app`. The purpose is to allow user to
+#' see the changes made to markdown for the app, and then approve or reject
+#' them. This is repeated, with changes to the markdown, until all changes are
+#' accepted.
+#'
+#' @param snap_dir The name of the directory the snapshots are in
+#' @param snaps_dir The path of the directory containing (or to create in) the
+#'   _snaps directory
+#'
+#' @return Nothing, used for side-effects only
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # For standard use case, default args are fine
+#' review_md_diff()
+#'
+#' # Can be paired with review_md_dir() for reviewing custom markdown
+#' review_md_dir(
+#'   md_dir = "my/adhoc/markdown",
+#'   snaps_dir = "C:/Users/CYPHER/Downloads"
+#' )
+#'
+#' review_md_diff(snaps_dir = "C:/Users/CYPHER/Downloads")
+#' )}
+review_md_diff <- function(snap_dir = "review_md/", snaps_dir = "inst/review/tests") {
   rlang::check_installed(c("shiny", "diffviewer"), "to use review_md_diff()")
 
-  changed <- testthat:::snapshot_meta(files, path)
+  changed <- testthat:::snapshot_meta(snap_dir, snaps_dir)
   if (nrow(changed) == 0) {
     rlang::inform("No snapshots to update")
     return(invisible())
@@ -771,5 +881,36 @@ review_md_diff <- function(files = "review_md/", path = "inst/review/tests") {
     shiny::shinyApp(ui, server),
     quiet = TRUE
   )
+
+  invisible()
+}
+
+
+#' Move all markdown files from one directory to another
+#'
+#' Convenience function to quickly move all the reviewed new markdown files to
+#' the app markdown folder.
+#'
+#' @param md_tmp_dir The path to the directory of reviewed markdown files
+#' @param md_dir The path to the directory for markdown files used by app
+#'
+#' @return Nothing, used for side-effects only
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # For standard use case, default args are fine
+#' update_md()
+#'
+#' # Unlikely needed, but can be used to move markdown files between any two folders
+#' update_md(
+#'   md_dir = "my/adhoc/markdown",
+#'   snaps_dir = "my/final/markdown"
+#' )}
+update_md <- function(md_tmp_dir = "inst/review/temp",
+                      md_dir = "inst/app/www/assets/markdown") {
+  md_files <- Sys.glob(file.path(md_tmp_dir, "*.md"))
+  file.rename(md_files, file.path(md_dir, basename(md_files)))
+
   invisible()
 }

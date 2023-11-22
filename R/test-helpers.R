@@ -1,3 +1,6 @@
+# See https://r-pkgs.org/testing-advanced.html for explanation of having these
+# internal functions
+
 local_create_md <- function(temp_dir = tempdir(), env = parent.frame()) {
   md_dir <- file.path(temp_dir, "markdown")
   dir.create(md_dir, showWarnings = FALSE)
