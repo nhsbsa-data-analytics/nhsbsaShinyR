@@ -11,3 +11,5 @@
 ^gitleaks.toml$
 ^\.github$
 ^\.lintr$
+^doc$
+^Meta$

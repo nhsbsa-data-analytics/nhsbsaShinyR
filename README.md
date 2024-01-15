@@ -15,6 +15,8 @@ Also included is a sample `data-raw/` script. Much of the data used in NHSBSA da
 
 There are also github actions to check that code conforms to `lintr` (https://lintr.r-lib.org/), passes `R CMD check` and to run a `gitleaks` check.
 
+Functionality to make adding and reviewing text of the app is available. Check out the vignette by running `vignette("writing-and-reviewing-text", "nhsbsaShinyR")`.
+
 ## Structure
 
 The package is structured as below. See the "Using this template" section for further details of the files.
@@ -45,9 +47,14 @@ nhsbsaShinyR
 |   |           └── markdown                # Markdown documents
 │   │       ├── css                         # NHS front-end toolkit and custom CSS
 │   │       └── js                          # NHS front-end toolkit and custom JavaScript
+│   ├── review                              # For files related to app text
+│   │   └── styles                          # 
+|   |       ├── .gitignore                  # Ignore the Word doc
+|   |       └── draft-styles.rmd            # Template for review Word document
 │   └── golem-config.yml                    # Golem file
 ├── LICENSE.md                              # Apache
-├── man                                     # Package documentation, created automatically by roxygen2 from your initial comment blocks
+├── man                                     # Package documentation, created automatically by roxygen2 from your 
+|                                           # initial comment blocks
 ├── NAMESPACE                               # Automatically generated documentation by roxygen2
 ├── nhsbsaShinyR.Rproj                      # R Project file
 ├── R                                       # R code for the dashboard
@@ -55,13 +62,16 @@ nhsbsaShinyR
 │   ├── app_config.R                        # Golem file
 │   ├── app_server.R                        # Server component
 │   ├── app_ui.R                            # UI component
+│   ├── faithful.R                          # Example of documenting a dataset
 │   ├── golem_utils_ui.R                    # Useful utility functions for UI
 │   ├── mod_*.R                             # Example Shiny modules
 |   ├── nhs_*.R                             # NHS styled UI components
 |   ├── nhsbsaShinyR.R                      # Package documentation file
 │   ├── run_app.R                           # Golem file (no modification)
+│   ├── test_helpers.R                      # Supporting functions for tests
 │   ├── utils_accessibility.R               # Custom NHSBSA highcharter theme
-│   └── utils-pipe.R                        # Magrittr %>% operator
+│   ├── utils_review.R                      # Functions used when adding and reviewing text
+│   └── utils_pipe.R                        # {magrittr} %>% operator
 └── README.md                               # Brief overview of the package
 
 ```
@@ -76,7 +86,7 @@ Under "Repository template" select "nhsbsa-data-analytics/nhsbsaShinyR".
 
 Enter a new name and a brief description.
 
-Leave it set as a Private repo for now. Later, when you are finished, consider if you are able to make it public.
+Leave it set as a private repo for now. Later, when you are finished, consider if you are able to make it public.
 
 ### Renaming the golem app
 
@@ -142,6 +152,8 @@ The `golem-config.yml` file will need to have the `golem_name` field set to your
 
 The `app/www` folder contains sub-folders for static assets and CSS and JavaScript files. Add any custom CSS to `css/style.css` and custom JavaScript to `js/custom.js`.
 
+The `review` folder contains only an Rmarkdown file used as a template for generating a Word document that will be used for drafting any text to be used in the app. The folder will be populated with various files and folders used in the review cycle.
+
 ### LICENSE.md
 
 Set as Apache PL v2. Can remove this and the `LICENSE` field in `DESCRIPTION` if you want to use another license, using one of the license functions in `usethis`.
@@ -166,3 +178,8 @@ All code that is used internally and/or is to be exported from the package belon
 
 Give an overview of your package including how to install and the simplest example of usage.
 
+## Installing from GitHub
+
+To install this package from GitHub, use the below code. Note that you must explicitly ask for vignettes to be built when installing from GitHub.
+
+`devtools::install_github("nhsbsa-data-analytics/nhsbsaShinyR", build_vignettes = TRUE)`

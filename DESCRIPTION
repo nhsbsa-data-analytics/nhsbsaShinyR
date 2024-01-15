@@ -1,6 +1,6 @@
 Package: nhsbsaShinyR
 Title: Template for NHSBSA {shiny} apps
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Authors@R: 
     c(person(given = "DALL",
              family = "",
@@ -29,22 +29,38 @@ Depends:
     R (>= 4.0)
 Imports: 
     config,
+    diffviewer,
     dplyr,
     golem,
     highcharter,
     htmltools,
     magrittr,
+    methods,
     nhsbsaR,
+    officedown,
+    officer,
+    purrr,
     rlang,
+    rmarkdown,
     scrollytell,
     shiny,
-    shinyjs
+    shinyjs,
+    testthat (>= 3.0.0),
+    tidyr,
+    utils,
+    withr,
+    xml2
 Suggests:
+    knitr,
     pkgload,
-    usethis
+    markdown,
+    usethis,
+    waldo
 Remotes:
     nhsbsa-data-analytics/nhsbsaR,
     statistiekcbs/scrollytell
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
+VignetteBuilder: knitr
+Config/testthat/edition: 3

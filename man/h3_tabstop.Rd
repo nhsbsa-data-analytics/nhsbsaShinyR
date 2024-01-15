@@ -4,18 +4,18 @@
 \alias{h3_tabstop}
 \title{h3_tabstop}
 \usage{
-h3_tabstop(header, tabindex = 0, ...)
+h3_tabstop(heading, ..., tabindex = 0)
 }
 \arguments{
-\item{header}{Heading text}
-
-\item{tabindex}{Number for tabindex, default 0}
+\item{heading}{Heading text}
 
 \item{...}{
-  Arguments passed on to \code{\link[shiny:reexports]{shiny::h3}}
+  Arguments passed on to \code{\link[shiny:reexports]{shiny::h1}}
   \describe{
     \item{\code{}}{}
   }}
+
+\item{tabindex}{Number for tabindex, default 0}
 }
 \value{
 HTML
