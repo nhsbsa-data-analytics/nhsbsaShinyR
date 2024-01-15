@@ -54,7 +54,7 @@ local_create_word_doc <- function(temp_dir = tempdir(), md_dir, rv_dir, docx_fil
 
   styles_rmd <- system.file(
     "review", "styles", "draft-styles.rmd",
-    package = "nhsbsaShinyR"
+    package = methods::getPackageName()
   )
 
   docx_path <- md_to_word(

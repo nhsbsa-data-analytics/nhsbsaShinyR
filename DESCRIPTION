@@ -35,6 +35,7 @@ Imports:
     highcharter,
     htmltools,
     magrittr,
+    methods,
     nhsbsaR,
     officedown,
     officer,

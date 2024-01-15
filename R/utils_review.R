@@ -14,20 +14,20 @@
 #' @examples
 #' \dontrun{
 #' # For standard use case, default args are fine
-#' gen_review_doc()
+#' gen_template_doc()
 #'
 #' # May be times when you want to use outside of the usual use case, e.g.
 #' # generate Word doc for adhoc purposes
-#' gen_review_doc(
+#' gen_template_doc(
 #'   "C:/Users/CYPHER/Downloads",
 #'   "adhoc.docx",
 #'   system.file(
 #'     "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
 #'   )
 #' )}
-gen_review_doc <- function(rv_dir = "inst/review",
-                           docx_file = "review.docx",
-                           styles_rmd = "inst/review/styles/draft-styles.rmd") {
+gen_template_doc <- function(rv_dir = "inst/review",
+                             docx_file = "review.docx",
+                             styles_rmd = "inst/review/styles/draft-styles.rmd") {
   rmarkdown::render(
     styles_rmd,
     output_dir = rv_dir,
@@ -70,7 +70,7 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
                        rv_dir = "inst/review",
                        docx_file = "review.docx",
                        styles_rmd = "inst/review/styles/draft-styles.rmd") {
-  styles_doc <- gen_review_doc(
+  styles_doc <- gen_template_doc(
     rv_dir = tempdir(),
     docx_file = tempfile(),
     styles_rmd = styles_rmd
@@ -630,6 +630,15 @@ word_to_md <- function(md_flag = "markdown/",
     if (file.exists(file.path(rv_dir, "_snaps"))) {
       if (!length(Sys.glob(file.path(rv_dir, "tests/_snaps/review_md", "*.md")))) {
         review_md_dir()
+      } else {
+        rlang::inform(c(
+          paste0(
+            "Snapshot folder ",
+            file.path(rv_dir, "tests/_snaps/review_md"),
+            " is not empty."
+          ),
+          i = "Aborting writing snapshot files"
+        ))
       }
 
       return(invisible())

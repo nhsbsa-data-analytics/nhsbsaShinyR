@@ -3,7 +3,7 @@
 export("%>%")
 export(accessible_action_link)
 export(accessible_radio_buttons)
-export(gen_review_doc)
+export(gen_template_doc)
 export(h1_tabstop)
 export(h2_tabstop)
 export(h3_tabstop)
