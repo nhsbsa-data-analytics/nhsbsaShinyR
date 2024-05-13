@@ -27,7 +27,11 @@
 #' )}
 gen_template_doc <- function(rv_dir = "inst/review",
                              docx_file = "review.docx",
-                             styles_rmd = "inst/review/styles/draft-styles.rmd") {
+                             styles_rmd = system.file(
+                               "review", "styles", "draft-styles.rmd",
+                               package = "nhsbsaShinyR"
+                             )
+                             ) {
   rmarkdown::render(
     styles_rmd,
     output_dir = rv_dir,
@@ -627,6 +631,7 @@ word_to_md <- function(md_flag = "markdown/",
   # Unless disabled, create initial snapshot files if there is no or an empty
   # _snaps dir
   if (first_run_snaps) {
+    testthat::local_edition(3)
     if (file.exists(file.path(rv_dir, "_snaps"))) {
       if (!length(Sys.glob(file.path(rv_dir, "tests/_snaps/review_md", "*.md")))) {
         review_md_dir()
@@ -738,6 +743,8 @@ review_md <- function(path, snaps_dir = "inst/review/tests") {
 #' review_md_diff(snaps_dir = "C:/Users/CYPHER/Downloads")
 #' )}
 review_md_dir <- function(md_dir = "inst/review/temp", snaps_dir = "inst/review/tests") {
+  testthat::local_edition(3)
+
   md_files <- Sys.glob(file.path(md_dir, "*.md"))
 
   purrr::walk(
