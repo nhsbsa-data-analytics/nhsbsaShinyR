@@ -7,7 +7,8 @@
 gen_template_doc(
   rv_dir = "inst/review",
   docx_file = "review.docx",
-  styles_rmd = "inst/review/styles/draft-styles.rmd"
+  styles_rmd = system.file("review", "styles", "draft-styles.rmd", package =
+    "nhsbsaShinyR")
 )
 }
 \arguments{
@@ -34,9 +35,6 @@ gen_template_doc()
 # generate Word doc for adhoc purposes
 gen_template_doc(
   "C:/Users/CYPHER/Downloads",
-  "adhoc.docx",
-  system.file(
-    "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
-  )
+  "adhoc.docx"
 )}
 }

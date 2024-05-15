@@ -20,18 +20,14 @@
 #' # generate Word doc for adhoc purposes
 #' gen_template_doc(
 #'   "C:/Users/CYPHER/Downloads",
-#'   "adhoc.docx",
-#'   system.file(
-#'     "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
-#'   )
+#'   "adhoc.docx"
 #' )}
 gen_template_doc <- function(rv_dir = "inst/review",
                              docx_file = "review.docx",
                              styles_rmd = system.file(
                                "review", "styles", "draft-styles.rmd",
                                package = "nhsbsaShinyR"
-                             )
-                             ) {
+                             )) {
   rmarkdown::render(
     styles_rmd,
     output_dir = rv_dir,
@@ -65,15 +61,15 @@ gen_template_doc <- function(rv_dir = "inst/review",
 #' md_to_word(
 #'   "my/adhoc/markdown",
 #'   "C:/Users/CYPHER/Downloads",
-#'   "adhoc.docx",
-#'   system.file(
-#'     "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
-#'   )
+#'   "adhoc.docx"
 #' )}
 md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
                        rv_dir = "inst/review",
                        docx_file = "review.docx",
-                       styles_rmd = "inst/review/styles/draft-styles.rmd") {
+                       styles_rmd = system.file(
+                         "review", "styles", "draft-styles.rmd",
+                         package = "nhsbsaShinyR"
+                       )) {
   styles_doc <- gen_template_doc(
     rv_dir = tempdir(),
     docx_file = tempfile(),
@@ -115,8 +111,8 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
     quiet = TRUE
   )
 
-  # Return path of generated Word doc
-  docx_path
+  # Return path of generated Word doc invisibly
+  invisible(docx_path)
 }
 
 
