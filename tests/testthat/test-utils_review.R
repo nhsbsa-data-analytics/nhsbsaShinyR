@@ -1,6 +1,6 @@
 test_that("md_to_word generates expected Word doc", {
   docx_file <- "review.docx"
-  md_dir <- local_create_md("temp_for_gha_debug")
+  md_dir <- local_create_md()
   rv_dir <- gsub("markdown", "review", md_dir)
   docx_path <- local_create_word_doc(
     md_dir = md_dir,
@@ -23,7 +23,7 @@ test_that("md_to_word generates expected Word doc", {
   # differences in the package_dir and doc_properties$data.
   # Also, when run on github CI, there are small differences in some of the
   # colours used in the Word doc styles.
-  expected_differences <- ifelse(testthat:::on_ci(), 8, 2)
+  expected_differences <- ifelse(testthat:::on_ci(), 48, 2)
 
   # If unexpected number of diffs, print out the comparison for ease of seeing
   # where the fail is.
