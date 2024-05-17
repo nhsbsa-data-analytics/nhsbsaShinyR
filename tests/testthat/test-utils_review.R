@@ -21,8 +21,8 @@ test_that("md_to_word generates expected Word doc", {
 
   # Due to how officer::read_docx works, we expect there to always be
   # differences in the package_dir and doc_properties$data.
-  # Also, when run on github CI, there are small differences in some of the
-  # colours used in the Word doc styles.
+  # Also, when run on github CI, there are small differences in the Word doc 
+  # generated, due to the Windows OS being Windows Server.
   expected_differences <- ifelse(testthat:::on_ci(), 48, 2)
 
   # If unexpected number of diffs, print out the comparison for ease of seeing
