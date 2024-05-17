@@ -1,6 +1,6 @@
 test_that("md_to_word generates expected Word doc", {
   docx_file <- "review.docx"
-  md_dir <- local_create_md()
+  md_dir <- local_create_md("temp_for_gha_debug")
   rv_dir <- gsub("markdown", "review", md_dir)
   docx_path <- local_create_word_doc(
     md_dir = md_dir,
