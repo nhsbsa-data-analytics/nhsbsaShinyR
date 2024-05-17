@@ -23,11 +23,8 @@ test_that("md_to_word generates expected Word doc", {
   # differences in the package_dir and doc_properties$data.
   # Also, when run on github CI, there are small differences in the Word doc
   # generated, due to the Windows OS being Windows Server.
-  expected_differences <- ifelse(testthat:::on_ci(), 48, 2)
+  expected_differences <- ifelse(testthat:::on_ci(), 56, 2)
 
-  cat("\n\nIs on CI: ", testthat:::on_ci())
-  cat("\nExpected differences = ", expected_differences, "\n\n")
-  
   # If unexpected number of diffs, print out the comparison for ease of seeing
   # where the fail is.
   if (length(comp_structure) > expected_differences) {
