@@ -4,9 +4,9 @@
 \name{nhsbsaShinyR-package}
 \alias{nhsbsaShinyR}
 \alias{nhsbsaShinyR-package}
-\title{nhsbsaShinyR: Template for NHSBSA {shiny} apps}
+\title{nhsbsaShinyR: Template for NHSBSA \{shiny\} apps}
 \description{
-Template used for NHSBSA Data Science and Advanced Analytics {shiny} apps.
+Template used for NHSBSA Data Science and Advanced Analytics \{shiny\} apps.
 }
 \author{
 \strong{Maintainer}: DALL \email{dall@nhsbsa.nhs.uk}

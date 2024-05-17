@@ -22,7 +22,7 @@ gen_template_doc(
 Path to the generated Word document
 }
 \description{
-The `{officer}` package works best with a Word document generated from
+The `\{officer\}` package works best with a Word document generated from
 Rmarkdown. This is just a wrapper around `rmarkdown::render` to do that, with
 default arguments matching our package conventions.
 }
