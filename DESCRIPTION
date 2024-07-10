@@ -1,6 +1,6 @@
 Package: nhsbsaShinyR
-Title: Template for NHSBSA {shiny} apps
-Version: 0.0.0.9004
+Title: Template for NHSBSA \{shiny\} apps
+Version: 0.0.0.9005
 Authors@R: 
     c(person(given = "DALL",
              family = "",
@@ -23,7 +23,7 @@ Authors@R:
              role = "ctb",
              email = "mark.mcpherson@nhsbsa.nhs.uk"))
 Description: Template used for NHSBSA Data Science and Advanced Analytics
-  {shiny} apps.
+  \{shiny\} apps.
 License: Apache License (>= 2)
 Depends: 
     R (>= 4.0)
@@ -61,6 +61,6 @@ Remotes:
     statistiekcbs/scrollytell
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Config/testthat/edition: 3

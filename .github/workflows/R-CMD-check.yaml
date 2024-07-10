@@ -18,7 +18,7 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -30,21 +30,12 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
-      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          global: true
-          token: '${{ secrets.GITHUB_TOKEN }}'
-
       - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check

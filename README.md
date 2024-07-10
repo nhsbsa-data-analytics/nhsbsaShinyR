@@ -1,6 +1,13 @@
 # NHSBSA R Shiny template
 
-This R package has been developed by NHS Business Services Authority Data Analytics Learning Lab to use as a template for building NHSBSA branded R `{shiny}` dashboards. 
+This R package has been developed by NHS Business Services Authority Data Analytics Learning Lab to use as a template for building NHSBSA branded R `{shiny}` dashboards.
+
+## Installing from GitHub
+
+To install this package from GitHub, use the below code. Note that you must explicitly ask for vignettes to be built when installing from GitHub.
+
+`devtools::install_github("nhsbsa-data-analytics/nhsbsaShinyR", build_vignettes = TRUE)`
+
 
 ## Features
 
@@ -177,9 +184,3 @@ All code that is used internally and/or is to be exported from the package belon
 ### `README.md`
 
 Give an overview of your package including how to install and the simplest example of usage.
-
-## Installing from GitHub
-
-To install this package from GitHub, use the below code. Note that you must explicitly ask for vignettes to be built when installing from GitHub.
-
-`devtools::install_github("nhsbsa-data-analytics/nhsbsaShinyR", build_vignettes = TRUE)`

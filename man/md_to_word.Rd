@@ -8,7 +8,8 @@ md_to_word(
   md_dir = "inst/app/www/assets/markdown",
   rv_dir = "inst/review",
   docx_file = "review.docx",
-  styles_rmd = "inst/review/styles/draft-styles.rmd"
+  styles_rmd = system.file("review", "styles", "draft-styles.rmd", package =
+    "nhsbsaShinyR")
 )
 }
 \arguments{
@@ -38,9 +39,6 @@ md_to_word()
 md_to_word(
   "my/adhoc/markdown",
   "C:/Users/CYPHER/Downloads",
-  "adhoc.docx",
-  system.file(
-    "inst", "review", "styles", "draft-styles.rmd", package = "nhsbsaShinyR"
-  )
+  "adhoc.docx"
 )}
 }
