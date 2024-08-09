@@ -115,3 +115,22 @@ and prevent them fading in / out) */
 .navbar-default .navbar-nav>li>a {
     color: #717465;
 }
+
+/* Accessibility shiny Widgets pickerInput contrast issue */
+
+.bootstrap-select .dropdown-toggle .filter-option {
+  opacity: 1 !important; 
+  color: #425563 !important; 
+}
+
+/* Adjusting opacity and color of the dropdown menu */
+.bootstrap-select .dropdown-menu {
+  opacity: 1 !important; 
+  color: #425563 !important; 
+}
+
+/* Override opacity for the specific select element */
+#content_main {
+  opacity: 1 !important;
+  color: #425563 !important;
+}
