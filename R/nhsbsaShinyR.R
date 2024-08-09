@@ -1,22 +1,19 @@
-#' \code{nhsbsaShinyR} package
-#'
-#' Template app using `golem` for NHSBSA DALL `shiny` apps.
-#'
-#' @docType package
-#' @name nhsbsaShinyR
-#'
-#' @importFrom rlang := .data
-#'
+#' @keywords internal
+#' @importFrom rlang .data :=
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL
 
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(
     c(
-      # data column names
-      "Sepal.Length",
-      "Sepal.Width",
-      "group_lvl",
-      "point_col"
+      # No unknown global variables
+      # Add any found during R CMD check, that cannot be handled with .data$
+      # e.g.
+
+      # "SOME_UNKNOWN_VARIABLE"
     )
   )
 }
