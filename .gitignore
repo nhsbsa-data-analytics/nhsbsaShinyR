@@ -7,3 +7,5 @@ rsconnect
 .Renviron
 /doc/
 /Meta/
+.google-sheets-credentials
+.secret

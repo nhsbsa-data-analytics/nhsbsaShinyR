@@ -24,6 +24,8 @@ There are also github actions to check that code conforms to `lintr` (https://li
 
 Functionality to make adding and reviewing text of the app is available. Check out the vignette by running `vignette("writing-and-reviewing-text", "nhsbsaShinyR")`.
 
+The example shiny app also features logging to track visits, using the `shinyusertracking` package. A vignette with usage process is available in that package, see the [installation instructions](https://github.com/nhsbsa-data-analytics/shinyusertracking?tab=readme-ov-file#installation) on its GitHub page.
+
 ## Structure
 
 The package is structured as below. See the "Using this template" section for further details of the files.

@@ -1,6 +1,6 @@
 Package: nhsbsaShinyR
 Title: Template for NHSBSA \{shiny\} apps
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Authors@R: 
     c(person(given = "DALL",
              family = "",
@@ -58,6 +58,7 @@ Suggests:
     waldo
 Remotes:
     nhsbsa-data-analytics/nhsbsaR,
+    nhsbsa-data-analytics/shinyusertracking,
     statistiekcbs/scrollytell
 Encoding: UTF-8
 LazyData: true
