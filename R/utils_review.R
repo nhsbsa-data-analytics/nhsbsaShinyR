@@ -47,6 +47,9 @@ gen_template_doc <- function(rv_dir = "inst/review",
 #' @param rv_dir Review directory
 #' @param docx_file Output Word document file name
 #' @param styles_rmd Path to Rmarkdown that creates Word template
+#' @param dynamic_values YAML file location containing entries for dynamic data
+#' @param .open,.close Used by `glue` as delimiters - note that these are 
+#'  specified as ASCII control characters and correspond to \"£>\" and \"<£\"
 #'
 #' @return Path of generated Word doc
 #' @export
@@ -69,11 +72,19 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
                        styles_rmd = system.file(
                          "review", "styles", "draft-styles.rmd",
                          package = "nhsbsaShinyR"
-                       )) {
-  styles_doc <- gen_template_doc(
+                       ),
+                       dynamic_values = NULL,
+                       .open = "\u00A3>",
+                       .close = "<\u00A3") {
+  styles_doc <- nhsbsaShinyR::gen_template_doc(
     rv_dir = tempdir(),
     docx_file = tempfile(),
     styles_rmd = styles_rmd
+  )
+
+  if (!is.null(dynamic_values)) assign(
+    basename(tools::file_path_sans_ext(dynamic_values)),
+    yaml::read_yaml(dynamic_values)
   )
 
   # Get paths of md files
@@ -90,6 +101,9 @@ md_to_word <- function(md_dir = "inst/app/www/assets/markdown",
 
   all_md <- purrr::map2(all_md, md_files, \(x, y) c(y, "", x, "")) # Add file marker
   all_md <- purrr::reduce(all_md, c)                     # All content in one vector
+  # If any dynamic values are present, this will replace the placeholders with
+  # actual values
+  all_md <- purrr::map_chr(all_md, \(x) glue::glue(x, .open = .open, .close = .close))
   writeLines(all_md, file.path(tempdir(), "all_md.rmd"))
 
   # Check and rename if existing review.docx is present
