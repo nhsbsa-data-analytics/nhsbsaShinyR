@@ -38,12 +38,12 @@ test_that("md_to_word generates expected Word doc", {
 
   # Get docx summaries for comparison - converting one column to lowercase as
   # some values for heading use "Heading" and some "heading", depending on Word and OS
-  old <- officer::docx_summary(new)
+  old <- officer::docx_summary(old)
   old[["style_name"]] <- tolower(old[["style_name"]])
-  new <- officer::docx_summary(old)
+  new <- officer::docx_summary(new)
   new[["style_name"]] <- tolower(new[["style_name"]])
 
-  expect_equal(old, new)
+  expect_equal(new, old)
 })
 
 
