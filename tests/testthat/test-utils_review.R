@@ -25,11 +25,12 @@ test_that("md_to_word generates expected Word doc", {
   # generated, due to the Windows OS being Windows Server.
   expected_differences <- ifelse(testthat:::on_ci(), 56, 2)
 
+  message(sprintf("::warning::DEBUG INFO: The count of actual differences was '%s''", length(comp_structure)))
+  
   # If unexpected number of diffs, print out the comparison for ease of seeing
   # where the fail is.
   if (length(comp_structure) > expected_differences) {
-    cat("\n\n", length(comp_structure), sep = "\n")
-    # cat("\n\n", comp_structure, sep = "\n")
+    cat("\n\n", comp_structure, sep = "\n")
   }
 
   expect_lte(length(comp_structure), expected_differences)

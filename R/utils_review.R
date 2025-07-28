@@ -48,7 +48,7 @@ gen_template_doc <- function(rv_dir = "inst/review",
 #' @param docx_file Output Word document file name
 #' @param styles_rmd Path to Rmarkdown that creates Word template
 #' @param dynamic_values YAML file location containing entries for dynamic data
-#' @param .open,.close Used by `glue` as delimiters - note that these are 
+#' @param .open,.close Used by `glue` as delimiters - note that these are
 #'  specified as ASCII control characters and correspond to \"£>\" and \"<£\"
 #'
 #' @return Path of generated Word doc
