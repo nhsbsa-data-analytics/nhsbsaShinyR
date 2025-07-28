@@ -28,7 +28,8 @@ test_that("md_to_word generates expected Word doc", {
   # If unexpected number of diffs, print out the comparison for ease of seeing
   # where the fail is.
   if (length(comp_structure) > expected_differences) {
-    cat("\n\n", comp_structure, sep = "\n")
+    cat("\n\n", length(comp_structure), sep = "\n")
+    # cat("\n\n", comp_structure, sep = "\n")
   }
 
   expect_lte(length(comp_structure), expected_differences)
