@@ -28,46 +28,71 @@ The text markdown lives in the `inst/app/www/assets/markdown` folder.
 list.files("../inst/app/www/assets/markdown")
 ```
 
-Usually there is a single file for each module of the app. This is because in general all the text is first in the module, and followed by the graphical components. Sometimes that is not the case. For example, in the Care Homes update a [module for metrics](https://github.com/nhsbsa-data-analytics/care-home-prescribing-2020-2023/blob/main/R/mod_10_metrics.R) includes several tables interspersed in the text. We did try out using markdown created tables, but they did not look great. In the end we created them with `kable`, and use multiple markdown files. The code is below as an example, with most table code omitted for brevity.
+Usually there is a single file for each module of the app. This is because in general all the text is first in the module, and followed by the graphical components. Sometimes that is not the case. For example, in the Care Homes Report a [module for metrics](https://github.com/nhsbsa-data-analytics/care-home-prescribing-2020-2023/blob/main/R/mod_10_metrics.R) includes several tables interspersed in the text. We did try out using markdown created tables, but they did not look great. In the end we created them with `kable`, and use multiple markdown files. The code is below as an example, with most table code omitted for brevity.
 
 ```{r, eval=FALSE}
-mod_09_metrics_ui <- function(id) {
+mod_10_metrics_ui <- function(id){
   tagList(
-    includeMarkdown("inst/markdown/09_metrics_1.md"),
+    include_dynamic_md("inst/markdown/10_metrics_1.md"),
     HTML(
       tibble::tribble(
-        ~Patient,       ~Month,     ~`Prescription items`, ~`Unique medicines`,
-        #---------------|-----------|--------------------|-----------------
-        "A",            "April",      4,                  2,
-        "A",            "May",        4,                  2,
-        "A",            "June",       4,                  4,
-        "A",            "July",       6,                  3,
-        "A",            "September",  6,                  3,
-        "A",            "November",   6,                  5,
-        "B",            "April",      13,                 10,
-        "B",            "May",        13,                 10,
-        "B",            "August",     10,                 8,
-        "C",            "October",    4,                  4
+        ~Patient, ~Month,      ~`Prescription items`,  ~`Unique medicines`,
+        #--------|------------|-----------------------|-----------------
+        "A",      "April",     4,                      2,
+        "A",      "May",       4,                      2,
+        "A",      "June",      4,                      4,
+        "A",      "July",      6,                      3,
+        "A",      "September", 6,                      3,
+        "A",      "November",  6,                      5,
+        "B",      "April",     13,                     10,
+        "B",      "May",       13,                     10,
+        "B",      "August",    10,                     8,
+        "C",      "October",   4,                      4
       ) %>%
         knitr::kable("html", caption = "Patient-months example") %>%
         kableExtra::kable_styling(
           bootstrap_options = c("bordered", "striped", "hover", "condensed", "responsive")
         )
     ),
-    includeMarkdown("inst/markdown/09_metrics_2.md"),
+    include_dynamic_md("inst/markdown/10_metrics_2.md"),
     HTML(
-      tibble::tribble()
+      tibble::tribble(...)
     ),
-    includeMarkdown("inst/markdown/09_metrics_3.md"),
+    include_dynamic_md("inst/markdown/10_metrics_3.md"),
     HTML(
-      tibble::tribble()
+      tibble::tribble(...)
     ),
-    includeMarkdown("inst/markdown/09_metrics_4.md")
+    include_dynamic_md("inst/markdown/10_metrics_4.md")
   )
 }
 ```
 
-Each markdown file is included in a modules UI function with the `includeMarkdown` function provided by `{shiny}`. You would think there would be an Rmarkdown version of this, but it seems there is not! This simply converts the markdown into HTML.
+Each markdown file is included in a modules UI function with the `include_dynamic_md` function. It uses the `includeMarkdown` function provided by `{shiny}` and the `{glue}` package to get a markdown file as HTML while interpolating dynamic values into the text. You would think there would be an Rmarkdown version of this, but it seems there is not!
+
+Dynamic text is specified with custom delimiters - `£>` and `<£`. This is to avoid conflicts with the markdown syntax, and also to make it easier to see where dynamic text is used. The delimiters and the code they contain are replaced with the result of running the code.
+
+For example, the markdown that creates the text for a [module for headline figures](https://github.com/nhsbsa-data-analytics/care-home-prescribing-2020-2023/blob/main/inst/markdown/01_headline_figures_1.md) in the Care Homes Report has markdown like below.
+
+```{r, results='asis', echo=FALSE}
+# The original text string
+my_text <- "In £>latest_figures$latest_fy<£, we estimated a monthly average of £>latest_figures$ch_monthly_pats<£ care home patients aged 65 years and over receiving prescriptions. They received an estimated £>latest_figures$ch_annual_items_m<£ million prescription items at a drug cost of ££>latest_figures$ch_annual_cost_m<£ million."
+
+# Use gsub to find the entire delimited section (including delimiters)
+# and wrap it with the HTML <strong> tag.
+# The parentheses in the pattern create a "capture group".
+# The \\1 in the replacement refers to the content of that captured group.
+html_text <- gsub(
+  pattern = "(£>.*?<£)", 
+  replacement = "<strong>\\1</strong>", 
+  x = my_text
+)
+
+# Wrap the entire result in <pre><code> tags to make it a code block
+# and print it directly into the document.
+cat(paste0("<pre><code>", html_text, "</code></pre>"))
+```
+
+Each of the four bold sections consist of an opening delimiter (`£>`), a variable specified by name and a closing delimiter (`<£`). The variable is a list item, so the full variable name is `latest_figures$latest_fy`, for example. The code in the markdown file is run when the app is started, and the result of the code replaces the delimited section with the value of the variable.
 
 ## The writing and review cycle
 
