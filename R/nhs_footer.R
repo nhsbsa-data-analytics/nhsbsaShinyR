@@ -72,7 +72,7 @@ nhs_footer <- function(a11y_statement_url = "#",
               style = "text-align: center;",
               tags$a(
                 "Open Government Licence v3.0",
-                href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+                href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", # Exclude Linting
                 rel = "license"
               ),
               "except where otherwise stated"
