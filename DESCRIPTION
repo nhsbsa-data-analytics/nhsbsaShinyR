@@ -1,6 +1,6 @@
 Package: nhsbsaShinyR
 Title: Template for NHSBSA \{shiny\} apps
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Authors@R: 
     c(person(given = "DALL",
              family = "",
@@ -26,11 +26,12 @@ Description: Template used for NHSBSA Data Science and Advanced Analytics
   \{shiny\} apps.
 License: Apache License (>= 2)
 Depends: 
-    R (>= 4.0)
+    R (>= 4.1)
 Imports: 
     config,
     diffviewer,
     dplyr,
+    glue,
     golem,
     highcharter,
     htmltools,
@@ -49,7 +50,8 @@ Imports:
     tidyr,
     utils,
     withr,
-    xml2
+    xml2,
+    yaml
 Suggests:
     knitr,
     pkgload,
@@ -61,6 +63,6 @@ Remotes:
     statistiekcbs/scrollytell
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3

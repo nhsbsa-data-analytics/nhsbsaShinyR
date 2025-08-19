@@ -35,7 +35,15 @@ test_that("md_to_word generates expected Word doc", {
 
   # Since read_docx only has pointers to the actual text content, also need to
   # compare the content separately.
-  expect_equal(officer::docx_summary(new), officer::docx_summary(old))
+
+  # Get docx summaries for comparison - converting one column to lowercase as
+  # some values for heading use "Heading" and some "heading", depending on Word and OS
+  old <- officer::docx_summary(old)
+  old[["style_name"]] <- tolower(old[["style_name"]])
+  new <- officer::docx_summary(new)
+  new[["style_name"]] <- tolower(new[["style_name"]])
+
+  expect_equal(new, old)
 })
 
 
