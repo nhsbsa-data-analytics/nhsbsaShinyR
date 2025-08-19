@@ -23,6 +23,7 @@ nhs_footer <- function(a11y_statement_url = "#",
         id = "nhsuk-footer",
         tags$div(
           class = "nhsuk-width-container app-width-container",
+          style = "display: flex; align-items: center;",
           tags$ul(
             class = "nhsuk-footer__list",
             tags$li(
@@ -56,9 +57,26 @@ nhs_footer <- function(a11y_statement_url = "#",
               )
             )
           ),
-          p(
+          div(
             class = "nhsuk-footer__copyright",
-            "\u00A9 APLv2"
+            style = "display: inline-flex; flex-direction: column; width: 30%;",
+            tags$image(
+              class = "nhsuk-logo",
+              style = "height: 30px;",
+              src = "www/assets/logos/logo-ogl.svg",
+              name = "Open Government License logo",
+              alt = "Open Government License"
+            ),
+            span(
+              "All content is available under the",
+              style = "text-align: center;",
+              tags$a(
+                "Open Government Licence v3.0",
+                href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+                rel = "license"
+              ),
+              "except where otherwise stated"
+            )
           )
         )
       )
