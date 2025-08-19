@@ -26,7 +26,7 @@ md_to_word(
 
 \item{dynamic_values}{YAML file location containing entries for dynamic data}
 
-\item{.open, .close}{Used by `glue` as delimiters - note that these are 
+\item{.open, .close}{Used by `glue` as delimiters - note that these are
 specified as ASCII control characters and correspond to \"£>\" and \"<£\"}
 }
 \value{

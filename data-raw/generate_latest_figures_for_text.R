@@ -9,6 +9,8 @@
 mean_eruption_minutes <- round(mean(faithful$eruptions), 1)
 mean_waiting_minutes <- round(mean(faithful$waiting), 1)
 
+if (!dir.exists("inst/extdata")) dir.create("inst/extdata")
+
 # Saving figures for dynamic inclusion
 # Not strictly necessary, as this script can just be rerun as needed, but the
 # resulting YAML file could be saved in the GitHub repo - normally there is no
@@ -18,5 +20,5 @@ yaml::write_yaml(
     mean_eruption_minutes = mean_eruption_minutes,
     mean_waiting_minutes = mean_waiting_minutes
   ),
-  "data/latest_figures.yaml"
+  "inst/extdata/latest_figures.yaml"
 )

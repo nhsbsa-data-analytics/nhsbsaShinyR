@@ -5,10 +5,12 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd
-mod_link_and_dynamic_text_example_ui <- function(id) {
+mod_link_and_dynamic_text_example_ui <- function(id) { # Exclude Linting
   ns <- NS(id)
   tagList(
-    include_dynamic_md("inst/app/www/assets/markdown/mod_link_and_dynamic_text_example.md")
+    include_dynamic_md(
+      "inst/app/www/assets/markdown/mod_link_and_dynamic_text_example.md"
+    )
   )
 }
 
