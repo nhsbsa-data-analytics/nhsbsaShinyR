@@ -23,3 +23,10 @@ Headings will automatically be assigned an id created from the heading text. Onl
 `<h3 id="linked-heading">Linked heading</h3>`
 
 If you got here by clicking the link, the back button on the browser will be enabled to take you back.
+
+### Dynamic text
+
+The mean values below are added dynamically:
+
+* The mean length of eruptions is £>latest_figures$mean_eruption_minutes<£ minutes.
+* The mean waiting time between eruptions is £>latest_figures$mean_waiting_minutes<£ minutes.

@@ -9,7 +9,10 @@ md_to_word(
   rv_dir = "inst/review",
   docx_file = "review.docx",
   styles_rmd = system.file("review", "styles", "draft-styles.rmd", package =
-    "nhsbsaShinyR")
+    "nhsbsaShinyR"),
+  dynamic_values = NULL,
+  .open = "£>",
+  .close = "<£"
 )
 }
 \arguments{
@@ -20,6 +23,11 @@ md_to_word(
 \item{docx_file}{Output Word document file name}
 
 \item{styles_rmd}{Path to Rmarkdown that creates Word template}
+
+\item{dynamic_values}{YAML file location containing entries for dynamic data}
+
+\item{.open, .close}{Used by `glue` as delimiters - note that these are
+specified as ASCII control characters and correspond to \"£>\" and \"<£\"}
 }
 \value{
 Path of generated Word doc
