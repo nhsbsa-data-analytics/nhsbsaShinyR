@@ -67,7 +67,7 @@ nhs_footer <- function(a11y_statement_url = "#",
           ),
           div(
             class = "nhsuk-footer__copyright",
-            style = "margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; white-space: nowrap;",
+            style = "margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; white-space: nowrap;",  # Exclude linting
             tags$image(
               class = "nhsuk-logo",
               style = "height: 17; width: 41;",
