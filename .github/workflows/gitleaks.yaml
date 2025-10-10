@@ -1,16 +1,18 @@
-name: gitleaks-action 
-on: [pull_request, push, workflow_dispatch] 
+name: gitleaks
+on: [pull_request, push, workflow_dispatch]
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-jobs: 
-  scan: 
-    name: gitleaks-action 
-    runs-on: ubuntu-latest 
-    steps: 
-      - uses: actions/checkout@v4 
-        with: 
-          fetch-depth: 0 
-      - run: wget -O .gitleaks.toml https://raw.githubusercontent.com/nhsbsa-data-analytics/nhsbsaShinyR/main/gitleaks.toml 
-      - uses: gitleaks/gitleaks-action@v2 
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}} 
+      - run: wget -O gitleaks.toml https://raw.githubusercontent.com/nhsbsa-data-analytics/nhsbsaShinyR/main/gitleaks.toml
+
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          GITLEAKS_CONFIG: "gitleaks.toml"
