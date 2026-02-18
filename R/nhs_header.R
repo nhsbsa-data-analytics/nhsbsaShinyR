@@ -19,12 +19,12 @@ nhs_header <- function() {
           tags$a(
             class = "nhsuk-header__link",
             href = "https://www.nhsbsa.nhs.uk/",
-            `aria-label` = "NHSBSA home",
+            `aria-label` = "Navigate to NHS Business Services Authority website",
             tags$image(
               class = "nhsuk-logo",
               src = "www/assets/logos/logo-nhsbsa.svg",
-              name = "NHSBSA logo",
-              alt = "NHS Business Services Authority"
+              name = "NHS Business Services Authority logo",
+              alt = "NHS Business Services Authority logo"
             )
           )
         )
