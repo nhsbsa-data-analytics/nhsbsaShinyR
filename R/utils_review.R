@@ -284,6 +284,11 @@ word_to_md <- function(md_flag = "markdown/",
   # End Exclude Linting
   doc <- officer::read_docx(file.path(rv_dir, docx_file))
   doc_df <- officer::docx_summary(doc)
+
+  if (!"num_id" %in% colnames(doc_df)) {
+    doc_df$num_id <- NA_character_
+  }
+
   maps <- list(
     bold_map = style_map(doc, "r", "rPr", "b"),
     ital_map = style_map(doc, "r", "rPr", "i"),
@@ -624,7 +629,7 @@ word_to_md <- function(md_flag = "markdown/",
 
       # Get the element indices which need a blank line afterward
       needs_blank_after <- which(doc_df$blank_after) +
-        seq_len(length(which(doc_df$blank_after))) - 1
+        seq_along(which(doc_df$blank_after)) - 1
 
       # Iterate over the indices and add a new blank row after each
       purrr::walk(
