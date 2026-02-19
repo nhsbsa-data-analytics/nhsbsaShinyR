@@ -284,6 +284,18 @@ word_to_md <- function(md_flag = "markdown/",
   # End Exclude Linting
   doc <- officer::read_docx(file.path(rv_dir, docx_file))
   doc_df <- officer::docx_summary(doc)
+
+  doc_df$style_name <- tolower(doc_df$style_name)
+
+  full_xml <- doc$doc_obj$get()
+
+  # Add numbering references
+  doc_df$num_id <- sapply(doc_df$doc_index, function(idx) {
+    node <- xml2::xml_find_first(full_xml, sprintf(".//*[@w:doc_index='%s']", idx))
+    val <- xml2::xml_attr(xml2::xml_find_first(node, ".//w:numPr/w:numId"), "val")
+    if (!is.na(val)) as.integer(val) else NA_integer_
+  })
+
   maps <- list(
     bold_map = style_map(doc, "r", "rPr", "b"),
     ital_map = style_map(doc, "r", "rPr", "i"),
@@ -590,41 +602,37 @@ word_to_md <- function(md_flag = "markdown/",
         dplyr::mutate(
           next_style = dplyr::lead(.data$style_name),
           blank_after = (
-            (.data$style_name != "Compact") |
-              (.data$style_name == "Compact" &
-                 dplyr::lead(.data$style_name) != "Compact")
+            (.data$style_name != "compact") |
+              (.data$style_name == "compact" &
+                 dplyr::lead(.data$style_name) != "compact")
           ) & (!is.na(dplyr::lead(.data$style_name))),
           style_name = dplyr::case_when(
-            .data$num_id %in% num_ids ~ "Numbering",
+            .data$num_id %in% num_ids ~ "numbering",
             TRUE ~ .data$style_name
           ),
-          text = dplyr::case_match(
+          text = dplyr::recode_values(
             .data$style_name,
-            "Heading 1" ~ paste0("# ", .data$text),
             "heading 1" ~ paste0("# ", .data$text),
-            "Heading 2" ~ paste0("## ", .data$text),
             "heading 2" ~ paste0("## ", .data$text),
-            "Heading 3" ~ paste0("### ", .data$text),
             "heading 3" ~ paste0("### ", .data$text),
-            "Heading 4" ~ paste0("#### ", .data$text),
             "heading 4" ~ paste0("#### ", .data$text),
-            "Compact" ~ paste0("- ", .data$text),
-            .default = .data$text
+            "compact" ~ paste0("- ", .data$text),
+            default = .data$text
           )
         ) %>%
         dplyr::group_by(.data$num_id) %>%
         dplyr::mutate(
-          text = dplyr::case_match(
+          text = dplyr::recode_values(
             .data$style_name,
-            "Numbering" ~ paste0(seq_len(dplyr::n()), ". ", .data$text),
-            .default = .data$text
+            "numbering" ~ paste0(seq_len(dplyr::n()), ". ", .data$text),
+            default = .data$text
           )
         ) %>%
         dplyr::ungroup()
 
-      # Get the element indices which need a blank line afterward
+      # Get the element indices which need a blank line afterwards
       needs_blank_after <- which(doc_df$blank_after) +
-        seq_len(length(which(doc_df$blank_after))) - 1
+        seq_along(which(doc_df$blank_after)) - 1
 
       # Iterate over the indices and add a new blank row after each
       purrr::walk(

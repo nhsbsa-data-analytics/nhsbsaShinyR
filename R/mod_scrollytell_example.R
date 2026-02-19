@@ -126,7 +126,7 @@ mod_scrollytell_example_server <- function(id) {
       # input$scroll_level will allow you to define the chart input this input
       # is based on section of the report that is currently active during the
       # scroll
-      chart_data <- datasets::iris |>
+      chart_data <- datasets::iris %>%
         dplyr::filter(
           .data$Species %in% switch(input$scroll_level,
             "section_3_setosa" = c("setosa"),
@@ -137,12 +137,12 @@ mod_scrollytell_example_server <- function(id) {
         )
 
       if (input$scroll_level == "section_1_all") {
-        chart_data <- chart_data |>
-          dplyr::mutate(group_lvl = "Species") |>
+        chart_data <- chart_data %>%
+          dplyr::mutate(group_lvl = "Species") %>%
           dplyr::mutate(point_col = "#0000FF")
       } else {
-        chart_data <- chart_data |>
-          dplyr::mutate(group_lvl = .data$Species) |>
+        chart_data <- chart_data %>%
+          dplyr::mutate(group_lvl = .data$Species) %>%
           dplyr::mutate(
             point_col = dplyr::case_when(
               .data$Species == "setosa" ~ "#fdb863",
@@ -154,7 +154,7 @@ mod_scrollytell_example_server <- function(id) {
       }
 
       # produce the chart object
-      chart_data |>
+      chart_data %>%
         highcharter::hchart(
           type = "scatter",
           highcharter::hcaes(
@@ -163,17 +163,17 @@ mod_scrollytell_example_server <- function(id) {
             group = .data$group_lvl,
             color = .data$point_col
           )
-        ) |>
+        ) %>%
         highcharter::hc_xAxis(
           min = 4,
           max = 8
-        ) |>
+        ) %>%
         highcharter::hc_yAxis(
           min = 1,
           max = 5
-        ) |>
+        )  %>%
         # remove plot animations
-        highcharter::hc_plotOptions(series = list(animation = FALSE)) |>
+        highcharter::hc_plotOptions(series = list(animation = FALSE)) %>%
         # disable the legend
         highcharter::hc_legend(enabled = FALSE)
     })
