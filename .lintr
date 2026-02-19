@@ -1,7 +1,7 @@
 linters: linters_with_defaults(
     line_length_linter(90),
     object_usage_linter = NULL,
-    pipe_consistency_linter(pipe = "%>%")
+    pipe_consistency_linter(pipe = c("|>", "%>%"))
   )
 exclude: "# Exclude Linting"
 exclude_start: "# Begin Exclude Linting"
