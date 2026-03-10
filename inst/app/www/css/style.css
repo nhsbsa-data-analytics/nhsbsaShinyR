@@ -134,3 +134,48 @@ and prevent them fading in / out) */
   opacity: 1 !important;
   color: #425563 !important;
 }
+
+.app-width-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #4c6272;
+}
+
+.nhsuk-footer__top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nhsuk-footer__list {
+  margin-bottom: 25px;
+}
+
+.nhsuk-footer__list-item-link {
+  text-decoration: underline;
+}
+
+.nhsuk-ogl-footer {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.nhsuk-ogl-logo {
+  height: 17px;
+  width: 41px;
+}
+
+.nhsuk-ogl-footer--text {
+  margin-bottom: 0;
+}
+
+.nhsuk-ogl-footer--text > a {
+  color: #4c6272;
+  text-decoration: underline;
+}

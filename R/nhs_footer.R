@@ -21,59 +21,62 @@ nhs_footer <- function(a11y_statement_url = "#",
       tags$div(
         class = "nhsuk-footer",
         id = "nhsuk-footer",
+        h2(class = "nhsuk-u-visually-hidden", "Support links"),
         tags$div(
           class = "nhsuk-width-container app-width-container",
-          style = "display: flex; align-items: center;",
-          tags$ul(
-            class = "nhsuk-footer__list",
-            tags$li(
-              class = "nhsuk-footer__list-item",
-              a(
-                class = "nhsuk-footer__list-item-link",
-                style = "text-decoration: underline;",
-                href = a11y_statement_url,
-                target = "_blank",
-                "Accessibility statement"
+          div(
+            class = "nhsuk-footer__top-row",
+            tags$ul(
+              class = "nhsuk-footer__list",
+              tags$li(
+                class = "nhsuk-footer__list-item",
+                a(
+                  class = "nhsuk-footer__list-item-link",
+                  href = a11y_statement_url,
+                  target = "_blank",
+                  "Accessibility"
+                )
+              ),
+              tags$li(
+                class = "nhsuk-footer__list-item",
+                a(
+                  class = "nhsuk-footer__list-item-link",
+                  href = paste0("mailto:@", email),
+                  target = "_blank",
+                  "Contact us"
+                )
+              ),
+              tags$li(
+                class = "nhsuk-footer__list-item",
+                a(
+                  class = "nhsuk-footer__list-item-link",
+                  href = github_url,
+                  target = "_blank",
+                  "GitHub"
+                )
               )
             ),
-            tags$li(
-              class = "nhsuk-footer__list-item",
-              a(
-                class = "nhsuk-footer__list-item-link",
-                style = "text-decoration: underline;",
-                href = paste0("mailto:@", email),
-                target = "_blank",
-                "Contact us"
-              )
-            ),
-            tags$li(
-              class = "nhsuk-footer__list-item",
-              a(
-                class = "nhsuk-footer__list-item-link",
-                style = "text-decoration: underline;",
-                href = github_url,
-                target = "_blank",
-                "GitHub"
-              )
+            span(
+              class = "nhsuk-footer__copyright",
+              HTML("&copy; Crown Copyright")
             )
           ),
           div(
-            class = "nhsuk-footer__copyright",
-            style = "display: inline-flex; flex-direction: column; width: 30%;",
+            class = "nhsuk-ogl-footer",
             tags$image(
-              class = "nhsuk-logo",
-              style = "height: 30px;",
+              class = "nhsuk-ogl-logo",
               src = "www/assets/logos/logo-ogl.svg",
               name = "Open Government License logo",
               alt = "Open Government License"
             ),
             span(
+              class = "nhsuk-ogl-footer--text",
               "All content is available under the",
-              style = "text-align: center;",
               tags$a(
-                "Open Government Licence v3.0",
                 href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", # Exclude Linting
-                rel = "license"
+                rel = "license",
+                target = "_blank",
+                "Open Government Licence v3.0,",
               ),
               "except where otherwise stated"
             )
